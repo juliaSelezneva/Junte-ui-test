@@ -7,6 +7,8 @@ import { Component, ContentChild, Input, TemplateRef } from '@angular/core';
 export class MonthGanttLineComponent {
 
   @Input() title: string;
+  @Input() from: Date;
+  @Input() to: Date;
   @Input() period: any;
   @ContentChild('period') periodTemplate: TemplateRef<any>;
 }

@@ -30,8 +30,8 @@
 
     &[day] {
       text-align: center;
-      font-size: .8em;
-      min-width: 25px;
+      font-size: $font-size-small;
+      min-width: 20px;
 
       &[current='true'] {
         color: $white-color;
@@ -40,7 +40,6 @@
     }
 
     &[title] {
-      width: 150px;
       border-left: 1px solid $gray-700;
     }
 
