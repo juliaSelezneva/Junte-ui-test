@@ -1,0 +1,76 @@
+<table class="calendar" border="0" cellpadding="5" [cellSpacing]="0">
+  <tr>
+    <td empty></td>
+    <td class="controls" [attr.colspan]="getDaysInMonth(current)">
+      <div>
+        <button arrow (click)="current = subMonths(current, 1)">
+          <jnt-icon [icon]="ui.icons.arrowLeft"></jnt-icon>
+        </button>
+        <div class="month">
+          {{current | format: 'MMMM'}}, {{current | format: 'YYYY'}}
+        </div>
+        <button arrow (click)="current = addMonths(current, 1)">
+          <jnt-icon [icon]="ui.icons.arrowRight"></jnt-icon>
+        </button>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="day" [class.current]="day == current && getMonth(current) === getMonth(today)"
+        *ngFor="let day of getDaysInMonth(current) | numberArray:1">
+      {{day}}
+    </td>
+  </tr>
+  <tr *ngFor="let line of lines;let i = index">
+    <td class="employee">
+      {{line.data.createdBy.employee.lastName}}
+      {{line.data.createdBy.employee.firstName}}
+      {{line.data.createdBy.employee.patronymic}}
+    </td>
+    <ng-template #no_request>
+      <td *ngFor="let day of getDaysInMonth(current) | numberArray:1"></td>
+    </ng-template>
+    <ng-container *ngIf="(isSameMonth(line.data.periodFrom, current) && isSameYear(line.data.periodFrom, current))
+      || (isSameMonth(line.data.periodTo, current) && isSameYear(line.data.periodTo, current)); else no_request">
+      <td *ngFor="let day of (line.data.periodFrom | start:current) - 1 | numberArray"></td>
+      <td
+        [attr.colspan]="(line.data.periodTo | end:current) - (line.data.periodFrom | start:current) + 1">
+        <div class="vacation"
+             [class.accepting]="line.data.status == statuses.accepting"
+             [class.accepted]="line.data.status == statuses.accepted"
+             [class.declined]="line.data.status == statuses.declined"
+             [class.used]="(line.data.periodTo | dateDiff:today) < 0"
+             [class.self-expense]="line.data.selfExpense"
+             [class.short]="(line.data.periodTo | end:current) - (line.data.periodFrom | start:current) < 3"
+             [class.over-from]="(line.data.periodFrom | fullMonth) < (current | fullMonth)"
+             [class.over-to]="(line.data.periodTo | fullMonth) > (current | fullMonth)">
+          <!--          <nz-spin *ngIf="progress[request.id];else period"-->
+          <!--                   [nzIndicator]="indicator"></nz-spin>-->
+          <!--          <ng-template #period>-->
+          <span class="label">
+            {{(line.data.periodTo | dateDiff:line.data.periodFrom) + 1 }} days
+          </span>
+        </div>
+      </td>
+      <td *ngFor="let day of (getDaysInMonth(current) - (line.data.periodTo | end:current)) | numberArray"></td>
+    </ng-container>
+  </tr>
+</table>
+
+<ng-container *ngIf="!lines?.length">
+  <ng-container *ngIf="loading;else no_data">
+    <tr loading>
+      <td [attr.colspan]="getDaysInMonth(current) | numberArray:1">
+        <jnt-skeleton [lines]="3"></jnt-skeleton>
+      </td>
+    </tr>
+  </ng-container>
+  <ng-template #no_data>
+    <tr nodata>
+      <td [attr.colspan]="getDaysInMonth(current) | numberArray:1">
+        <jnt-icon [icon]="ui.icons.stopping" icon></jnt-icon>
+      </td>
+    </tr>
+  </ng-template>
+</ng-container>

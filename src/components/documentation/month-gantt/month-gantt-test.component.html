@@ -1,0 +1,7 @@
+<form [formGroup]="form">
+  <jnt-month-gantt formControlName="gantt">
+    <jnt-month-gantt-line *ngFor="let request of requests" [data]="request">
+
+    </jnt-month-gantt-line>
+  </jnt-month-gantt>
+</form>
