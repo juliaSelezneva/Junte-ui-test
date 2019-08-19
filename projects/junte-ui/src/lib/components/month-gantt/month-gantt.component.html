@@ -29,31 +29,27 @@
 
     <td class="title">{{line.title}}</td>
 
-    <ng-container *ngIf="(line.data.from | same: current)
-    || (line.data.to | same: current); else no_request">
+    <ng-container *ngIf="(line.data.from | same: current) || (line.data.to | same: current); else no_request">
 
-      <td *ngFor="let day of (line.data.from | before:current) - 1 | numberArray"></td>
+      <td *ngFor="let day of (line.data.from | before: current) - 1 | numberArray"></td>
 
-      <td [attr.colspan]="(line.data.to | after:current) - (line.data.from | before:current) + 1">
+      <td [attr.colspan]="(line.data.to | after: current) - (line.data.from | before: current) + 1">
         <div class="vacation"
-             [class.accepting]="line.data.status == statuses.accepting"
-             [class.accepted]="line.data.status == statuses.accepted"
-             [class.declined]="line.data.status == statuses.declined"
+             [class.accepting]="line.data.status === statuses.accepting"
+             [class.accepted]="line.data.status === statuses.accepted"
+             [class.declined]="line.data.status === statuses.declined"
              [class.used]="(line.data.to | dateDiff:today) < 0"
              [class.self-expense]="line.data.selfExpense"
-             [class.short]="(line.data.to | after:current) - (line.data.from | before:current) < 3"
+             [class.short]="(line.data.to | after: current) - (line.data.from | before: current) < 3"
              [class.over-from]="(line.data.from | fullMonth) < (current | fullMonth)"
              [class.over-to]="(line.data.to | fullMonth) > (current | fullMonth)">
-          <!--          <nz-spin *ngIf="progress[request.id];else period"-->
-          <!--                   [nzIndicator]="indicator"></nz-spin>-->
-          <!--          <ng-template #period>-->
           <span class="label">
             {{(line.data.to | dateDiff:line.data.from) + 1 }} days
           </span>
         </div>
       </td>
 
-      <td *ngFor="let day of (getDaysInMonth(current) - (line.data.to | after:current)) | numberArray"></td>
+      <td *ngFor="let day of (getDaysInMonth(current) - (line.data.to | after: current)) | numberArray"></td>
 
     </ng-container>
   </tr>
