@@ -1,7 +1,9 @@
 @import "../../assets/styles/variables";
 
 :host {
-  display: block;
+  padding: $gutter-normal;
+  display: inline-block;
+  box-sizing: border-box;
 }
 
 .calendar {
@@ -37,7 +39,7 @@
       }
     }
 
-    &.employee {
+    &.title {
       width: 150px;
       border-left: 1px solid $gray-700;
     }

@@ -23,19 +23,16 @@
     </td>
   </tr>
   <tr *ngFor="let line of lines;let i = index">
-    <td class="employee">
-      {{line.data.createdBy.employee.lastName}}
-      {{line.data.createdBy.employee.firstName}}
-      {{line.data.createdBy.employee.patronymic}}
-    </td>
+    <td class="title">{{line.title}}</td>
     <ng-template #no_request>
       <td *ngFor="let day of getDaysInMonth(current) | numberArray:1"></td>
     </ng-template>
+
     <ng-container *ngIf="(isSameMonth(line.data.periodFrom, current) && isSameYear(line.data.periodFrom, current))
       || (isSameMonth(line.data.periodTo, current) && isSameYear(line.data.periodTo, current)); else no_request">
       <td *ngFor="let day of (line.data.periodFrom | start:current) - 1 | numberArray"></td>
-      <td
-        [attr.colspan]="(line.data.periodTo | end:current) - (line.data.periodFrom | start:current) + 1">
+
+      <td [attr.colspan]="(line.data.periodTo | end:current) - (line.data.periodFrom | start:current) + 1">
         <div class="vacation"
              [class.accepting]="line.data.status == statuses.accepting"
              [class.accepted]="line.data.status == statuses.accepted"
@@ -53,6 +50,7 @@
           </span>
         </div>
       </td>
+
       <td *ngFor="let day of (getDaysInMonth(current) - (line.data.periodTo | end:current)) | numberArray"></td>
     </ng-container>
   </tr>

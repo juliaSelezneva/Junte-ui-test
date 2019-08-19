@@ -6,6 +6,7 @@ import { Component, Input, TemplateRef } from '@angular/core';
 })
 export class MonthGanttLineComponent {
 
+  @Input() title: string;
   @Input() data: any;
   @Input() template: TemplateRef<any>;
 }
