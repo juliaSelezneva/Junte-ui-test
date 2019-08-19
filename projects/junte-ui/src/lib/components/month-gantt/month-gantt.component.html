@@ -30,19 +30,13 @@
     <td title>{{line.title}}</td>
 
     <ng-container *ngIf="(line.from | same: current) || (line.to | same: current); else no_request">
-
       <td *ngFor="let day of (line.from | before: current) - 1 | numberArray"></td>
-
       <td [attr.colspan]="(line.to | after: current) - (line.from | before: current) + 1">
-
         <ng-container *ngTemplateOutlet="line.indicatorTemplate;
           context: {period: line.period, current: current, today: today}">
         </ng-container>
-
       </td>
-
       <td *ngFor="let day of (getDaysInMonth(current) - (line.to | after: current)) | numberArray"></td>
-
     </ng-container>
   </tr>
 </table>
