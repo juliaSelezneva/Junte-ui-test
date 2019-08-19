@@ -1,12 +1,12 @@
-<table class="calendar" border="0" cellpadding="5" [cellSpacing]="0">
+<table calendar border="0" cellpadding="5" [cellSpacing]="0">
   <tr>
     <td empty></td>
-    <td class="controls" [attr.colspan]="getDaysInMonth(current)">
+    <td controls [attr.colspan]="getDaysInMonth(current)">
       <div>
         <button arrow (click)="current = subMonths(current, 1)">
           <jnt-icon [icon]="ui.icons.arrowLeft"></jnt-icon>
         </button>
-        <div class="month">
+        <div month>
           {{current | format: 'MMMM'}}, {{current | format: 'YYYY'}}
         </div>
         <button arrow (click)="current = addMonths(current, 1)">
@@ -17,7 +17,7 @@
   </tr>
   <tr>
     <td></td>
-    <td class="day" [class.current]="day == current && getMonth(current) === getMonth(today)"
+    <td day [attr.current]="day == current && getMonth(current) === getMonth(today)"
         *ngFor="let day of getDaysInMonth(current) | numberArray:1">
       {{day}}
     </td>
@@ -27,23 +27,22 @@
       <td *ngFor="let day of getDaysInMonth(current) | numberArray:1"></td>
     </ng-template>
 
-    <td class="title">{{line.title}}</td>
+    <td title>{{line.title}}</td>
 
     <ng-container *ngIf="(line.data.from | same: current) || (line.data.to | same: current); else no_request">
 
       <td *ngFor="let day of (line.data.from | before: current) - 1 | numberArray"></td>
 
       <td [attr.colspan]="(line.data.to | after: current) - (line.data.from | before: current) + 1">
-        <div class="vacation"
-             [class.accepting]="line.data.status === statuses.accepting"
-             [class.accepted]="line.data.status === statuses.accepted"
-             [class.declined]="line.data.status === statuses.declined"
-             [class.used]="(line.data.to | dateDiff:today) < 0"
-             [class.self-expense]="line.data.selfExpense"
-             [class.short]="(line.data.to | after: current) - (line.data.from | before: current) < 3"
-             [class.over-from]="(line.data.from | fullMonth) < (current | fullMonth)"
-             [class.over-to]="(line.data.to | fullMonth) > (current | fullMonth)">
-          <span class="label">
+        <div [attr.accepting]="line.data.status === statuses.accepting"
+             [attr.accepted]="line.data.status === statuses.accepted"
+             [attr.declined]="line.data.status === statuses.declined"
+             [attr.used]="(line.data.to | dateDiff:today) < 0"
+             [attr.self-expense]="line.data.selfExpense"
+             [attr.short]="(line.data.to | after: current) - (line.data.from | before: current) < 3"
+             [attr.over-from]="(line.data.from | fullMonth) < (current | fullMonth)"
+             [attr.over-to]="(line.data.to | fullMonth) > (current | fullMonth)" period>
+          <span label>
             {{(line.data.to | dateDiff:line.data.from) + 1 }} days
           </span>
         </div>

@@ -6,21 +6,21 @@
   box-sizing: border-box;
 }
 
-.calendar {
+[calendar] {
   width: 100%;
 
   td {
     border-bottom: 1px solid $gray-700;
     border-right: 1px solid $gray-700;
 
-    &.controls {
+    &[controls] {
       border-right: none;
 
       div {
         display: flex;
         justify-content: space-around;
 
-        .month {
+        [month] {
           flex: 1;
           text-align: center;
           font-weight: bold;
@@ -28,18 +28,18 @@
       }
     }
 
-    &.day {
+    &[day] {
       text-align: center;
       font-size: .8em;
       min-width: 25px;
 
-      &.current {
+      &[current] {
         color: $white-color;
         background-color: $primary-color;
       }
     }
 
-    &.title {
+    &[title] {
       width: 150px;
       border-left: 1px solid $gray-700;
     }
@@ -49,7 +49,7 @@
     }
   }
 
-  .vacation {
+  [period] {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -63,45 +63,40 @@
     overflow: hidden;
     text-overflow: ellipsis;
 
-    &.accepting {
+    &[accepting] {
       cursor: pointer;
       pointer-events: all;
     }
 
-    &.accepted {
+    &[accepted] {
       background-color: $success-color;
     }
 
-    &.declined {
+    &[declined] {
       background-color: $fail-color;
     }
 
-    &.used {
+    &[used] {
       background-color: $gray-600;
     }
 
-    .spinner {
-      color: $white-color;
-      font-size: 16px;
-    }
-
-    &.short {
-      .label {
+    &[short] {
+      [label] {
         display: none;
       }
     }
 
-    &.over-from {
+    &[over-from] {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
     }
 
-    &.over-to {
+    &[over-to] {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
     }
 
-    &.self-expense {
+    &[self-expense] {
       border: 1px dashed $gray-800;
     }
   }
