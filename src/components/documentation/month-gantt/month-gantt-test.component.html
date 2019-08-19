@@ -1,7 +1,7 @@
 <jnt-container>
   <jnt-block>
     <form [formGroup]="form">
-      <jnt-month-gantt formControlName="gantt">
+      <jnt-month-gantt formControlName="gantt" [loading]="loading">
         <jnt-month-gantt-line *ngFor="let request of requests"
                               [period]="request"
                               [from]="request.from"

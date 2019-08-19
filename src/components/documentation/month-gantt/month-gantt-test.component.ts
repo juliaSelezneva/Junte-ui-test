@@ -10,8 +10,9 @@ import { REQUESTS } from './requests';
 })
 export class MonthGanttTestComponent implements OnInit {
 
-  requests = REQUESTS;
+  requests = [];
   statuses = GanttRequestStatuses;
+  loading = true;
   gantt = new FormControl(new Date());
   form = this.fb.group({
     gantt: this.gantt
@@ -21,6 +22,10 @@ export class MonthGanttTestComponent implements OnInit {
   }
 
   ngOnInit() {
+    setTimeout(() => {
+      // this.requests = REQUESTS;
+      this.loading = false;
+    }, 3000);
     this.gantt.valueChanges.subscribe(date => console.log('Date changed: ', date));
   }
 }
