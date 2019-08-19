@@ -1,4 +1,4 @@
-<table calendar border="0" cellpadding="5" [cellSpacing]="0">
+<table gantt border="0" cellpadding="5" [cellSpacing]="0">
   <tr>
     <td empty></td>
     <td controls [attr.colspan]="getDaysInMonth(current)">
@@ -17,7 +17,7 @@
   </tr>
   <tr>
     <td></td>
-    <td day [attr.current]="day == current && getMonth(current) === getMonth(today)"
+    <td day [attr.current]="day === getDate(today) && isSameMonth(current, today)"
         *ngFor="let day of getDaysInMonth(current) | numberArray:1">
       {{day}}
     </td>

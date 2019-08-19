@@ -1,6 +1,6 @@
 import { Component, ContentChildren, forwardRef, HostBinding, QueryList } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { addMonths, format, getDaysInMonth, getMonth, isEqual, isSameMonth, isSameYear, subMonths } from 'date-fns';
+import { addMonths, format, getDaysInMonth, getMonth, isEqual, isSameMonth, isSameYear, subMonths, getDay, getDate } from 'date-fns';
 import { GanttRequestStatuses, UI } from '../../enum/ui';
 import { today } from '../calendar/utils';
 import { MonthGanttLineComponent } from './month-gantt-line/month-gantt-line.component';
@@ -34,9 +34,8 @@ export class MonthGanttComponent implements ControlValueAccessor {
   subMonths = subMonths;
   isEqual = isEqual;
   isSameMonth = isSameMonth;
-  isSameYear = isSameYear;
+  getDate = getDate;
   getDaysInMonth = getDaysInMonth;
-  getMonth = getMonth;
 
   @ContentChildren(MonthGanttLineComponent)
   lines: QueryList<MonthGanttLineComponent>;

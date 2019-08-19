@@ -6,7 +6,7 @@
   box-sizing: border-box;
 }
 
-[calendar] {
+[gantt] {
   width: 100%;
 
   td {
@@ -33,7 +33,7 @@
       font-size: .8em;
       min-width: 25px;
 
-      &[current] {
+      &[current='true'] {
         color: $white-color;
         background-color: $primary-color;
       }
@@ -53,9 +53,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 5px;
+    margin: $gutter-tiny;
     text-align: center;
-    border-radius: 20px;
+    border-radius: $corner-large;
     background-color: $primary-color;
     color: $white-color;
     height: 40px;
@@ -63,40 +63,40 @@
     overflow: hidden;
     text-overflow: ellipsis;
 
-    &[accepting] {
+    &[accepting='true'] {
       cursor: pointer;
       pointer-events: all;
     }
 
-    &[accepted] {
+    &[accepted='true'] {
       background-color: $success-color;
     }
 
-    &[declined] {
+    &[declined='true'] {
       background-color: $fail-color;
     }
 
-    &[used] {
+    &[used='true'] {
       background-color: $gray-600;
     }
 
-    &[short] {
+    &[short='true'] {
       [label] {
         display: none;
       }
     }
 
-    &[over-from] {
+    &[over-from='true'] {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
     }
 
-    &[over-to] {
+    &[over-to='true'] {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
     }
 
-    &[self-expense] {
+    &[self-expense='true'] {
       border: 1px dashed $gray-800;
     }
   }
