@@ -23,7 +23,6 @@ export class MonthGanttComponent implements ControlValueAccessor {
   @HostBinding('attr.host') readonly host = 'jnt-month-gantt-host';
 
   ui = UI;
-  statuses = GanttRequestStatuses;
   loading = false;
   today = (today());
   progress: any = {};

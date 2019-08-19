@@ -32,7 +32,15 @@ import { AfterPipe, BeforePipe, DateDiffPipe, DiffDayPipe, FullMonthPipe, Remnan
   ],
   exports: [
     MonthGanttComponent,
-    MonthGanttLineComponent
+    MonthGanttLineComponent,
+    FullMonthPipe,
+    BeforePipe,
+    AfterPipe,
+    StatusPipe,
+    DiffDayPipe,
+    RemnantDayPipe,
+    DateDiffPipe,
+    SamePipe
   ]
 })
 export class MonthGanttModule {
