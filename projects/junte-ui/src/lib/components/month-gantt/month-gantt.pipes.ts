@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { differenceInDays, getDate, getDaysInMonth, getMonth, getYear } from 'date-fns';
+import { differenceInDays, getDate, getDaysInMonth, getMonth, getYear, isSameMonth, isSameYear } from 'date-fns';
 import { GanttRequestStatuses } from '../../enum/ui';
 
 const MONTHS_IN_YEAR = 12;
@@ -43,6 +43,13 @@ export class AfterPipe implements PipeTransform {
   transform(to: Date, current: Date): number {
     return getFullMonth(getYear(to), getMonth(to)) <= getFullMonth(getYear(current), getMonth(current))
       ? getDate(to) : getDaysInMonth(current);
+  }
+}
+
+@Pipe({name: 'same'})
+export class SamePipe implements PipeTransform {
+  transform(date: Date, current: Date): boolean {
+    return isSameMonth(date, current) && isSameYear(date, current);
   }
 }
 

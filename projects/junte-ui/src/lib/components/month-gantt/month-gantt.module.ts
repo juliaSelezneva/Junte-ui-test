@@ -7,7 +7,7 @@ import { IconModule } from '../icon';
 import { SkeletonModule } from '../skeleton';
 import { MonthGanttLineComponent } from './month-gantt-line/month-gantt-line.component';
 import { MonthGanttComponent } from './month-gantt.component';
-import { AfterPipe, BeforePipe, DateDiffPipe, DiffDayPipe, FullMonthPipe, RemnantDayPipe, StatusPipe } from './month-gantt.pipes';
+import { AfterPipe, BeforePipe, DateDiffPipe, DiffDayPipe, FullMonthPipe, RemnantDayPipe, SamePipe, StatusPipe } from './month-gantt.pipes';
 
 @NgModule({
   declarations: [
@@ -19,6 +19,7 @@ import { AfterPipe, BeforePipe, DateDiffPipe, DiffDayPipe, FullMonthPipe, Remnan
     DiffDayPipe,
     RemnantDayPipe,
     DateDiffPipe,
+    SamePipe,
     MonthGanttLineComponent
   ],
   imports: [
