@@ -30,16 +30,17 @@
 
     <ng-container *ngIf="(isSameMonth(line.data.periodFrom, current) && isSameYear(line.data.periodFrom, current))
       || (isSameMonth(line.data.periodTo, current) && isSameYear(line.data.periodTo, current)); else no_request">
-      <td *ngFor="let day of (line.data.periodFrom | start:current) - 1 | numberArray"></td>
 
-      <td [attr.colspan]="(line.data.periodTo | end:current) - (line.data.periodFrom | start:current) + 1">
+      <td *ngFor="let day of (line.data.periodFrom | before:current) - 1 | numberArray"></td>
+
+      <td [attr.colspan]="(line.data.periodTo | after:current) - (line.data.periodFrom | before:current) + 1">
         <div class="vacation"
              [class.accepting]="line.data.status == statuses.accepting"
              [class.accepted]="line.data.status == statuses.accepted"
              [class.declined]="line.data.status == statuses.declined"
              [class.used]="(line.data.periodTo | dateDiff:today) < 0"
              [class.self-expense]="line.data.selfExpense"
-             [class.short]="(line.data.periodTo | end:current) - (line.data.periodFrom | start:current) < 3"
+             [class.short]="(line.data.periodTo | after:current) - (line.data.periodFrom | before:current) < 3"
              [class.over-from]="(line.data.periodFrom | fullMonth) < (current | fullMonth)"
              [class.over-to]="(line.data.periodTo | fullMonth) > (current | fullMonth)">
           <!--          <nz-spin *ngIf="progress[request.id];else period"-->
@@ -51,7 +52,8 @@
         </div>
       </td>
 
-      <td *ngFor="let day of (getDaysInMonth(current) - (line.data.periodTo | end:current)) | numberArray"></td>
+      <td *ngFor="let day of (getDaysInMonth(current) - (line.data.periodTo | after:current)) | numberArray"></td>
+
     </ng-container>
   </tr>
 </table>

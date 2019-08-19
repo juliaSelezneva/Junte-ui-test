@@ -30,16 +30,16 @@ export class FullMonthPipe implements PipeTransform {
   }
 }
 
-@Pipe({name: 'start'})
-export class StartPipe implements PipeTransform {
+@Pipe({name: 'before'})
+export class BeforePipe implements PipeTransform {
   transform(from: Date, current: Date): number {
     return getFullMonth(getYear(from), getMonth(from)) >= getFullMonth(getYear(current), getMonth(current))
       ? getDate(from) : 1;
   }
 }
 
-@Pipe({name: 'end'})
-export class EndPipe implements PipeTransform {
+@Pipe({name: 'after'})
+export class AfterPipe implements PipeTransform {
   transform(to: Date, current: Date): number {
     return getFullMonth(getYear(to), getMonth(to)) <= getFullMonth(getYear(current), getMonth(current))
       ? getDate(to) : getDaysInMonth(current);
