@@ -10,5 +10,5 @@ export class MonthGanttLineComponent {
   @Input() from: Date;
   @Input() to: Date;
   @Input() period: any;
-  @ContentChild('period') periodTemplate: TemplateRef<any>;
+  @ContentChild('indicator') indicatorTemplate: TemplateRef<any>;
 }

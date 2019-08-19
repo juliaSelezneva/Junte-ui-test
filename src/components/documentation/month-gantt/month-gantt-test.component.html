@@ -7,7 +7,7 @@
                               [from]="request.from"
                               [to]="request.to"
                               [title]="request.createdBy.login">
-          <ng-template #period let-period="period" let-current="current" let-today="today">
+          <ng-template #indicator let-period="period" let-current="current" let-today="today">
             <div [attr.accepting]="period['status'] === statuses.accepting"
                  [attr.accepted]="period['status'] === statuses.accepted"
                  [attr.declined]="period['status'] === statuses.declined"

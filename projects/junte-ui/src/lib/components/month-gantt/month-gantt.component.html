@@ -35,7 +35,7 @@
 
       <td [attr.colspan]="(line.to | after: current) - (line.from | before: current) + 1">
 
-        <ng-container *ngTemplateOutlet="line.periodTemplate;
+        <ng-container *ngTemplateOutlet="line.indicatorTemplate;
           context: {period: line.period, current: current, today: today}">
         </ng-container>
 
