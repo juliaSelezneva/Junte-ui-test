@@ -65,7 +65,7 @@ export const REQUESTS =
       'createdAt': '2019-08-16T01:11:40+0300',
       'createdBy': {
         'id': 111,
-        'login': 'romanov Roman Romanovich'
+        'login': 'Romanov Roman Romanovich'
       },
       'from': '2019-08-18T08:05:18+0300',
       'to': '2019-09-21T05:00:38+0300',
