@@ -23,7 +23,7 @@ export class MonthGanttTestComponent implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-      // this.requests = REQUESTS;
+      this.requests = REQUESTS;
       this.loading = false;
     }, 3000);
     this.gantt.valueChanges.subscribe(date => console.log('Date changed: ', date));
