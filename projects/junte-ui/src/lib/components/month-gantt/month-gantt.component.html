@@ -44,13 +44,13 @@
 
   <ng-container *ngIf="!!lines?.length else skeletonTemplate">
     <tr *ngFor="let line of lines;let i = index">
-      <ng-template #no_request>
+      <ng-template #noRequest>
         <td *ngFor="let day of getDaysInMonth(current) | numberArray: 1"></td>
       </ng-template>
 
       <td title>{{line.title}}</td>
 
-      <ng-container *ngIf="(line.from | same: current) || (line.to | same: current); else no_request">
+      <ng-container *ngIf="(line.from | same: current) || (line.to | same: current); else noRequest">
         <td *ngFor="let day of (line.from | before: current) - 1 | numberArray"></td>
         <td [attr.colspan]="(line.to | after: current) - (line.from | before: current) + 1">
           <ng-container *ngTemplateOutlet="line.indicatorTemplate;
