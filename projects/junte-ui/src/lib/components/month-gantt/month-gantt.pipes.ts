@@ -18,9 +18,9 @@ function getDifference(date1: Date, date2: Date, base: string = 'days') {
 }
 
 export enum VacationRequestLables {
-  accepting = 'На согласовании',
-  accepted = 'Согласовано',
-  declined = 'Отказано',
+  accepting = 'Accepting',
+  accepted = 'Accepted',
+  declined = 'Declined',
 }
 
 @Pipe({name: 'fullMonth'})
