@@ -10,7 +10,7 @@ export class MockArrayPipe implements PipeTransform {
 @Pipe({name: 'numberArray'})
 export class NumberArrayPipe implements PipeTransform {
   transform(count: number, start: number = 0): any[] {
-    return count > 0 ? Array.from(Array(count).keys()).map(x => start ? x + start : x) : [];
+    return count > 0 ? [...Array(count).keys()].map(x => start ? x + start : x) : [];
   }
 }
 
