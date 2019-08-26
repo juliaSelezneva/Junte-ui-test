@@ -8,19 +8,6 @@
   url('../fonts/icons/icons.svg#icons') format('svg');
 }
 
-i {
-  font-family: "icons";
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-style: normal;
-  font-variant: normal;
-  font-weight: normal;
-  /* speak: none; only necessary if not using the private unicode range (firstGlyph option) */
-  text-decoration: none;
-  text-transform: none;
-}
-
-
 .icon-access-lock:before {
   content: "\ea01"
 }
