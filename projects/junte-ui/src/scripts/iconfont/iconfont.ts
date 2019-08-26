@@ -23,6 +23,7 @@ class Config {
 export class Gulpfile {
 
   private check() {
+    console.log(fs.existsSync('iconfont/' + CONFIG_NAME));
     return fs.existsSync('iconfont/' + CONFIG_NAME) && fs.existsSync('iconfont/' + TEMPLATE_NAME);
   }
 
