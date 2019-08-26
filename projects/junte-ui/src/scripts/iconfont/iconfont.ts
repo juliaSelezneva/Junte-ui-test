@@ -17,6 +17,7 @@ class Config {
   stylesDir: string = '';
   fontsDir: string = '';
   templateDir: string = '';
+  fontName: string = '';
 }
 
 @Gulpclass()
@@ -48,7 +49,7 @@ export class Gulpfile {
     return gulp.src([config.iconsDir])
       .pipe(debug())
       .pipe(iconfont({
-        fontName: 'icons',
+        fontName: config.fontName,
         prependUnicode: false,
         formats: ['ttf', 'woff', 'svg', 'eot', 'woff2'],
         timestamp: Math.round(Date.now() / 1000),
