@@ -8,7 +8,7 @@
     "gulp:styles:w": "gulp build --gulpfile ./projects/junte-ui/src/scripts/styles.ts --watch",
     "gulp:iconfont": "gulp build --gulpfile projects/junte-ui/src/scripts/iconfont/iconfont.ts --cwd .",
     "clean": "rimraf ./dist",
-    "serve": "wait-on -i 3000 dist/junte-ui/public_api.d.ts && npm run copy:files && ng serve --noImplicitAny --hmr",
+    "serve": "wait-on -i 3000 dist/junte-ui/public_api.d.ts && npm run copy:files && ng serve --hmr",
     "start": "npm run clean && run-p *:watch serve",
     "build": "npm run encapsulation && npm run gulp:iconfont && ng build",
     "assets:create:folders": "mkdir ./dist/junte-ui/lib/assets/ && mkdir ./dist/junte-ui/lib/assets/images && mkdir ./dist/junte-ui/lib/assets/fonts && mkdir ./dist/junte-ui/lib/assets/styles",

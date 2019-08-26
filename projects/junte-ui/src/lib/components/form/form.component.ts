@@ -58,7 +58,7 @@ export class FormComponent implements AfterContentInit {
     this.items.changes.subscribe(items => this.setLayout(items));
   }
 
-  private check(form: FormGroup) {
+  private check(form: any) {
     for (const i in form.controls) {
       form.controls[i].markAsDirty();
       form.controls[i].updateValueAndValidity();
