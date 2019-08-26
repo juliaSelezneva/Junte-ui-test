@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as gulp from 'gulp';
 import * as consolidate from 'gulp-consolidate';
 import * as debug from 'gulp-debug';
-import * as iconfont from 'gulp-iconfont/src';
+import * as iconfont from 'gulp-iconfont';
 import * as rename from 'gulp-rename';
 import { Gulpclass, SequenceTask, Task } from 'gulpclass';
 import 'reflect-metadata';
@@ -50,17 +50,15 @@ export class Gulpfile {
       .pipe(debug())
       .pipe(iconfont({
         fontName: config.fontName,
-        prependUnicode: false,
+        prependUnicode: true,
         formats: ['ttf', 'woff', 'svg', 'eot', 'woff2'],
         timestamp: Math.round(Date.now() / 1000),
         normalize: true,
-        fontHeight: 1001,
-        appendCodepoints: true
+        fontHeight: 1001
       }))
       .on('glyphs', function (glyphs) {
         glyphs.forEach(function (glyph, idx, arr) {
           arr[idx].unicode[0] = glyph.unicode[0].charCodeAt(0).toString(16);
-          glyph.name = glyph.name.substring(0, glyph.name.lastIndexOf('-'));
         });
         gulp.src(config.templateDir)
           .pipe(consolidate('lodash', {
