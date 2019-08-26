@@ -1,6 +1,15 @@
 <jnt-container>
   <h1>Badge</h1>
-
+  <jnt-stack resources [type]="ui.stack.type.horizontal">
+    <jnt-link [icon]="ui.icons.externalLink"
+              source="https://gitlab.com/junte/junte-ui/tree/master/projects/junte-ui/src/lib/components/badge"
+              target="_blank" title="GitLab">
+    </jnt-link>
+    <jnt-link [icon]="ui.icons.externalLink"
+              source="https://www.figma.com/file/EIUNwZCXL9Nm5BKQKl43mfDr/Junte-UI-v1?node-id=2089%3A34"
+              target="_blank" title="Figma">
+    </jnt-link>
+  </jnt-stack>
   <h3>Requirements</h3>
 
   <ol>
@@ -8,22 +17,6 @@
     <li>The badge must have different position: right-top, left-top and inline</li>
   </ol>
 
-  <hr>
-
-  <h3>Sources</h3>
-
-  <ul>
-    <li>
-      <jnt-link source="https://gitlab.com/junte/junte-ui/tree/master/projects/junte-ui/src/lib/components/badge"
-                target="_blank" title="GitLab">
-      </jnt-link>
-    </li>
-    <li>
-      <jnt-link source="https://www.figma.com/file/EIUNwZCXL9Nm5BKQKl43mfDr/Junte-UI-v1?node-id=2089%3A34"
-                target="_blank" title="Figma">
-      </jnt-link>
-    </li>
-  </ul>
 
   <hr>
 
@@ -31,8 +24,8 @@
 
   <jnt-stack>
     <jnt-stack [type]="ui.stack.type.horizontal">
-      <ng-container *ngFor="let scheme of [ui.schemes.primary, ui.schemes.secondary, ui.schemes.success, ui.schemes.fail]">
-        <jnt-badge [scheme]="scheme" [count]="5">
+      <ng-container *ngFor="let color of [ui.colors.purple, ui.colors.blue100, ui.colors.green, ui.colors.red]">
+        <jnt-badge [color]="color" [count]="5">
           <a href="#" block></a>
         </jnt-badge>
       </ng-container>
@@ -40,7 +33,7 @@
 
       <ngx-prism language="html">
 <pre><![CDATA[
-<jnt-badge [scheme]="ui.schemes.primary" [count]="5">
+<jnt-badge [color]="ui.colors.purple" [count]="5">
   <a href="#"></a>
 </jnt-badge>
 ]]></pre>

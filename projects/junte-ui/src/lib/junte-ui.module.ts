@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { MonthGanttModule } from './components/month-gantt/month-gantt.module';
 import { AppLayoutModule } from './components/app-layout/app-layout.module';
 import { AvatarModule } from './components/avatar/avatar.module';
 import { BadgeModule } from './components/badge/badge.module';
@@ -36,24 +37,27 @@ import { SwitchModule } from './components/switch/switch.module';
 import { SwitcherModule } from './components/switcher/switcher.module';
 import { TableModule } from './components/table/table.module';
 import { TabsModule } from './components/tabs/tabs.module';
+import { ThemeSwitcherModule } from './components/theme-switcher/theme-switcher.module';
 import { JunteDirectiveModule } from './directives/junte-directive.module';
 import { JunteUiComponent } from './junte-ui.component';
 import { AnimationPipeModule } from './pipes/animation-pipe.module';
 import { DatePipeModule } from './pipes/date-pipe.module';
+import { IncludesPipeModule } from './pipes/includes-pipe.module';
 import { IsEqualModule } from './pipes/is-equal.module';
 import { SanitizePipeModule } from './pipes/sanitize.module';
 import { TextPipeModule } from './pipes/text-pipe.module';
-import { IncludesPipeModule } from './pipes/includes-pipe.module';
 
 @NgModule({
   declarations: [
     JunteUiComponent,
   ],
-  exports: [
+  imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule,
+    RouterModule
+  ],
+  exports: [
     AppLayoutModule,
     AnimationPipeModule,
     AvatarModule,
@@ -94,7 +98,9 @@ import { IncludesPipeModule } from './pipes/includes-pipe.module';
     TabsModule,
     PopoverModule,
     ProgressBarModule,
-    ChartModule
+    ChartModule,
+    ThemeSwitcherModule,
+    MonthGanttModule
   ]
 })
 export class JunteUiModule {

@@ -16,7 +16,7 @@
       </jnt-stack>
 
       <div>
-        <jnt-input *ngIf="features | includes : ui.table.features.search" formControlName="query"
+        <jnt-input *ngIf="features | includes : ui.table.features.search" formControlName="q"
                    [icon]="ui.icons.search" placeholder="Search">
         </jnt-input>
       </div>
@@ -49,7 +49,7 @@
           <ng-container *ngIf="source.length; else noDataTemplate">
             <tr *ngFor="let row of source; let i = index" [class.even]="!(i % 2)">
               <td *ngIf="!!rowActionsTemplate" action>
-                <jnt-dropdown>
+                <jnt-dropdown menu>
                   <ng-template #trigger let-action="trigger">
                     <jnt-button button [outline]="ui.outline.transparent" [icon]="ui.icons.actions"
                                 (click)="action()"></jnt-button>

@@ -2,7 +2,7 @@
 
 :host {
   display: inline-flex;
-  box-shadow: $shadow-primary;
+  box-shadow: $shadow-normal;
   border-radius: $corner-normal;
   background-color: $secondary-background;
 }
@@ -85,6 +85,9 @@ table {
       &:last-child {
         color: $gray-900;
         text-align: center;
+      }
+      [content] {
+        overflow: hidden;
       }
     }
   }

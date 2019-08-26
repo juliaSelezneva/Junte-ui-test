@@ -1,22 +1,24 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
-import { ModalComponent, ModalService, PopoverComponent, PopoverService, UI } from 'junte-ui';
-
-enum Themes {
-  light = 'light',
-  dark = 'dark'
-}
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormControl } from '@angular/forms';
+import { ModalComponent, ModalService, PopoverComponent, PopoverService, UI, Themes } from 'junte-ui';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements OnInit, AfterViewInit {
 
   private _theme = Themes.light;
   ui = UI;
-  loading: { [name: string]: boolean } = {};
+  loading = false;
   themes = Themes;
+  checked = true;
+  themeControl = new FormControl(null);
+
+  themeForm = this.fb.group({
+    theme: this.themeControl
+  });
 
   set theme(theme: Themes) {
     this._theme = theme;
@@ -32,7 +34,14 @@ export class AppComponent implements AfterViewInit {
   @ViewChild('layout', {read: ElementRef}) backdrop;
 
   constructor(private modalService: ModalService,
-              private popoverService: PopoverService) {
+              private popoverService: PopoverService,
+              private fb: FormBuilder) {
+  }
+
+  ngOnInit() {
+    this._theme = Themes[localStorage.getItem('theme')];
+    this.themeControl.setValue(this.theme);
+    this.themeControl.valueChanges.subscribe(theme => this.theme = theme);
   }
 
   ngAfterViewInit() {
@@ -41,7 +50,7 @@ export class AppComponent implements AfterViewInit {
   }
 
   private load(theme: Themes) {
-    this.loading[theme] = true;
-    window['themes'](theme, () => this.loading[theme] = false);
+    this.loading = true;
+    window['themes'](theme, () => this.loading = false);
   }
 }

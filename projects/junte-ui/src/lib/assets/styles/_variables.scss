@@ -62,7 +62,9 @@ $jnt-slider-carousel-dots-host: 'jnt-slider-carousel-dots-host';
 $jnt-slider-carousel-item-host: 'jnt-slider-carousel-item-host';
 $jnt-slider-carousel-host: 'jnt-slider-carousel-host';
 $jnt-switcher-host: 'jnt-switcher-host';
+$jnt-theme-switcher-host: 'jnt-theme-switcher-host';
 $jnt-dot-host: 'jnt-dot-host';
+$jnt-month-gantt-host: 'jnt-month-gantt-host';
 
 /*Color*/
 $blue: #E7F5FF !default;
@@ -191,7 +193,7 @@ $line-height-small: 1 !default;
 
 $font-family-base: Open Sans !default;
 
-$h1-font-size: $font-size-base * 4.85 !default;
+$h1-font-size: $font-size-base * 4 !default;
 $h2-font-size: $font-size-base * 3 !default;
 $h3-font-size: $font-size-base * 1.85 !default;
 $h4-font-size: $font-size-base * 1.28 !default;
