@@ -65,7 +65,7 @@ export class Gulpfile {
         gulp.src(config.templateDir)
           .pipe(consolidate('lodash', {
             glyphs: glyphs,
-            fontName: 'icons',
+            fontName: config.fontName,
             fontPath: '../fonts/icons/',
             className: 'icon'
           }))
