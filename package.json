@@ -4,8 +4,6 @@
   "scripts": {
     "ng": "ng",
     "gulp": "gulp",
-    "gulp:encapsulation": "gulp build --gulpfile ./projects/junte-ui/src/scripts/encapsulation.ts",
-    "gulp:encapsulation:w": "gulp build --gulpfile ./projects/junte-ui/src/scripts/encapsulation.ts --watch",
     "gulp:styles": "gulp build --gulpfile ./projects/junte-ui/src/scripts/styles.ts",
     "gulp:styles:w": "gulp build --gulpfile ./projects/junte-ui/src/scripts/styles.ts --watch",
     "gulp:iconfont": "gulp build --gulpfile projects/junte-ui/src/scripts/iconfont/iconfont.ts --cwd .",
