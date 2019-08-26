@@ -36,7 +36,7 @@ export class Gulpfile {
       fs.mkdirSync('iconfont');
     }
     fs.writeFileSync('iconfont/' + CONFIG_NAME, JSON.stringify(new Config(), null, 4));
-    fs.copyFileSync('node-modules/junte-ui/' + TEMPLATE_NAME, 'iconfont/');
+    fs.copyFileSync('node_modules/junte-ui/' + TEMPLATE_NAME, 'iconfont/');
     console.log('\x1b[31m', ICONFONT_INFO);
   }
 
