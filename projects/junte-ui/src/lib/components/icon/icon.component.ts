@@ -5,19 +5,19 @@ const DEFAULT_ICONSET = 'icons';
 
 @Component({
   selector: 'jnt-icon',
-  templateUrl: './icon.component.html'
+  templateUrl: './icon.component.html',
+  styleUrls: ['./icon.component.scss']
 })
 export class IconComponent {
 
   private _icon: string = Icons.check;
   typeIcon = TypeIcon;
-  type: TypeIcon;
+  type: TypeIcon = TypeIcon.font;
   iconset: string;
 
   @Input()
   set icon(icon: string) {
     const chunks = icon.split(':');
-
     this._icon = chunks[0];
 
     if (!!chunks[1]) {
