@@ -42,8 +42,10 @@ export class LinkComponent {
 
   @Input()
   set source(source: string | string[]) {
-    this.externalLink = !Array.isArray(source);
-    this._source = source;
+    if (!!source) {
+      this.externalLink = !Array.isArray(source);
+      this._source = source;
+    }
   }
 
   get source() {
