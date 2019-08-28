@@ -4,11 +4,11 @@ import { GanttRequestStatuses } from 'junte-ui';
 import { REQUESTS } from './requests';
 
 @Component({
-  selector: 'app-month-gantt-test',
-  templateUrl: './month-gantt-test.component.html',
-  styleUrls: ['./month-gantt-test.component.scss']
+  selector: 'app-gantt-test',
+  templateUrl: './gantt-test.component.html',
+  styleUrls: ['./gantt-test.component.scss']
 })
-export class MonthGanttTestComponent implements OnInit {
+export class GanttTestComponent implements OnInit {
 
   requests = [];
   statuses = GanttRequestStatuses;

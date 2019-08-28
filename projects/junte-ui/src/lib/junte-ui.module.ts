@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { MonthGanttModule } from './components/month-gantt/month-gantt.module';
+import { GanttModule } from './components/gantt/gantt.module';
 import { AppLayoutModule } from './components/app-layout/app-layout.module';
 import { AvatarModule } from './components/avatar/avatar.module';
 import { BadgeModule } from './components/badge/badge.module';
@@ -100,7 +100,7 @@ import { TextPipeModule } from './pipes/text-pipe.module';
     ProgressBarModule,
     ChartModule,
     ThemeSwitcherModule,
-    MonthGanttModule
+    GanttModule
   ]
 })
 export class JunteUiModule {

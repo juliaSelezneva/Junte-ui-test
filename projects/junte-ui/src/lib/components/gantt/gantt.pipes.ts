@@ -82,3 +82,12 @@ export class RemnantDayPipe implements PipeTransform {
     return Math.min(diff, Math.max(remnant, 0));
   }
 }
+
+@Pipe({
+  name: 'getDaysInMonth'
+})
+export class GetDaysInMonthPipe implements PipeTransform {
+  transform(date: Date): number {
+    return getDaysInMonth(date);
+  }
+}

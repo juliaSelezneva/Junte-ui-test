@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MonthGanttTestComponent } from './month-gantt/month-gantt-test.component';
+import { GanttTestComponent } from './gantt/gantt-test.component';
 import { AppLayoutTestComponent } from './app-layout/app-layout-test.component';
 import { AvatarTestComponent } from './avatar/avatar-test.component';
 import { BadgeTestComponent } from './badge/badge-test.component';
@@ -206,9 +206,9 @@ export const routes: Routes = [
         data: {breadcrumb: 'Chart'}
       },
       {
-        path: 'month-gantt',
-        component: MonthGanttTestComponent,
-        data: {breadcrumb: 'Month-gantt'}
+        path: 'gantt',
+        component: GanttTestComponent,
+        data: {breadcrumb: 'Gantt'}
       },
       {
         path: 'theming',
