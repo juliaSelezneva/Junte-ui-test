@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'jnt-animated-icon',
-  templateUrl: './animated-icon.component.html',
+  template: '<img [src]="source">',
   styleUrls: ['./animated-icon.component.scss']
 })
 export class AnimatedIconComponent implements OnInit {
