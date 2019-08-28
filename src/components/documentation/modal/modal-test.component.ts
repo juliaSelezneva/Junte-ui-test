@@ -15,6 +15,9 @@ export class ModalTestComponent {
   @ViewChild('content')
   content: TemplateRef<any>;
 
+  @ViewChild('footer')
+  footer: TemplateRef<any>;
+
   constructor(private modalService: ModalService,
               private injector: Injector,
               private cfr: ComponentFactoryResolver) {
@@ -27,7 +30,10 @@ export class ModalTestComponent {
   openCalendar() {
     const component = this.cfr.resolveComponentFactory(ModalTestFactoryComponent).create(this.injector);
     this.modalService.open(component, new ModalOptions({
-      title: 'Calendar',
+      title: {
+        text: 'Calendar',
+        icon: UI.icons.calendar
+      },
       maxHeight: '1024px',
       maxWidth: '1080px'
     }));

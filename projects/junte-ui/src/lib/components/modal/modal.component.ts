@@ -13,18 +13,23 @@ import {
   ViewContainerRef
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { UI } from '../../enum/ui';
+import { Icons, UI } from '../../enum/ui';
 
 export enum ModalClosingOption {
   enable = 'enable',
   disable = 'disable'
 }
 
+interface ModalTitle {
+  text?: string;
+  icon?: Icons;
+}
+
 export class ModalOptions {
-  title: string;
   maxWidth = '800px';
   maxHeight = '705px';
   closing: ModalClosingOption = ModalClosingOption.enable;
+  title?: ModalTitle;
 
   constructor(defs: any = null) {
     Object.assign(this, defs);
