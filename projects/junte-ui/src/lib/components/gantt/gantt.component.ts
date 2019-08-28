@@ -1,6 +1,6 @@
 import { Component, ContentChildren, forwardRef, HostBinding, Input, QueryList } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { addMonths, format, getDaysInMonth, isSameMonth, subMonths } from 'date-fns';
+import { addMonths, subMonths } from 'date-fns';
 import { UI } from '../../enum/ui';
 import { today } from '../calendar/utils';
 import { GanttLineComponent } from './gantt-line/gantt-line.component';
@@ -20,20 +20,19 @@ export class GanttComponent implements ControlValueAccessor {
 
   private _current: Date;
 
-  @HostBinding('attr.host') readonly host = 'jnt-gantt-host';
   @Input() loading = false;
+
+  @HostBinding('attr.host') readonly host = 'jnt-gantt-host';
+
   @ContentChildren(GanttLineComponent)
   lines: QueryList<GanttLineComponent>;
 
   ui = UI;
-  today = (today());
+  today = today();
   error: Error;
 
-  format = format;
   addMonths = addMonths;
   subMonths = subMonths;
-  isSameMonth = isSameMonth;
-  getDaysInMonth = getDaysInMonth;
 
   get current() {
     return this._current;

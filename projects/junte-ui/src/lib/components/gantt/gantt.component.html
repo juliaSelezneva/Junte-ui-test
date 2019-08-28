@@ -19,7 +19,7 @@
 
   <tr>
     <td></td>
-    <td day [attr.current]="(day === (today | getDate)) && isSameMonth(current, today)"
+    <td day [attr.current]="(day === (today | getDate)) && (current | isSameMonth: today)"
         *ngFor="let day of (current | getDaysInMonth) | numberArray: 1">
       {{day}}
     </td>

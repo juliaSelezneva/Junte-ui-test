@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ButtonModule } from '../button/button.module';
 import { ArrayPipeModule } from '../../pipes/array-pipe.module';
 import { DatePipeModule } from '../../pipes/date-pipe.module';
+import { ButtonModule } from '../button/button.module';
 import { CardModule } from '../card/card.module';
 import { IconModule } from '../icon/icon.module';
 import { SkeletonModule } from '../skeleton/skeleton.module';
@@ -15,6 +15,7 @@ import {
   DiffDayPipe,
   FullMonthPipe,
   GetDaysInMonthPipe,
+  IsSameMonthPipe,
   RemnantDayPipe,
   SamePipe,
   StatusPipe
@@ -32,6 +33,7 @@ import {
     RemnantDayPipe,
     DateDiffPipe,
     GetDaysInMonthPipe,
+    IsSameMonthPipe,
     SamePipe
   ],
   imports: [
@@ -54,6 +56,7 @@ import {
     RemnantDayPipe,
     DateDiffPipe,
     GetDaysInMonthPipe,
+    IsSameMonthPipe,
     SamePipe
   ]
 })
