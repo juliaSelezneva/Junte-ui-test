@@ -9,8 +9,6 @@ import { Icons } from 'projects/junte-ui/src/lib/enum/ui';
 export class FontIconComponent {
 
   @Input() icon = Icons.check;
-  @Input() @HostBinding('style.font-family')
-  iconset = 'icons';
 
   @HostBinding('class')
   get class() {
