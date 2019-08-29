@@ -31,11 +31,8 @@ $stack-gutters: (
 )!default;
 
 @mixin stack($property, $gutter) {
-  & > :not(:last-child) {
+  & > :not(:last-child):not(router-outlet) {
     #{$property}: #{map-get($gutter, gutter)};
-  }
-  router-outlet {
-    margin: 0 !important;
   }
 }
 
