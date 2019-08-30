@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AnimatedIconTestComponent } from 'src/components/documentation/animated-icon/animated-icon-test.component';
 import { GanttTestComponent } from './gantt/gantt-test.component';
 import { AppLayoutTestComponent } from './app-layout/app-layout-test.component';
 import { AvatarTestComponent } from './avatar/avatar-test.component';
@@ -138,6 +139,11 @@ export const routes: Routes = [
         path: 'icon',
         component: IconTestComponent,
         data: {breadcrumb: 'Icon'}
+      },
+      {
+        path: 'animated-icon',
+        component: AnimatedIconTestComponent,
+        data: {breadcrumb: 'Animated icon'}
       },
       {
         path: 'badge',
