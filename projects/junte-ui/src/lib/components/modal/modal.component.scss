@@ -9,6 +9,7 @@ $modal-text-font-size: $font-size-base !default;
 $modal-title-padding-x: $gutter-normal !default;
 $modal-title-padding-y: $gutter-normal !default;
 $modal-title-background: $page-background !default;
+$modal-title-font-size: 18px !default;
 
 $modal-content-padding-x: $gutter-normal !default;
 $modal-content-padding-y: $gutter-normal !default;
@@ -53,16 +54,17 @@ $modal-content-padding-y: $gutter-normal !default;
     border-top-right-radius: $corner-normal;
     padding: $modal-title-padding-x $modal-title-padding-y;
     background-color: $modal-title-background;
+    font-size: $modal-title-font-size;
 
     [text] {
       color: $modal-text-color;
       font-weight: $modal-text-font-weight;
-      font-size: $modal-text-font-size;
     }
   }
 
   [content] {
     padding: $modal-content-padding-x $modal-content-padding-y;
+    font-size: $modal-text-font-size;
   }
 
 }
