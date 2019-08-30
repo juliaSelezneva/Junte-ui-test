@@ -13,8 +13,9 @@
 
   <div [ngStyle]="{'max-height': options?.maxHeight, 'max-width': options?.maxWidth}">
     <ng-container #container>
-      <ng-container [ngIf]="template" *ngTemplateOutlet="template"></ng-container>
+      <ng-container [ngIf]="!!contentTemplate" *ngTemplateOutlet="contentTemplate"></ng-container>
     </ng-container>
+    <ng-container [ngIf]="!!footerTemplate" *ngTemplateOutlet="footerTemplate"></ng-container>
   </div>
 
 </jnt-block>

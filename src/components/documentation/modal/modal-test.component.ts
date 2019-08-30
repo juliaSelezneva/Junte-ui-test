@@ -29,14 +29,18 @@ export class ModalTestComponent {
 
   openCalendar() {
     const component = this.cfr.resolveComponentFactory(ModalTestFactoryComponent).create(this.injector);
-    this.modalService.open(component, new ModalOptions({
+    const options = new ModalOptions({
       title: {
         text: 'Calendar',
         icon: UI.icons.calendar
       },
       maxHeight: '1024px',
       maxWidth: '1080px'
-    }));
+    });
+    console.log(this.footer);
+    console.log(component);
+    console.log(options);
+    this.modalService.open(component, this.footer, options);
   }
 
   close() {
