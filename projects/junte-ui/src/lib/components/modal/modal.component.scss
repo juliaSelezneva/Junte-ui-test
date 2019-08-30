@@ -7,8 +7,11 @@ $modal-text-font-weight: $font-weight-bold !default;
 $modal-text-font-size: $font-size-base !default;
 
 $modal-title-padding-x: $gutter-normal !default;
-$modal-title-padding-y: $gutter-big !default;
+$modal-title-padding-y: $gutter-normal !default;
 $modal-title-background: $page-background !default;
+
+$modal-content-padding-x: $gutter-normal !default;
+$modal-content-padding-y: $gutter-normal !default;
 
 @keyframes fadein {
   from {
@@ -56,6 +59,10 @@ $modal-title-background: $page-background !default;
       font-weight: $modal-text-font-weight;
       font-size: $modal-text-font-size;
     }
+  }
+
+  [content] {
+    padding: $modal-content-padding-x $modal-content-padding-y;
   }
 
 }

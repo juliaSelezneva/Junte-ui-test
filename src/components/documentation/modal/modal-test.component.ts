@@ -23,9 +23,17 @@ export class ModalTestComponent {
               private cfr: ComponentFactoryResolver) {
   }
 
-  open() {
-    this.modalService.open(this.content);
+  openModal() {
+    const options = new ModalOptions({
+      title: {
+        text: 'Login',
+        icon: UI.icons.accessLock
+      },
+      maxWidth: '400px'
+    });
+    this.modalService.open(this.content, this.footer, options);
   }
+
 
   openCalendar() {
     const component = this.cfr.resolveComponentFactory(ModalTestFactoryComponent).create(this.injector);
@@ -35,11 +43,8 @@ export class ModalTestComponent {
         icon: UI.icons.calendar
       },
       maxHeight: '1024px',
-      maxWidth: '1080px'
+      maxWidth: '400px'
     });
-    console.log(this.footer);
-    console.log(component);
-    console.log(options);
     this.modalService.open(component, this.footer, options);
   }
 
