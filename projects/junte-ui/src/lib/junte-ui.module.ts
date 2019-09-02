@@ -1,7 +1,10 @@
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { AnimatedIconModule } from 'projects/junte-ui/src/lib/components/icon/animated-icon';
+import { SvgIconModule } from 'projects/junte-ui/src/lib/components/icon/svg-icon';
 import { AppLayoutModule } from './components/app-layout/app-layout.module';
 import { AvatarModule } from './components/avatar/avatar.module';
 import { BadgeModule } from './components/badge/badge.module';
@@ -17,7 +20,6 @@ import { DotModule } from './components/dot/dot.module';
 import { DropdownModule } from './components/dropdown/dropdown.module';
 import { FormModule } from './components/form/form.module';
 import { GridModule } from './components/grid/grid.module';
-import { AnimatedIconModule } from './components/icon/animated-icon/animated-icon.module';
 import { IconModule } from './components/icon/icon.module';
 import { InputModule } from './components/input/input.module';
 import { LabelModule } from './components/label/label.module';
@@ -56,7 +58,8 @@ import { TextPipeModule } from './pipes/text-pipe.module';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule
   ],
   exports: [
     AppLayoutModule,
@@ -79,6 +82,8 @@ import { TextPipeModule } from './pipes/text-pipe.module';
     GridModule,
     JunteDirectiveModule,
     IconModule,
+    AnimatedIconModule,
+    SvgIconModule,
     IncludesPipeModule,
     InputModule,
     LabelModule,
@@ -101,8 +106,7 @@ import { TextPipeModule } from './pipes/text-pipe.module';
     ProgressBarModule,
     ChartModule,
     ThemeSwitcherModule,
-    MonthGanttModule,
-    AnimatedIconModule
+    MonthGanttModule
   ]
 })
 export class JunteUiModule {
