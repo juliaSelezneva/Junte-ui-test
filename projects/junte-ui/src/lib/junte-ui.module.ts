@@ -3,8 +3,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { AnimatedIconModule } from 'projects/junte-ui/src/lib/components/icon/animated-icon';
-import { SvgIconModule } from 'projects/junte-ui/src/lib/components/icon/svg-icon';
+import { SvgIconModule } from './components/icon/svg-icon';
+import { GanttModule } from './components/gantt/gantt.module';
+import { AnimatedIconModule } from './components/icon/animated-icon/animated-icon.module';
 import { AppLayoutModule } from './components/app-layout/app-layout.module';
 import { AvatarModule } from './components/avatar/avatar.module';
 import { BadgeModule } from './components/badge/badge.module';
@@ -26,7 +27,6 @@ import { LabelModule } from './components/label/label.module';
 import { LinkModule } from './components/link/link.module';
 import { MenuModule } from './components/menu/menu.module';
 import { ModalModule } from './components/modal/modal.module';
-import { MonthGanttModule } from './components/month-gantt/month-gantt.module';
 import { PaginationModule } from './components/pagination/pagination.module';
 import { PopoverModule } from './components/popover/popover.module';
 import { ProgressBarModule } from './components/progress-bar/progress-bar.module';
@@ -106,7 +106,7 @@ import { TextPipeModule } from './pipes/text-pipe.module';
     ProgressBarModule,
     ChartModule,
     ThemeSwitcherModule,
-    MonthGanttModule
+    GanttModule
   ]
 })
 export class JunteUiModule {

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { SvgIconComponent } from 'projects/junte-ui/src/lib/components/icon/svg-icon/svg-icon.component';
-import { CacheService } from 'projects/junte-ui/src/lib/services';
+import { CacheService } from '../../../services';
+import { SvgIconComponent } from './svg-icon.component';
 
 @NgModule({
   declarations: [

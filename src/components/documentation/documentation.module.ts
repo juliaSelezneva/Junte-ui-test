@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PrismModule } from '@ngx-prism/core';
 import { JunteUiModule } from 'junte-ui';
-import { SvgIconModule } from 'projects/junte-ui/src/lib/components/icon/svg-icon';
 import { SvgIconTestComponent } from 'src/components/documentation/svg-icon/svg-icon-test.component';
 import { AnimatedIconTestComponent } from './animated-icon/animated-icon-test.component';
 import { AppLayoutTestComponent } from './app-layout/app-layout-test.component';
@@ -27,7 +26,7 @@ import { LinkTestComponent } from './link/link-test.component';
 import { MenuTestComponent } from './menu/menu-test.component';
 import { ModalTestComponent } from './modal/modal-test.component';
 import { ModalTestFactoryComponent } from './modal/test.component';
-import { MonthGanttTestComponent } from './month-gantt/month-gantt-test.component';
+import { GanttTestComponent } from './gantt/gantt-test.component';
 import { PagerTestComponent } from './pager/pager-test.component';
 import { PipesTestComponent } from './pipes/pipes-test.component';
 import { PopoverTestComponent } from './popover/popover-test.component';
@@ -52,8 +51,7 @@ import { TypographyTestComponent } from './typography/typography-test.component'
     ReactiveFormsModule,
     PrismModule,
     JunteUiModule,
-    DocumentationRoutingModule,
-    SvgIconModule
+    DocumentationRoutingModule
   ],
   declarations: [
     DocumentationComponent,
@@ -93,7 +91,7 @@ import { TypographyTestComponent } from './typography/typography-test.component'
     ChartTestComponent,
     SliderTestComponent,
     SwitcherTestComponent,
-    MonthGanttTestComponent,
+    GanttTestComponent,
     AnimatedIconTestComponent,
     SvgIconTestComponent
   ],
