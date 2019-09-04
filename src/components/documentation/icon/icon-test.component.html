@@ -75,7 +75,7 @@
 
   <jnt-stack [type]="ui.stack.type.horizontal" [wrap]="ui.flex.wrap.wrap">
     <div *ngFor="let icon of icons" wrapper>
-      <jnt-font-icon [icon]="icon" iconset="icons" icon></jnt-font-icon>
+      <jnt-font-icon [icon]="icon.value" iconset="icons" icon></jnt-font-icon>
       <div name>{{icon.name}}</div>
     </div>
   </jnt-stack>
