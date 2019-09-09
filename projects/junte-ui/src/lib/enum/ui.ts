@@ -105,7 +105,6 @@ export enum AnimatedIcons {
   settings = 'settings',
   time = 'time',
   upload = 'upload',
-  preloaderLogoJunteUi = 'preloader-logo-junte-ui'
 }
 
 export enum Colors {
