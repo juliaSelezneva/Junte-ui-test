@@ -1,6 +1,6 @@
 [
   {
-    "iconsDir": "src/assets/image/icons",
+    "svgDir": "src/assets/image/icons",
     "fontsDir": "src/assets/fonts",
     "fontName": "junte-ui"
   }
