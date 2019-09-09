@@ -100,7 +100,12 @@ export enum SvgIcons {
 }
 
 export enum AnimatedIcons {
-  runningMan = 'running-man'
+  runningMan = 'running-man',
+  download = 'download',
+  settings = 'settings',
+  time = 'time',
+  upload = 'upload',
+  preloaderLogoJunteUi = 'preloader-logo-junte-ui'
 }
 
 export enum Colors {
