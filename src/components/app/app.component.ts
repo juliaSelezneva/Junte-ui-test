@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
-import { ModalComponent, ModalService, PopoverComponent, PopoverService, UI, Themes } from 'junte-ui';
+import { ModalComponent, ModalService, PopoverComponent, PopoverService, Themes, UI } from 'junte-ui';
 
 @Component({
   selector: 'app-root',
@@ -31,7 +31,7 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   @ViewChild('popover', {static: false}) popover: PopoverComponent;
   @ViewChild('modal', {static: false}) modal: ModalComponent;
-  @ViewChild('layout', {read: ElementRef, static: false}) backdrop;
+  @ViewChild('layout', {read: ElementRef, static: true}) backdrop;
 
   constructor(private modalService: ModalService,
               private popoverService: PopoverService,
