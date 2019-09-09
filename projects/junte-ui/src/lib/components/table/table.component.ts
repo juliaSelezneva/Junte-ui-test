@@ -102,7 +102,7 @@ export class TableComponent implements OnInit, OnDestroy {
     });
 
     this.filterForm.valueChanges.pipe(filtering(() => !!this.fetcher), debounceTime(FILTER_DELAY))
-      .subscribe((filter: DefaultSearchFilter) => {
+      .subscribe(filter => {
         if (filter.first !== this.filter.first) {
           filter.page = 1;
         }
