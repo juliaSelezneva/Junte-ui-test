@@ -6,6 +6,6 @@ import { Component, HostBinding } from '@angular/core';
 })
 export class AppLayoutComponent {
 
-  @HostBinding('attr.host', ) readonly host = 'jnt-app-layout-host';
+  @HostBinding('attr.host') readonly host = 'jnt-app-layout-host';
 
 }
