@@ -97,8 +97,8 @@ export enum FontIcons {
 
 export enum SvgIcons {
   question = 'question',
-  figmaIcon = 'figma-icon',
-  gitlabIcon = 'gitlab-icon'
+  figma = 'figma',
+  gitlab = 'gitlab'
 }
 
 export enum AnimatedIcons {
