@@ -57,10 +57,10 @@
           </ng-container>
         </ng-container>
         <ng-container *ngFor="let size of [ui.sizes.small, ui.sizes.normal, ui.sizes.large]">
-          <jnt-button [scheme]="scheme" [size]="size" [outline]="ui.outline.transparent" [icon]="ui.icons.font.plus"
+          <jnt-button [scheme]="scheme" [size]="size" [outline]="ui.outline.transparent" icon="settings:animated:default"
                       [text]="scheme | titlecase"></jnt-button>
           <jnt-button [scheme]="scheme" [size]="size" [outline]="ui.outline.transparent"
-                      [icon]="ui.icons.font.plus"></jnt-button>
+                      icon="question:svg:default"></jnt-button>
           <jnt-button [scheme]="scheme" [size]="size" [outline]="ui.outline.transparent"
                       [text]="scheme | titlecase"></jnt-button>
         </ng-container>
