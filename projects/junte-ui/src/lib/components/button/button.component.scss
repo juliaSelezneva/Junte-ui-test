@@ -9,75 +9,83 @@ $outline-transparent: 'transparent';
 $button-schemes: (
   #{$scheme-primary}: (
     fill-color: $white-color,
+    fill-background-color: $primary-color,
+    fill-hover-background-color: $primary-dark-color,
+    fill-badge-color: $primary-color,
+    fill-badge-background-color: $white-color,
+
     outline-color: $primary-color,
+    outline-border-color: $primary-color,
+    outline-hover-background-color: $primary-color,
+    outline-hover-color: $white-color,
+    outline-badge-color: $white-color,
+    outline-hover-badge-color: $primary-color,
+    outline-badge-background: $primary-color,
+    outline-hover-badge-background: $primary-background,
+
     transparent-color: $primary-color,
     transparent-hover-color: $primary-dark-color,
-    border-outline-color: $primary-color,
-    background: $primary-color,
-    background-hover: $primary-dark-color,
-    background-outline-hover: $primary-color,
-    color-outline-hover: $white-color,
-    badge-color: $primary-color,
-    badge-background: $white-color,
-    badge-outline-color: $white-color,
-    badge-hover-outline-color: $primary-color,
-    badge-outline-background: $primary-color,
-    badge-hover-outline-background: $primary-background,
-    color-shadow-focus: $primary-color
+    button-focus-shadow-color: $primary-color
   ),
   #{$scheme-secondary}: (
     fill-color: $gray-900,
+    fill-background-color: $secondary-color,
+    fill-hover-background-color: $blue-100,
+    fill-badge-color: $secondary-color,
+    fill-badge-background-color: $gray-900,
+
     outline-color: $gray-900,
+    outline-border-color: $gray-900,
+    outline-hover-background-color: $gray-900,
+    outline-hover-color: $secondary-color,
+    outline-badge-color: $white-color,
+    outline-hover-badge-background: $secondary-color,
+    outline-hover-badge-color: $gray-900,
+    outline-badge-background: $gray-900,
+
     transparent-color: $primary-text-color,
     transparent-hover-color: $primary-text-dark-color,
-    border-outline-color: $gray-900,
-    background: $secondary-color,
-    background-hover: $blue-100,
-    background-outline-hover: $gray-900,
-    color-outline-hover: $secondary-color,
-    badge-color: $secondary-color,
-    badge-background: $gray-900,
-    badge-outline-color: $white-color,
-    badge-hover-outline-background: $secondary-color,
-    badge-hover-outline-color: $gray-900,
-    badge-outline-background: $gray-900,
-    color-shadow-focus: $gray-900
+    button-focus-shadow-color: $gray-900
   ),
   #{$scheme-success}: (
     fill-color: $white-color,
+    fill-background-color: $success-color,
+    fill-hover-background-color: $green-dark,
+    fill-badge-color: $success-color,
+    fill-badge-background-color: $white-color,
+
     outline-color: $success-color,
+    outline-border-color: $success-color,
+    outline-hover-background-color: $success-color,
+    outline-hover-color: $white-color,
+    outline-badge-color: $white-color,
+    outline-badge-background: $success-color,
+    outline-hover-badge-background: $primary-background,
+    outline-hover-badge-color: $success-color,
+
     transparent-color: $success-color,
     transparent-hover-color: $green-dark,
-    border-outline-color: $success-color,
-    background: $success-color,
-    background-hover: $green-dark,
-    background-outline-hover: $success-color,
-    color-outline-hover: $white-color,
-    badge-color: $success-color,
-    badge-background: $white-color,
-    badge-outline-color: $white-color,
-    badge-outline-background: $success-color,
-    badge-hover-outline-background: $primary-background,
-    badge-hover-outline-color: $success-color,
-    color-shadow-focus: $success-color
+    button-focus-shadow-color: $success-color
   ),
   #{$scheme-fail}: (
     fill-color: $white-color,
+    fill-background-color: $fail-color,
+    fill-hover-background-color: $red-dark,
+    fill-badge-color: $fail-color,
+    fill-badge-background-color: $white-color,
+
     outline-color: $fail-color,
+    outline-border-color: $fail-color,
+    outline-hover-background-color: $fail-color,
+    outline-hover-color: $white-color,
+    outline-badge-color: $white-color,
+    outline-badge-background: $fail-color,
+    outline-hover-badge-background: $primary-background,
+    outline-hover-badge-color: $fail-color,
+
     transparent-color: $fail-color,
     transparent-hover-color: $red-dark,
-    border-outline-color: $fail-color,
-    background: $fail-color,
-    background-hover: $red-dark,
-    background-outline-hover: $fail-color,
-    color-outline-hover: $white-color,
-    badge-color: $fail-color,
-    badge-background: $white-color,
-    badge-outline-color: $white-color,
-    badge-outline-background: $fail-color,
-    badge-hover-outline-background: $primary-background,
-    badge-hover-outline-color: $fail-color,
-    color-shadow-focus: $fail-color
+    button-focus-shadow-color: $fail-color
   ),
 )!default;
 
@@ -119,17 +127,17 @@ $button-sizes: (
 @mixin scheme($scheme) {
   button {
     color: #{map-get($scheme, fill-color)};
-    background: #{map-get($scheme, background)};
+    background-color: #{map-get($scheme, fill-background-color)};
     &:hover, &:focus {
-      background-color: #{map-get($scheme, background-hover)};
+      background-color: #{map-get($scheme, fill-hover-background-color)};
     }
     &:focus {
-      box-shadow: 0 1px 5px #{map-get($scheme, color-shadow-focus)};
+      box-shadow: 0 1px 5px #{map-get($scheme, button-focus-shadow-color)};
     }
     [badge][child-host=#{$jnt-badge-host}] {
       sup {
-        color: #{map-get($scheme, badge-color)};
-        background: #{map-get($scheme, badge-background)} !important;
+        color: #{map-get($scheme, fill-badge-color)};
+        background: #{map-get($scheme, fill-badge-background-color)} !important;
       }
     }
     [icon][child-host=#{$jnt-icon-host}] {
@@ -143,22 +151,22 @@ $button-sizes: (
   button {
     color: #{map-get($scheme, outline-color)};
     background-color: $primary-background;
-    border-color: #{map-get($scheme, border-outline-color)};
+    border-color: #{map-get($scheme, outline-border-color)};
     &:hover, &:focus {
-      background-color: #{map-get($scheme, background-outline-hover)};
+      background-color: #{map-get($scheme, outline-hover-background-color)};
       color: #{map-get($scheme, outline-hover-color)};
 
       [badge][child-host=#{$jnt-badge-host}] > sup {
-        background: #{map-get($scheme, badge-hover-outline-background)} !important;
-        color: #{map-get($scheme, badge-hover-outline-color)} !important;
+        background: #{map-get($scheme, outline-hover-badge-background)} !important;
+        color: #{map-get($scheme, outline-hover-badge-color)} !important;
       }
       [icon][child-host=#{$jnt-icon-host}] {
         fill: #{map-get($scheme, outline-hover-color)};
       }
     }
     [badge][child-host=#{$jnt-badge-host}] > sup {
-      background: #{map-get($scheme, badge-outline-background)} !important;
-      color: #{map-get($scheme, badge-outline-color)};
+      background: #{map-get($scheme, outline-badge-background)} !important;
+      color: #{map-get($scheme, outline-badge-color)};
     }
     [icon][child-host=#{$jnt-icon-host}] {
       fill: #{map-get($scheme, outline-color)};
@@ -189,7 +197,6 @@ $button-sizes: (
     padding: #{map-get($size, padding)};
     font-size: #{map-get($size, font-size)};
     height: #{map-get($size, height)};
-    line-height: #{map-get($size, height)};
   }
   [badge][child-host=#{$jnt-badge-host}] > sup {
     min-width: #{map-get($size, badge-size)};
@@ -284,7 +291,7 @@ $button-sizes: (
     width: 100%;
     position: relative;
     font-family: $font-family-base;
-    line-height: $line-height-base;
+    line-height: 1;
     [icon] {
       margin-right: $gutter-small;
     }
