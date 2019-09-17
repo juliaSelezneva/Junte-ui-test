@@ -1,5 +1,13 @@
+@import "../../../../projects/junte-ui/src/lib/assets/styles/variables";
+
 [resources] {
   position: absolute;
   top: 0;
   right: 0;
+}
+
+[stack][host=#{$jnt-stack-host}] {
+  @media screen and (max-width: map_get($grid-breakpoints, mobile)) {
+    flex-direction: column;
+  }
 }
