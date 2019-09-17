@@ -5,17 +5,12 @@ import {
   forwardRef,
   HostBinding,
   Input,
-  OnInit,
   QueryList
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { UI } from '../../enum/ui';
 import { ChartIndicatorComponent } from './chart-indicator/chart-indicator.component';
-
-const LIGHT_COLOR = '#FFF';
-const DARK_COLOR = '#4F4F4F';
-const RATIO_BRIGHTNESS = 150;
-const RATIO_RGB = [299, 587, 114];
+import { getTextBrightness } from '../../utils/brightness';
 
 @Component({
   selector: 'jnt-chart',
@@ -28,11 +23,12 @@ const RATIO_RGB = [299, 587, 114];
     }
   ]
 })
-export class ChartComponent implements ControlValueAccessor, OnInit, AfterContentInit {
+export class ChartComponent implements ControlValueAccessor, AfterContentInit {
 
   @HostBinding('attr.host') readonly host = 'jnt-chart-host';
 
   ui = UI;
+  getTextBrightness = getTextBrightness;
 
   private _selected: number;
   private _widthMark = 100;
@@ -40,6 +36,8 @@ export class ChartComponent implements ControlValueAccessor, OnInit, AfterConten
   progress = {loading: false};
 
   @Input() valueField: string;
+  @Input() title: string;
+  @Input() metric: string;
 
   @HostBinding('attr.heightIndicator')
   @Input() heightIndicator = 55;
@@ -52,9 +50,6 @@ export class ChartComponent implements ControlValueAccessor, OnInit, AfterConten
   set widthMark(width: number) {
     this._widthMark = width < 60 ? 60 : width;
   }
-
-  @Input() title: string;
-  @Input() metric: string;
 
   get widthMark() {
     return this._widthMark;
@@ -78,28 +73,6 @@ export class ChartComponent implements ControlValueAccessor, OnInit, AfterConten
 
 
   indicators: ChartIndicatorComponent[] = [];
-
-  ngOnInit() {
-  }
-
-  textColor(bgcolor) {
-    return this.brightness(bgcolor) >= RATIO_BRIGHTNESS ? DARK_COLOR : LIGHT_COLOR;
-  }
-
-  constructor() {
-  }
-
-  private brightness(color: string): number {
-    color = color.substr(1);
-    if (color.length === 3) {
-      color = color.split('').map(v => v + v).join('');
-    }
-
-    const rgb = [0, 0, 0];
-    return rgb.map((v, i) => (RATIO_RGB[i] * parseInt(color.substr(i * 2, 2), 16)) / 1000)
-      .reduce((a, c) => a + c);
-  }
-
 
   ngAfterContentInit() {
     this.indicators = this.indicatorsComponents.toArray();
