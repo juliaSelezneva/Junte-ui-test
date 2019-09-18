@@ -212,6 +212,9 @@ $button-sizes: (
     width: #{map-get($size, icon-size)};
     height: #{map-get($size, icon-size)};
   }
+  [text] {
+    line-height: #{map-get($size, height)};
+  }
 }
 
 @mixin size-without-text($size) {
