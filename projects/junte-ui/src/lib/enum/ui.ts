@@ -99,7 +99,8 @@ export enum SvgIcons {
   question = 'question',
   figma = 'figma',
   gitlab = 'gitlab',
-  angular = 'angular'
+  angular = 'angular',
+  arnold = 'arnold',
 }
 
 export enum AnimatedIcons {
@@ -358,6 +359,7 @@ export class UI {
     gitlab: SvgIcons.gitlab + ':svg:default',
     figma: SvgIcons.figma + ':svg:default',
     angular: SvgIcons.angular + ':svg:default',
+    arnold: SvgIcons.arnold + 'svg:default',
     runningMan: AnimatedIcons.runningMan + ':animated:default'
   };
   static schemes = Schemes;
