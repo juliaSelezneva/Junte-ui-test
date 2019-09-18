@@ -101,6 +101,7 @@ export enum SvgIcons {
   gitlab = 'gitlab',
   angular = 'angular',
   arnold = 'arnold',
+  dribbble = 'dribbble',
 }
 
 export enum AnimatedIcons {
@@ -360,6 +361,7 @@ export class UI {
     figma: SvgIcons.figma + ':svg:default',
     angular: SvgIcons.angular + ':svg:default',
     arnold: SvgIcons.arnold + 'svg:default',
+    dribbble: SvgIcons.dribbble + ':svg:default',
     runningMan: AnimatedIcons.runningMan + ':animated:default'
   };
   static schemes = Schemes;
