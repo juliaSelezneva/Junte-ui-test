@@ -6,8 +6,3 @@
   right: 0;
 }
 
-[stack][host=#{$jnt-stack-host}] {
-  @media screen and (max-width: map_get($grid-breakpoints, mobile)) {
-    flex-direction: column;
-  }
-}
