@@ -1,4 +1,4 @@
-import { Component, ContentChild, Input, TemplateRef } from '@angular/core';
+import { Component, ContentChild, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 
 @Component({
   selector: 'jnt-gantt-line',
@@ -10,5 +10,7 @@ export class GanttLineComponent {
   @Input() from: Date;
   @Input() to: Date;
   @Input() period: any;
+  @Output() click = new EventEmitter<any>();
   @ContentChild('indicator', {static: false}) indicatorTemplate: TemplateRef<any>;
+  @ContentChild('title', {static: false}) titleTemplate: TemplateRef<any>;
 }

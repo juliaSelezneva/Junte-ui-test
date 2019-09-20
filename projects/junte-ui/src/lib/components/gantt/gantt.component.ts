@@ -18,9 +18,10 @@ import { GanttLineComponent } from './gantt-line/gantt-line.component';
 })
 export class GanttComponent implements ControlValueAccessor {
 
-  private _current: Date;
+  private _current: Date = new Date();
 
   @Input() loading = false;
+  @Input() title: string;
 
   @HostBinding('attr.host') readonly host = 'jnt-gantt-host';
 

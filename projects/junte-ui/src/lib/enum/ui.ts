@@ -418,7 +418,7 @@ export class UI {
     sync: FontIcons.sync + 'font',
     profile: FontIcons.profile + 'font',
     project: FontIcons.project + 'font',
-    query: FontIcons.question + 'font',
+    query: FontIcons.query + 'font',
     printer: FontIcons.printer + 'font',
     money: FontIcons.money + 'font',
     webProgramming: FontIcons.webProgramming + 'font',
