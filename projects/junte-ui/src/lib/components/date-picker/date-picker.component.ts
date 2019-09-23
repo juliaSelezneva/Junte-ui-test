@@ -1,7 +1,7 @@
 import { Component, forwardRef, HostBinding, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { format } from 'date-fns';
-import { PopoverService } from 'projects/junte-ui/src/lib/components/popover/popover.service';
+import { PopoverService } from '../popover/popover.service';
 import { UI } from '../../enum/ui';
 
 @Component({
