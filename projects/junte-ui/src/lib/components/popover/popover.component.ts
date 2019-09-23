@@ -6,6 +6,8 @@ export class PopoverOptions {
   content: string | TemplateRef<void>;
   trigger: PopoverTriggers;
   placement: PopoverPlacements;
+  maxWidth: string;
+  maxHeight: string;
 
   constructor(defs: any = null) {
     Object.assign(this, defs);

@@ -1,5 +1,5 @@
-import {ElementRef, Injectable} from '@angular/core';
-import {PopoverComponent, PopoverOptions} from './popover.component';
+import { ElementRef, Injectable } from '@angular/core';
+import { PopoverComponent, PopoverOptions } from './popover.component';
 
 @Injectable({providedIn: 'root'})
 export class PopoverService {
@@ -7,6 +7,7 @@ export class PopoverService {
   private popover: PopoverComponent;
 
   constructor() {
+    console.log('init popover');
   }
 
   register(popover: PopoverComponent): void {
@@ -19,6 +20,10 @@ export class PopoverService {
   }
 
   hide(): void {
-    this.popover.hide();
+    console.log('hide');
+    console.log(this.popover);
+    if (!!this.popover) {
+      this.popover.hide();
+    }
   }
 }

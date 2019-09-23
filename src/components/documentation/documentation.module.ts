@@ -41,6 +41,7 @@ import { TableTestComponent } from './table/table-test.component';
 import { TabsTestComponent } from './tabs/tabs-test.component';
 import { ThemingComponent } from './theming/theming.component';
 import { TypographyTestComponent } from './typography/typography-test.component';
+import { DatePickerTestComponent } from './date-picker/date-picker-test.component';
 
 @NgModule({
   imports: [
@@ -89,7 +90,8 @@ import { TypographyTestComponent } from './typography/typography-test.component'
     ChartTestComponent,
     SliderTestComponent,
     SwitcherTestComponent,
-    GanttTestComponent
+    GanttTestComponent,
+    DatePickerTestComponent
   ],
   entryComponents: [
     ModalTestFactoryComponent
