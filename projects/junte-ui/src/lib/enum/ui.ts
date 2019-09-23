@@ -55,7 +55,7 @@ export enum FontIcons {
   settings = 'settings',
   warning = 'warning',
   information = 'information',
-  question = 'question',
+  query = 'query',
   stopping = 'stopping',
   project = 'project',
   money = 'money',
