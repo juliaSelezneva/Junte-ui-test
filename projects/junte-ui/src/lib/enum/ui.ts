@@ -105,6 +105,14 @@ export enum SvgIcons {
   angular = 'angular',
   arnold = 'arnold',
   dribbble = 'dribbble',
+  russia = 'russia',
+  germany = 'germany',
+  usa = 'usa',
+  france = 'france',
+  unitedKingdom = 'united-kingdom',
+  italy = 'italy',
+  spain = 'spain',
+  sweden = 'sweden',
 }
 
 export enum AnimatedIcons {
@@ -413,7 +421,7 @@ export class UI {
     sync: FontIcons.sync + 'font',
     profile: FontIcons.profile + 'font',
     project: FontIcons.project + 'font',
-    query: FontIcons.query + 'font',
+    query: FontIcons.question + 'font',
     printer: FontIcons.printer + 'font',
     money: FontIcons.money + 'font',
     webProgramming: FontIcons.webProgramming + 'font',
@@ -452,6 +460,14 @@ export class UI {
     angular: SvgIcons.angular + ':svg:default',
     arnold: SvgIcons.arnold + ':svg:default',
     dribbble: SvgIcons.dribbble + ':svg:default',
+    russia: SvgIcons.russia + ':svg:default',
+    germany: SvgIcons.germany + ':svg:default',
+    usa: SvgIcons.usa + ':svg:default',
+    france: SvgIcons.france + ':svg:default',
+    unitedKingdom: SvgIcons.unitedKingdom + ':svg:default',
+    italy: SvgIcons.italy + ':svg:default',
+    spain: SvgIcons.spain + ':svg:default',
+    sweden: SvgIcons.sweden + ':svg:default',
     runningMan: AnimatedIcons.runningMan + ':animated:default'
   };
   static schemes = Schemes;
