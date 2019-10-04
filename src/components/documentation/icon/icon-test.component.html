@@ -119,7 +119,11 @@
 
   <jnt-stack [type]="ui.stack.type.horizontal" [wrap]="ui.flex.wrap.wrap">
     <div *ngFor="let icon of svg" wrapper>
-      <jnt-svg-icon [icon]="icon.value"></jnt-svg-icon>
+      <jnt-svg-icon [icon]="icon.value" [iconset]="icon.iconset"></jnt-svg-icon>
+      <div name>{{icon.name}}</div>
+    </div>
+    <div *ngFor="let icon of svgFlags" wrapper>
+      <jnt-svg-icon [icon]="icon.value" [iconset]="icon.iconset"></jnt-svg-icon>
       <div name>{{icon.name}}</div>
     </div>
   </jnt-stack>

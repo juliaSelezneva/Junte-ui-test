@@ -98,13 +98,16 @@ export enum FontIcons {
   half = 'half',
 }
 
-export enum SvgIcons {
+export enum SvgDefaultIcons {
   question = 'question',
   figma = 'figma',
   gitlab = 'gitlab',
   angular = 'angular',
   arnold = 'arnold',
-  dribbble = 'dribbble',
+  dribbble = 'dribbble'
+}
+
+export enum SvgFlagsIcons {
   russia = 'russia',
   germany = 'germany',
   usa = 'usa',
@@ -112,8 +115,11 @@ export enum SvgIcons {
   unitedKingdom = 'united-kingdom',
   italy = 'italy',
   spain = 'spain',
-  sweden = 'sweden',
+  sweden = 'sweden'
 }
+
+export const SvgIcons = Object.assign({}, SvgDefaultIcons, SvgFlagsIcons);
+export type SvgIcons = SvgDefaultIcons | SvgFlagsIcons;
 
 export enum AnimatedIcons {
   runningMan = 'running-man',
@@ -357,7 +363,10 @@ export enum GanttRequestStatuses {
 export class UI {
   static icons = {
     font: FontIcons,
-    svg: SvgIcons,
+    svg: {
+      default: SvgDefaultIcons,
+      flags: SvgFlagsIcons,
+    },
     animated: AnimatedIcons,
 
     add: FontIcons.add + ':font',
@@ -460,14 +469,14 @@ export class UI {
     angular: SvgIcons.angular + ':svg:default',
     arnold: SvgIcons.arnold + ':svg:default',
     dribbble: SvgIcons.dribbble + ':svg:default',
-    russia: SvgIcons.russia + ':svg:default',
-    germany: SvgIcons.germany + ':svg:default',
-    usa: SvgIcons.usa + ':svg:default',
-    france: SvgIcons.france + ':svg:default',
-    unitedKingdom: SvgIcons.unitedKingdom + ':svg:default',
-    italy: SvgIcons.italy + ':svg:default',
-    spain: SvgIcons.spain + ':svg:default',
-    sweden: SvgIcons.sweden + ':svg:default',
+    russia: SvgIcons.russia + ':svg:flags',
+    germany: SvgIcons.germany + ':svg:flags',
+    usa: SvgIcons.usa + ':svg:flags',
+    france: SvgIcons.france + ':svg:flags',
+    unitedKingdom: SvgIcons.unitedKingdom + ':svg:flags',
+    italy: SvgIcons.italy + ':svg:flags',
+    spain: SvgIcons.spain + ':svg:flags',
+    sweden: SvgIcons.sweden + ':svg:flags',
     runningMan: AnimatedIcons.runningMan + ':animated:default'
   };
   static schemes = Schemes;
