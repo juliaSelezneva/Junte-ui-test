@@ -70,14 +70,14 @@ $jnt-dot-host: 'jnt-dot-host';
 $jnt-gantt-host: 'jnt-gantt-host';
 
 /*Color*/
-$blue: #E7F5FF !default;
-$blue-100: #E6E9FA !default;
-$orange: #EE8030 !default;
-$green: #00CCB1 !default;
-$green-dark: #00B89F !default;
-$teal: #1D2932 !default;
-$red: #FF6262 !default;
-$red-dark: #DE5B5B !default;
+$blue-color: #E7F5FF !default;
+$blue-color-100: #E6E9FA !default;
+$orange-color: #EE8030 !default;
+$green-color: #00CCB1 !default;
+$green-color-dark: #00B89F !default;
+$teal-color: #1D2932 !default;
+$red-color: #FF6262 !default;
+$red-color-dark: #DE5B5B !default;
 $yellow: #F8DB42 !default;
 $purple: #3949AB !default;
 $purple-dark: #00227B !default;
@@ -101,15 +101,15 @@ $primary-dark-color: $purple-dark !default;
 $primary-light-color: $purple-light !default;
 
 $secondary-color: $gray-500 !default;
-$secondary-dark-color: $blue-100 !default;
+$secondary-dark-color: $blue-color-100 !default;
 
-$success-color: $green !default;
-$success-dark-color: $green-dark !default;
+$success-color: $green-color !default;
+$success-dark-color: $green-color-dark !default;
 
-$warning-color: $orange !default;
+$warning-color: $orange-color !default;
 
-$fail-color: $red !default;
-$fail-dark-color: $red-dark !default;
+$fail-color: $red-color !default;
+$fail-dark-color: $red-color-dark !default;
 
 $muted-color: $gray-400 !default;
 
