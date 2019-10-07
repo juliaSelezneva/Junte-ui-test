@@ -6,10 +6,6 @@ export class PopoverService {
 
   private popover: PopoverComponent;
 
-  constructor() {
-    console.log('init popover');
-  }
-
   register(popover: PopoverComponent): void {
     this.popover = popover;
   }
@@ -20,10 +16,6 @@ export class PopoverService {
   }
 
   hide(): void {
-    console.log('hide');
-    console.log(this.popover);
-    if (!!this.popover) {
-      this.popover.hide();
-    }
+    this.popover.hide();
   }
 }

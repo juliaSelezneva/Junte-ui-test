@@ -114,6 +114,7 @@ export class PopoverComponent {
     this.renderer.setStyle(this.hostRef.nativeElement, 'top', `${position.top}px`);
     this.renderer.setStyle(this.hostRef.nativeElement, 'left', `${position.left}px`);
     this.visible = true;
+
   }
 
   picked(elements: HTMLElement[]) {

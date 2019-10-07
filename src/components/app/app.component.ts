@@ -46,8 +46,6 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.modalService.register(this.modal);
-    console.log('modal: ', this.modal);
-    console.log('popover: ', this.popover);
     this.popoverService.register(this.popover);
   }
 

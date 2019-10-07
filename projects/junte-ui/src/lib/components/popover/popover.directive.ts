@@ -1,7 +1,7 @@
-import {Directive, ElementRef, HostListener, Input} from '@angular/core';
-import {PopoverComponent, PopoverOptions} from './popover.component';
-import {PopoverService} from './popover.service';
-import {PopoverTriggers} from '../../enum/ui';
+import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import { PopoverTriggers } from '../../enum/ui';
+import { PopoverComponent, PopoverOptions } from './popover.component';
+import { PopoverService } from './popover.service';
 
 @Directive({
   selector: '[jntPopover]',
@@ -50,6 +50,7 @@ export class PopoverDirective {
   }
 
   private show() {
+    console.log(this.options.content);
     this.reference = this.popover.show(this.hostRef, this.options);
   }
 

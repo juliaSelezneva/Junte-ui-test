@@ -1,9 +1,10 @@
 <jnt-form [formGroup]="form">
   <jnt-input [placeholder]="placeholder" formControlName="input"
-             [jntPopover]="{content: calendar, trigger: ui.popover.trigger.click, maxWidth: '100%'}">
+             [jntPopover]="options" [icon]="ui.icons.font.calendar">
   </jnt-input>
   <ng-template #calendar>
     <jnt-block calendar>
+      {{title}}
       <jnt-calendar formControlName="calendar"></jnt-calendar>
     </jnt-block>
   </ng-template>

@@ -1,7 +1,23 @@
 <jnt-container>
   <jnt-block [padding]="ui.padding.normal">
     <jnt-form [formGroup]="form">
-      <jnt-date-picker placeholder="Select date" formControlName="datePicker"></jnt-date-picker>
+      <jnt-form-item>
+        <jnt-form-label>
+          Picked date: {{date | format: 'YYYY.MM.DD'}}
+        </jnt-form-label>
+        <jnt-form-control>
+          <jnt-date-picker placeholder="Select date" formControlName="datePicker"></jnt-date-picker>
+        </jnt-form-control>
+      </jnt-form-item>
+
+      <jnt-form-item>
+        <jnt-form-label>
+          Picked date1: {{date1 | format: 'YYYY.MM.DD'}}
+        </jnt-form-label>
+        <jnt-form-control>
+          <jnt-date-picker placeholder="Select date" formControlName="datePicker1"></jnt-date-picker>
+        </jnt-form-control>
+      </jnt-form-item>
     </jnt-form>
   </jnt-block>
 </jnt-container>
