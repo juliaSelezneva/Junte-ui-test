@@ -19,14 +19,14 @@ export class IconTestComponent implements OnInit {
 
   icons: IconTest[] = [];
   animated: IconTest[] = [];
-  svg: IconTest[] = [];
+  svgDefault: IconTest[] = [];
   svgFlags: IconTest[] = [];
 
   ngOnInit() {
     this.icons = Object.keys(UI.icons.font)
       .map(icon => new IconTest(icon, UI.icons.font[icon]));
 
-    this.svg = Object.keys(UI.icons.svg.default)
+    this.svgDefault = Object.keys(UI.icons.svg.default)
       .map(icon => new IconTest(icon, UI.icons.svg.default[icon]));
 
     this.svgFlags = Object.keys(UI.icons.svg.flags)
