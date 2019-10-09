@@ -50,10 +50,12 @@ import { IncludesPipeModule } from './pipes/includes-pipe.module';
 import { IsEqualModule } from './pipes/is-equal.module';
 import { SanitizePipeModule } from './pipes/sanitize.module';
 import { TextPipeModule } from './pipes/text-pipe.module';
+import { DatePeriodComponent } from './components/date-period/date-period.component';
 
 @NgModule({
   declarations: [
     JunteUiComponent,
+    DatePeriodComponent,
   ],
   imports: [
     CommonModule,
