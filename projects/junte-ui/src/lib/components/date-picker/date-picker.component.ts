@@ -30,7 +30,6 @@ export class DatePickerComponent implements OnInit, OnDestroy {
     calendar: this.calendar
   });
   options = null;
-  title = Math.random().toString();
 
   @Input() placeholder: string;
   @Input() format: string = 'DD.MM.YYYY';

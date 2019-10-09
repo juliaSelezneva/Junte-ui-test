@@ -122,6 +122,7 @@ export class PopoverComponent {
   }
 
   hide(): void {
+    this.options = new PopoverOptions();
     this.visible = false;
   }
 }
