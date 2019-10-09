@@ -50,7 +50,6 @@ export class PopoverDirective {
   }
 
   private show() {
-    console.log(this.options.content);
     this.reference = this.popover.show(this.hostRef, this.options);
   }
 
