@@ -1,5 +1,6 @@
 import { AfterContentInit, Component, ContentChildren, forwardRef, HostBinding, Input, QueryList } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { isEqual } from '../../utils/equal';
 import { UI } from '../../enum/ui';
 import { getTextBrightness } from '../../utils/brightness';
 import { ChartIndicatorComponent } from './chart-indicator/chart-indicator.component';
@@ -42,7 +43,7 @@ export class ChartComponent implements ControlValueAccessor, AfterContentInit {
   @HostBinding('attr.widthMark')
   @Input()
   set widthMark(width: number) {
-    this._widthMark = width < 60 ? 60 : width;
+    this._widthMark = Math.min(width, 60);
   }
 
   get widthMark() {
@@ -50,7 +51,14 @@ export class ChartComponent implements ControlValueAccessor, AfterContentInit {
   }
 
   set selected(value: any) {
-    this._selected = this._selected !== value ? value : null;
+    let isSame = false;
+    if (!!this.keyField && !!this._selected && !!value) {
+      isSame = this._selected[this.keyField] === value[this.keyField];
+    } else {
+      isSame = isEqual(this._selected, value);
+    }
+
+    this._selected = !isSame ? value : null;
     this.onChange(this._selected);
   }
 
