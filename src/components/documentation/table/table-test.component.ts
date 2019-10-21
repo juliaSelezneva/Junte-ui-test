@@ -44,7 +44,7 @@ export class TableTestComponent implements OnInit {
       {value: 'Value 9', label: 'Label 9'},
       {value: 'Value 10', label: 'Label 10'}
     ],
-    count: 12
+    count: 37
   };
 
   constructor(private fb: FormBuilder) {
