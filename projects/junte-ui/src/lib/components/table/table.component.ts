@@ -14,7 +14,7 @@ import {
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { debounceTime, filter as filtering, finalize } from 'rxjs/operators';
 import { TableFeatures, UI } from '../../enum/ui';
-import { DEFAULT_PAGE_SIZE, DefaultSearchFilter, SearchFilter } from '../../models/table';
+import { DEFAULT_FIRST, DEFAULT_OFFSET, DefaultSearchFilter, SearchFilter } from '../../models/table';
 import { Subscriptions } from '../../utils/subscriptions';
 import { TableColumnComponent } from './column/table-column.component';
 
@@ -39,7 +39,7 @@ export class TableComponent implements OnInit, OnDestroy {
   sort: FormControl;
   page: FormControl;
   offset: FormControl;
-  pageSize: FormControl;
+  first: FormControl;
 
   source: any[] = [];
 
@@ -64,8 +64,8 @@ export class TableComponent implements OnInit, OnDestroy {
 
   @Input()
   filter: SearchFilter = new DefaultSearchFilter({
-    offset: 0,
-    pageSize: DEFAULT_PAGE_SIZE
+    offset: DEFAULT_OFFSET,
+    first: DEFAULT_FIRST
   });
 
   @Input()
@@ -82,7 +82,7 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   get pagesCount() {
-    return Math.ceil(this.count / this.filterForm.get('pageSize').value);
+    return Math.ceil(this.count / this.filterForm.get('first').value);
   }
 
   constructor(private formBuilder: FormBuilder) {
@@ -90,23 +90,23 @@ export class TableComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.sort = this.formBuilder.control(null);
-    this.pageSize = this.formBuilder.control(DEFAULT_PAGE_SIZE);
+    this.first = this.formBuilder.control(DEFAULT_FIRST);
     this.offset = this.formBuilder.control(0);
-    this.page = this.formBuilder.control(((+this.offset.value / +this.pageSize.value) + 1));
+    this.page = this.formBuilder.control(((+this.offset.value / +this.first.value) + 1));
     this.filterForm = this.formBuilder.group({
       orderBy: this.sort,
       q: [''],
       offset: this.offset,
       page: this.page,
-      pageSize: this.pageSize
+      first: this.first
     });
 
     this.filterForm.valueChanges.pipe(filtering(() => !!this.fetcher), debounceTime(FILTER_DELAY))
       .subscribe(filter => {
-        if (filter.pageSize !== this.filter.pageSize) {
+        if (filter.first !== this.filter.first) {
           filter.page = 1;
         }
-        filter.offset = (filter.page - 1) * filter.pageSize;
+        filter.offset = (filter.page - 1) * filter.first;
         Object.assign(this.filter, filter);
         this.load();
       });
