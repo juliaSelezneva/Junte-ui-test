@@ -1,6 +1,6 @@
 {
   "name": "junte-ui-app",
-  "version": "0.0.286",
+  "version": "0.0.287",
   "scripts": {
     "ng": "ng",
     "gulp": "gulp",
@@ -30,7 +30,7 @@
     "build:prod": "npm run encapsulation && npm run build:lib && npm run copy:files",
     "npm:pack": "cd dist/junte-ui && npm pack",
     "package": "npm run build:prod && npm run npm:pack",
-    "publish": "npm publish ./dist/junte-ui/junte-ui-$npm_package_version.tgz",
+    "publish": "npm run package && npm publish ./dist/junte-ui/junte-ui-$npm_package_version.tgz",
     "clean:package": "npm cache clean --force && rm -rf -- node_modules doc coverage dist dll package-lock.json",
     "refresh": "npm run clean:package && npm install",
     "processes": "lsof -Pnl +M -i -cmd | grep -E 'LISTEN|TCP|UDP'"
