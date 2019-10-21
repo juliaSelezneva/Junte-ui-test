@@ -1,30 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { PopoverModule } from '../popover/popover.module';
-import { BlockModule } from '../block/block.module';
-import { CalendarModule } from '../calendar/calendar.module';
-import { FormModule } from '../form/form.module';
-import { InputModule } from '../input/input.module';
-import { DatePickerComponent } from './date-picker.component';
+import { DatePeriodComponent } from './date-period.component';
+import { StackModule } from '../stack/stack.module';
 
 
 @NgModule({
   declarations: [
-    DatePickerComponent
+    DatePeriodComponent
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule,
-    FormModule,
-    InputModule,
-    CalendarModule,
-    BlockModule,
-    PopoverModule
+    StackModule
   ],
   exports: [
-    DatePickerComponent
+    DatePeriodComponent
   ]
 })
-export class DatePickerModule {
+export class DatePeriodModule {
 }
