@@ -3,6 +3,7 @@ import {
   ContentChild,
   ContentChildren,
   EventEmitter,
+  forwardRef,
   HostBinding,
   Input,
   OnDestroy,
@@ -11,7 +12,7 @@ import {
   QueryList,
   TemplateRef
 } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { ControlValueAccessor, FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { debounceTime, filter as filtering, finalize } from 'rxjs/operators';
 import { TableFeatures, UI } from '../../enum/ui';
 import { DEFAULT_FIRST, DEFAULT_OFFSET, DefaultSearchFilter, SearchFilter } from '../../models/table';
@@ -22,9 +23,16 @@ const FILTER_DELAY = 500;
 
 @Component({
   selector: 'jnt-table',
-  templateUrl: './table.encapsulated.html'
+  templateUrl: './table.encapsulated.html',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => TableComponent),
+      multi: true
+    }
+  ]
 })
-export class TableComponent implements OnInit, OnDestroy {
+export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
   ui = UI;
 
@@ -91,7 +99,7 @@ export class TableComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.sort = this.formBuilder.control(null);
     this.first = this.formBuilder.control(DEFAULT_FIRST);
-    this.offset = this.formBuilder.control(0);
+    this.offset = this.formBuilder.control(DEFAULT_OFFSET);
     this.page = this.formBuilder.control(((+this.offset.value / +this.first.value) + 1));
     this.filterForm = this.formBuilder.group({
       orderBy: this.sort,
@@ -108,8 +116,13 @@ export class TableComponent implements OnInit, OnDestroy {
         }
         filter.offset = (filter.page - 1) * filter.first;
         Object.assign(this.filter, filter);
+        this.onChange(this.filter);
         this.load();
       });
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   load() {
@@ -122,13 +135,29 @@ export class TableComponent implements OnInit, OnDestroy {
       }));
   }
 
-  ngOnDestroy() {
-    this.subscriptions.unsubscribe();
-  }
-
   sorting(sort: string) {
     this.filterForm.patchValue({
       orderBy: this.sort.value === sort ? `-${sort}` : sort
     });
+  }
+
+  writeValue(value: SearchFilter) {
+    if (value !== undefined) {
+      this.filterForm.patchValue({first: value.first, offset: value.offset}, {emitEvent: false});
+    }
+  }
+
+  onChange(value: SearchFilter) {
+  }
+
+  onTouched() {
+  }
+
+  registerOnChange(fn) {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn) {
+    this.onTouched = fn;
   }
 }
