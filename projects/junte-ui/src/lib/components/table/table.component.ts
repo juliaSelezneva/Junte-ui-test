@@ -13,7 +13,8 @@ import {
   TemplateRef
 } from '@angular/core';
 import { ControlValueAccessor, FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { debounceTime, filter as filtering, finalize } from 'rxjs/operators';
+import { isEqual } from '../../utils/equal';
+import { debounceTime, distinctUntilChanged, filter as filtering, finalize } from 'rxjs/operators';
 import { TableFeatures, UI } from '../../enum/ui';
 import { DEFAULT_FIRST, DEFAULT_OFFSET, DefaultSearchFilter, SearchFilter } from '../../models/table';
 import { Subscriptions } from '../../utils/subscriptions';
@@ -109,15 +110,19 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
       first: this.first
     });
 
-    this.filterForm.valueChanges.pipe(filtering(() => !!this.fetcher), debounceTime(FILTER_DELAY))
-      .subscribe(filter => {
-        if (filter.first !== this.filter.first) {
-          filter.page = 1;
-        }
-        filter.offset = (filter.page - 1) * filter.first;
-        Object.assign(this.filter, filter);
-        this.onChange(this.filter);
-      });
+    this.filterForm.valueChanges.pipe(
+      filtering(() => !!this.fetcher),
+      debounceTime(FILTER_DELAY),
+      distinctUntilChanged((val1, val2) => isEqual(val1, val2))
+    ).subscribe(filter => {
+      if (filter.first !== this.filter.first) {
+        filter.page = 1;
+      }
+      filter.offset = (filter.page - 1) * filter.first;
+      Object.assign(this.filter, filter);
+      this.onChange(this.filter);
+      this.load();
+    });
   }
 
   ngOnDestroy() {
@@ -142,8 +147,10 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
   writeValue(value: SearchFilter) {
     if (value !== undefined) {
-      this.filterForm.patchValue({first: value.first, offset: value.offset}, {emitEvent: false});
-      this.load();
+      this.filterForm.patchValue({
+        first: value.first,
+        offset: value.offset
+      }, {emitEvent: false});
     }
   }
 
