@@ -117,7 +117,6 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
         filter.offset = (filter.page - 1) * filter.first;
         Object.assign(this.filter, filter);
         this.onChange(this.filter);
-        this.load();
       });
   }
 
@@ -144,6 +143,7 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
   writeValue(value: SearchFilter) {
     if (value !== undefined) {
       this.filterForm.patchValue({first: value.first, offset: value.offset}, {emitEvent: false});
+      this.load();
     }
   }
 
