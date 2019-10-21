@@ -152,7 +152,7 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
       this.filterForm.patchValue({
         first: value.first,
         offset: value.offset
-      });
+      }, {emitEvent: false});
     }
   }
 
