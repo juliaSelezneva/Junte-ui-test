@@ -130,13 +130,15 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
   }
 
   load() {
-    this.progress.loading = true;
-    this.subscriptions.push('rows', this.fetcher(this.filter)
-      .pipe(finalize(() => this.progress.loading = false))
-      .subscribe(resp => {
-        this.source = resp.results;
-        this.count = resp.count;
-      }));
+    if (!!this.fetcher) {
+      this.progress.loading = true;
+      this.subscriptions.push('rows', this.fetcher(this.filter)
+        .pipe(finalize(() => this.progress.loading = false))
+        .subscribe(resp => {
+          this.source = resp.results;
+          this.count = resp.count;
+        }));
+    }
   }
 
   sorting(sort: string) {
