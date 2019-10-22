@@ -11,8 +11,10 @@ export class DatePeriodComponent implements OnInit {
   @HostBinding('attr.host') readonly host = 'jnt-date-period-host';
   ui = UI;
 
-  @Input() start: Date;
-  @Input() end: Date;
+  @Input() start = moment();
+  @Input() end = moment();
+
+  diff = this.start.to(this.end);
 
   constructor() {
   }
