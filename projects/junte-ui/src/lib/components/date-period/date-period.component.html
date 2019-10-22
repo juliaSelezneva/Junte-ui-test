@@ -1,17 +1,15 @@
 <jnt-stack [type]="ui.stack.type.horizontal" [justify]="ui.flex.justify.between">
-  <div>
+  <div date>
     <div>{{start | date: "dd.MM"}}</div>
     <div arrow></div>
   </div>
-  <div>
+  <div date>
     <div>{{end | date: "dd.MM"}}</div>
     <div arrow></div>
   </div>
-
 </jnt-stack>
 <div bar>
-  <!--<div *ngIf="value >= 0" progress [style.width.%]="value > 100 ? 100 : value"-->
-       <!--[attr.fail]="value > 100"></div>-->
+  <div [style.width.%]="(current | dateDiff:start:base) / (end | dateDiff:start:base) * 100" progress></div>
 </div>
-<div>{{diff}}</div>
+<div days>{{end | dateDiff:start:base}} {{base}}</div>
 
