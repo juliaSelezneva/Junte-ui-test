@@ -1,15 +1,15 @@
 <jnt-stack [type]="ui.stack.type.horizontal" [justify]="ui.flex.justify.between">
-  <div date>
+  <div date left>
     <div>{{start | date: "dd.MM"}}</div>
-    <div arrow></div>
+    <div line><div arrow></div></div>
   </div>
-  <div date>
+  <div date right>
     <div>{{end | date: "dd.MM"}}</div>
-    <div arrow></div>
+    <div line><div arrow></div></div>
   </div>
 </jnt-stack>
 <div bar>
-  <div [style.width.%]="(current | dateDiff:start:base) / (end | dateDiff:start:base) * 100" progress></div>
+  <div [style.width.%]="start > end ? 0 : current >= end ? 100 : current <= start ? 0 : (current | dateDiff:start:base) / (end | dateDiff:start:base) * 100" progress></div>
 </div>
-<div days>{{end | dateDiff:start:base}} {{base}}</div>
+<div days>{{start > end ? 0 : current | dateDiff:start:base}} {{base}}</div>
 

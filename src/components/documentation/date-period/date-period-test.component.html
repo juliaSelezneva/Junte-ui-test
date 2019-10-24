@@ -9,5 +9,28 @@
   </jnt-stack>
 
 
-  <jnt-date-period [start]="start" [end]="end" [current]="current"></jnt-date-period>
+  <jnt-stack [align]="ui.flex.align.stretch" wrapper>
+
+    <h4>Start < End, current</h4>
+    <jnt-date-period [start]="start" [end]="end" [current]="current"></jnt-date-period>
+    <h4>Start < End, not current</h4>
+    <jnt-date-period [start]="start" [end]="end"></jnt-date-period>
+    <h4>Start > End, not current</h4>
+    <jnt-date-period [start]="end" [end]="start"></jnt-date-period>
+    <h4>Start > End, current</h4>
+    <jnt-date-period [start]="end" [end]="start" [current]="current"></jnt-date-period>
+    <h4>not Start</h4>
+    <jnt-date-period [end]="end" [current]="current"></jnt-date-period>
+    <h4>not Start, current</h4>
+    <jnt-date-period [end]="start" [current]="current"></jnt-date-period>
+
+    <jnt-form [formGroup]="form">
+      <jnt-date-picker formControlName="start"></jnt-date-picker>
+      <jnt-date-picker formControlName="end"></jnt-date-picker>
+      <jnt-date-period [start]="startTest" [end]="endTest" [current]="current"></jnt-date-period>
+    </jnt-form>
+
+
+  </jnt-stack>
+
 </jnt-container>

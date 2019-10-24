@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UI } from '../../../../projects/junte-ui/src/lib/enum/ui';
+import { FormBuilder, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-date-period-test',
@@ -14,10 +15,23 @@ export class DatePeriodTestComponent implements OnInit {
   end = new Date(2019, 11, 20);
   current = new Date(2019, 11, 15);
 
-  constructor() {
+  startTest = new FormControl(new Date());
+  endTest = new FormControl(new Date());
+
+
+  form = this.fb.group({
+    start: this.startTest,
+    end: this.endTest
+  });
+
+
+  constructor(private fb: FormBuilder) {
   }
 
+
   ngOnInit() {
+    this.startTest.valueChanges.subscribe(start => this.startTest = start);
+    this.endTest.valueChanges.subscribe(end => this.endTest = end);
   }
 
 }
