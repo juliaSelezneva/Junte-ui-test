@@ -58,6 +58,7 @@ $link-schemes: (
     transparent-hover-color: $primary-text-dark-color,
     transparent-badge-color: $white-color,
     transparent-badge-background: $gray-900-color,
+
     link-focus-shadow-color: $gray-900-color
   ),
   #{$scheme-success}: (
@@ -80,6 +81,7 @@ $link-schemes: (
     transparent-hover-color: $green-dark-color,
     transparent-badge-color: $white-color,
     transparent-badge-background: $success-color,
+
     link-focus-shadow-color: $success-color
   ),
   #{$scheme-fail}: (
@@ -102,6 +104,7 @@ $link-schemes: (
     transparent-hover-color: $red-dark-color,
     transparent-badge-color: $white-color,
     transparent-badge-background: $fail-color,
+
     link-focus-shadow-color: $fail-color
   ),
 )!default;
@@ -164,6 +167,8 @@ $link-schemes: (
     color: #{map-get($scheme, transparent-color)};
     background-color: transparent;
     border-color: transparent;
+    padding: 0;
+    border-radius: 0;
     &:hover, &:focus {
       color: #{map-get($scheme, transparent-hover-color)};
       [icon][child-host=#{$jnt-icon-host}] {
@@ -189,7 +194,7 @@ $link-schemes: (
   display: inline-block;
   &[disabled="true"] {
     [link] {
-      color: $link-disabled-color;
+      opacity: .65;
       pointer-events: none;
       cursor: default;
     }
@@ -217,6 +222,7 @@ $link-schemes: (
   cursor: pointer;
   width: 100%;
   border-radius: $link-corner;
+  line-height: 1;
   [icon], span {
     font-weight: $link-font-weight;
     font-size: $link-font-size;
