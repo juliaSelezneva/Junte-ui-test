@@ -12,11 +12,11 @@ import {
   QueryList,
   TemplateRef
 } from '@angular/core';
-import { ControlValueAccessor, FormBuilder, FormControl, FormGroup, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { isEqual } from '../../utils/equal';
+import { ControlValueAccessor, FormBuilder, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, filter as filtering, finalize } from 'rxjs/operators';
 import { TableFeatures, UI } from '../../enum/ui';
 import { DEFAULT_FIRST, DEFAULT_OFFSET, DefaultSearchFilter, SearchFilter } from '../../models/table';
+import { isEqual } from '../../utils/equal';
 import { Subscriptions } from '../../utils/subscriptions';
 import { TableColumnComponent } from './column/table-column.component';
 
@@ -44,11 +44,18 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
   @HostBinding('attr.host') readonly host = 'jnt-table-host';
 
-  filterForm: FormGroup;
-  sort: FormControl;
-  page: FormControl;
-  offset: FormControl;
-  first: FormControl;
+  sort = new FormControl(null);
+  offset = new FormControl(DEFAULT_OFFSET);
+  first = new FormControl(DEFAULT_FIRST);
+  page = new FormControl((+this.offset.value / +this.first.value) + 1);
+
+  filterForm = this.formBuilder.group({
+    q: [''],
+    sort: this.sort,
+    page: this.page,
+    offset: this.offset,
+    first: this.first
+  });
 
   source: any[] = [];
 
@@ -98,18 +105,6 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
   }
 
   ngOnInit() {
-    this.sort = this.formBuilder.control(null);
-    this.first = this.formBuilder.control(DEFAULT_FIRST);
-    this.offset = this.formBuilder.control(DEFAULT_OFFSET);
-    this.page = this.formBuilder.control(((+this.offset.value / +this.first.value) + 1));
-    this.filterForm = this.formBuilder.group({
-      orderBy: this.sort,
-      q: [''],
-      offset: this.offset,
-      page: this.page,
-      first: this.first
-    });
-
     this.filterForm.valueChanges.pipe(
       filtering(() => !!this.fetcher),
       debounceTime(FILTER_DELAY),
@@ -142,9 +137,7 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
   }
 
   sorting(sort: string) {
-    this.filterForm.patchValue({
-      orderBy: this.sort.value === sort ? `-${sort}` : sort
-    });
+    this.filterForm.patchValue({orderBy: this.sort.value === sort ? `-${sort}` : sort});
   }
 
   writeValue(value: SearchFilter) {
