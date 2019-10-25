@@ -11,21 +11,21 @@ $date-period-corner: 1px;
 :host {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
 }
 
 [date] {
-  position: relative;
-  bottom: -10px;
   font-size: $date-period-font-size;
+  display: flex;
+  flex-direction: column;
   &[left] {
-    text-align: left;
+    align-items: flex-start;
   }
   &[right] {
-    text-align: right;
+    align-items: flex-end;
   }
   [line] {
     display: inline-flex;
+    height: 8px;
     border-top: 2px solid $date-period-arrow-color;
     border-radius: $date-period-corner $date-period-corner 0 0;
     [arrow] {
@@ -37,7 +37,6 @@ $date-period-corner: 1px;
 }
 
 [bar] {
-  width: 100%;
   background-color: $date-period-background;
   min-height: $date-period-height;
   height: $date-period-height;
@@ -47,6 +46,7 @@ $date-period-corner: 1px;
     background-color: $date-period-progress-background;
     height: 100%;
     border-radius: $date-period-corner;
+    width: 0;
   }
 }
 [days] {

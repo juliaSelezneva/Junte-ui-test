@@ -11,17 +11,29 @@ export class DatePeriodTestComponent implements OnInit {
 
   ui = UI;
 
-  start = new Date(2019, 11, 9);
-  end = new Date(2019, 11, 20);
-  current = new Date(2019, 11, 15);
+  demo = [
+    {start: new Date(2019, 9, 9), end: new Date(2019, 9, 30), current: new Date(2019, 9, 15)},
+    {start: new Date(2019, 9, 9), end: new Date(2019, 9, 30)},
+    {start: new Date(2019, 9, 30), end: new Date(2019, 9, 9)},
+    {end: new Date(2019, 9, 9)},
+    {end: new Date(2019, 9, 9), current: new Date(2019, 9, 15)},
+    {start: new Date(2019, 9, 9), current: new Date(2019, 9, 15)},
+    {},
+  ];
 
-  startTest = new FormControl(new Date());
-  endTest = new FormControl(new Date());
+  start: Date = this.demo[0]['start'];
+  end: Date = this.demo[0]['end'];
+  current: Date = this.demo[0]['current'];
+
+  startTest = new FormControl(this.start);
+  endTest = new FormControl(this.end);
+  currentTest = new FormControl(this.current);
 
 
   form = this.fb.group({
     start: this.startTest,
-    end: this.endTest
+    end: this.endTest,
+    current: this.currentTest
   });
 
 
@@ -30,8 +42,9 @@ export class DatePeriodTestComponent implements OnInit {
 
 
   ngOnInit() {
-    this.startTest.valueChanges.subscribe(start => this.startTest = start);
-    this.endTest.valueChanges.subscribe(end => this.endTest = end);
+    this.startTest.valueChanges.subscribe(start => this.start = start);
+    this.endTest.valueChanges.subscribe(end => this.end = end);
+    this.currentTest.valueChanges.subscribe(current => this.current = current);
   }
 
 }

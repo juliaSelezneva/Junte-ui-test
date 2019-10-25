@@ -1,4 +1,4 @@
-<jnt-stack [type]="type" [gutter]="spacer" [align]="ui.flex.align.stretch" [wrap]="ui.flex.wrap.wrap">
+<jnt-stack [type]="type" [gutter]="spacer" [wrap]="ui.flex.wrap.wrap">
   <ng-container *ngFor="let submenu of submenus">
     <div submenu jntSubMenu>
       <div title (click)="submenu.opened = !submenu.opened" [attr.opened]="submenu.opened">

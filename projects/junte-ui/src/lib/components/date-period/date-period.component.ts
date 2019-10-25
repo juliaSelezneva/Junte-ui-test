@@ -1,8 +1,9 @@
 import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { UI } from '../../enum/ui';
+import { differenceInDays } from 'date-fns';
 
 export enum DatePeriodBases {
-  days = 'days'
+  days = 'day(s)'
 }
 
 @Component({

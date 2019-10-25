@@ -10,7 +10,7 @@
               target="_blank" title="Figma">
     </jnt-link>
   </jnt-stack>
-  <jnt-stack>
+  <jnt-stack [align]="ui.flex.align.start">
     <jnt-stack [type]="ui.stack.type.horizontal">
       <jnt-stack>
         <jnt-label label="Selected chart: {{selected | json}}" [color]="ui.colors.red"></jnt-label>
@@ -57,7 +57,7 @@
                            [color]="ui.colors.yellow"></jnt-chart-indicator>
     </jnt-chart>
 
-    <jnt-stack [align]="ui.flex.align.stretch">
+    <jnt-stack>
       <jnt-stack [type]="ui.stack.type.vertical">
         <jnt-stack [type]="ui.stack.type.horizontal">
           <jnt-label label="Selected chart" [color]="ui.colors.red"></jnt-label>

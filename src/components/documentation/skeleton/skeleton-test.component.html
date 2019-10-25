@@ -44,7 +44,7 @@
   <h2>Horizontal skeleton</h2>
 
   <jnt-block [width]="ui.width.fluid" [padding]="ui.padding.normal">
-    <jnt-stack [align]="ui.flex.align.stretch">
+    <jnt-stack>
       <jnt-stack [type]="ui.stack.type.horizontal">
         <jnt-skeleton [type]="ui.skeleton.type.avatar"></jnt-skeleton>
         <jnt-skeleton [lines]="3"></jnt-skeleton>
@@ -56,7 +56,7 @@
 
   <ngx-prism language="html">
 <pre><![CDATA[
-  <jnt-stack [align]="ui.flex.align.stretch">
+  <jnt-stack>
     <jnt-stack [type]="ui.stack.type.horizontal">
       <jnt-skeleton [type]="ui.skeleton.type.avatar" [size]="ui.sizes.small"></jnt-skeleton>
       <jnt-skeleton [lines]="3"></jnt-skeleton>
