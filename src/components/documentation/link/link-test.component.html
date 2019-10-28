@@ -80,7 +80,7 @@
 
     <ng-container *ngFor="let outline of [ui.outline.fill, ui.outline.ghost, ui.outline.transparent]">
       <ng-container *ngFor="let fz of [12, 16, 20]">
-        <span text [style.font-size.px]="fz">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio ducimus,
+        <span [style.font-size.px]="fz">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio ducimus,
         <jnt-link [source]="['/documentation', 'link']"
                 [icon]="ui.icons.font.search"
                 title="Documentation"
@@ -126,6 +126,12 @@
       <td>-</td>
       <td>boolean</td>
       <td>true</td>
+    </tr>
+    <tr>
+      <td>[scheme]</td>
+      <td>-</td>
+      <td>primary | secondary | fail | success</td>
+      <td>primary</td>
     </tr>
     </tbody>
   </table>
