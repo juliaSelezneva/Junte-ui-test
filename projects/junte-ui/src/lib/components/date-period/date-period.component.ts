@@ -16,9 +16,9 @@ export class DatePeriodComponent implements OnInit {
   ui = UI;
 
   @Input() base: DatePeriodBases = DatePeriodBases.days;
-  @Input() start: Date = new Date();
+  @Input() start: Date;
   @Input() end: Date;
-  @Input() current = new Date();
+  @Input() current: Date = new Date();
 
   constructor() {
   }

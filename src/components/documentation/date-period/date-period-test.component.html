@@ -43,7 +43,7 @@
         <jnt-date-picker formControlName="current"></jnt-date-picker>
       </jnt-form-item>
 
-      <jnt-date-period [start]="start" [end]="end" [current]="current"></jnt-date-period>
+      <jnt-date-period [start]="startDate" [end]="endDate" [current]="currentDate"></jnt-date-period>
     </jnt-form>
 
     <br>
@@ -51,8 +51,8 @@
     <ng-container *ngFor="let date of demo">
       <p><b>Start:</b> {{!!date.start ? (date.start | date: "dd.MM") : '-'}},
         <b>End:</b> {{!!date.end ? (date.end | date: "dd.MM") : '-'}},
-        <b>Current:</b> {{!!date.current ? (date.current | date: "dd.MM") : '-'}}</p>
-      <jnt-date-period [start]="date.start" [end]="date.end" [current]="date.current"></jnt-date-period>
+        <b>Current:</b> {{date.current || current | date: "dd.MM"}}</p>
+      <jnt-date-period [start]="date.start" [end]="date.end" [current]="date.current || current"></jnt-date-period>
     </ng-container>
 
     <ngx-prism language="html">
