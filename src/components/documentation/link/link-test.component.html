@@ -78,15 +78,17 @@
 
     <h3>Link in text</h3>
 
-    <jnt-container *ngFor="let outline of [ui.outline.fill, ui.outline.ghost, ui.outline.transparent]">
-      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio ducimus,
-      <jnt-link [source]="['/documentation', 'link']"
+    <ng-container *ngFor="let outline of [ui.outline.fill, ui.outline.ghost, ui.outline.transparent]">
+      <ng-container *ngFor="let fz of [12, 16, 20]">
+        <span text [style.font-size.px]="fz">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio ducimus,
+        <jnt-link [source]="['/documentation', 'link']"
                 [icon]="ui.icons.font.search"
                 title="Documentation"
                 [outline]="outline">
-      </jnt-link>
-      eveniet excepturi fugiat hic incidunt ipsam minima nam odio perspiciatis, reiciendis sunt totam veniam voluptas voluptate. Dolorem neque officia saepe.
-    </jnt-container>
+        </jnt-link>
+        eveniet excepturi fugiat hic incidunt ipsam minima nam odio perspiciatis.</span>
+      </ng-container>
+    </ng-container>
   </jnt-stack>
 
   <h3>API</h3>

@@ -2,14 +2,13 @@
 
 $link-decoration: none !default;
 $link-font-weight: $font-weight-base !default;
-$link-font-size: 0.875rem !default;
 $link-active-color: $primary-color !default;
 $link-disabled-color: $primary-text-light-color !default;
 $link-icon-spacing: $gutter-tiny !default;
 $link-badges-spacing: $gutter-small !default;
 $link-icon-size: 16px !default;
 $link-corner: $corner-small !default;
-$link-padding: $gutter-tiny !default;
+$link-padding: $gutter-tiny $gutter-small !default;
 
 $outline-ghost: 'ghost';
 $outline-transparent: 'transparent';
@@ -225,7 +224,6 @@ $link-schemes: (
   line-height: 1;
   [icon], span {
     font-weight: $link-font-weight;
-    font-size: $link-font-size;
     transition: color .3s;
     text-align: left;
   }
