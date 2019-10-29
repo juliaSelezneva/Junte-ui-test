@@ -1,6 +1,5 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 import { UI } from '../../enum/ui';
-import { differenceInDays } from 'date-fns';
 
 export enum DatePeriodBases {
   days = 'day(s)'
@@ -10,7 +9,7 @@ export enum DatePeriodBases {
   selector: 'jnt-date-period',
   templateUrl: './date-period.encapsulated.html'
 })
-export class DatePeriodComponent implements OnInit {
+export class DatePeriodComponent {
 
   @HostBinding('attr.host') readonly host = 'jnt-date-period-host';
   ui = UI;
@@ -19,11 +18,5 @@ export class DatePeriodComponent implements OnInit {
   @Input() start: Date;
   @Input() end: Date;
   @Input() current: Date = new Date();
-
-  constructor() {
-  }
-
-  ngOnInit() {
-  }
 
 }
