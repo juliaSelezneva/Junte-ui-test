@@ -12,6 +12,7 @@ export class DatePeriodTestComponent implements OnInit {
   ui = UI;
 
   demo = [
+    {start: new Date(2019, 9, 10), end: new Date(2019, 9, 30), current: new Date(2019, 9, 15)},
     {start: new Date(2019, 9, 30), end: new Date(2019, 9, 9)},
     {end: new Date(2019, 9, 9)},
     {end: new Date(2019, 9, 9), current: new Date(2019, 9, 8)},
