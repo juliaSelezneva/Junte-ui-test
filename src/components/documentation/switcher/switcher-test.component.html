@@ -16,7 +16,7 @@
       <span>{{form.value | json}}</span>
     </jnt-stack>
     <jnt-form [formGroup]="form">
-      <jnt-stack [gutter]="ui.stack.gutter.large" [align]="ui.flex.align.start">
+      <jnt-stack [gutter]="ui.gutter.large">
         <ng-container *ngFor="let type of [ui.type.horizontal, ui.type.vertical]">
           <h3>{{type | titlecase}}</h3>
           <jnt-switcher formControlName="selected" [type]="type">

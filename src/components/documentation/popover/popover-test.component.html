@@ -22,7 +22,7 @@
 
   <hr>
 
-  <jnt-stack [type]="ui.stack.type.vertical" [align]="ui.flex.align.start">
+  <jnt-stack [type]="ui.stack.type.vertical">
     <jnt-stack [type]="ui.stack.type.horizontal">
       <jnt-button [jntPopover]="{title: 'Title', content: 'Click content', trigger: ui.popover.trigger.click}"
                   text="Click me">
@@ -52,7 +52,7 @@
   <hr>
   <h4>Placements</h4>
   <jnt-row [justify]="ui.flex.justify.center">
-    <jnt-stack placements>
+    <jnt-stack [align]="ui.flex.align.stretch" placements>
 
       <jnt-stack [type]="ui.stack.type.horizontal" [justify]="ui.flex.justify.center" stack>
         <ng-container

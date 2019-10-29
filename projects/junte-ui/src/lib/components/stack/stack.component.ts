@@ -17,7 +17,7 @@ export class StackComponent {
 
   @HostBinding('attr.align')
   @Input()
-  align: FlexAlign = FlexAlign.stretch;
+  align: FlexAlign = FlexAlign.start;
 
   @HostBinding('attr.justify')
   @Input()

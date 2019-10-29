@@ -1,5 +1,5 @@
 <form [formGroup]="filterForm">
-  <jnt-stack>
+  <jnt-stack [align]="ui.flex.align.stretch">
     <jnt-stack [type]="ui.stack.type.horizontal" [justify]="ui.flex.justify.between"
                [align]="ui.flex.align.center" [wrap]="ui.flex.wrap.wrap">
       <jnt-stack [type]="ui.stack.type.horizontal" [align]="ui.flex.align.center" [wrap]="ui.flex.wrap.wrap">
@@ -23,7 +23,7 @@
 
     </jnt-stack>
 
-    <jnt-stack>
+    <jnt-stack [align]="ui.flex.align.stretch">
       <div table>
         <table>
           <div *ngIf="source.length && progress.loading" spinner>
