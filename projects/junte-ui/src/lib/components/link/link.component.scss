@@ -14,7 +14,6 @@ $link-icon-color: $link-color !default;
 
 :host {
   display: inline-block;
-  text-align: left;
   &[disabled="true"] {
     [link] {
       color: $link-disabled-color;
