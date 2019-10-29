@@ -25,11 +25,20 @@
       <jnt-label label="Doing" [color]="color"></jnt-label>
     </ng-container>
     <jnt-label label="To Do" color="#FFF"></jnt-label>
-    <!--<jnt-label label="To Do" color="red"></jnt-label>-->
     <jnt-label label="To Do"></jnt-label>
     <jnt-label label="To Do" [icon]="ui.icons.font.reload"></jnt-label>
     <jnt-label label="To Do" icon="settings:animated:default"></jnt-label>
     <jnt-label label="To Do" icon="figma:svg:default"></jnt-label>
+
+  </jnt-stack>
+
+
+  <h3>Label sizes</h3>
+
+  <jnt-stack [type]="ui.stack.type.horizontal" [align]="ui.flex.align.center">
+    <ng-container *ngFor="let size of [ui.sizes.normal, ui.sizes.small]">
+      <jnt-label [label]="size" [size]="size"></jnt-label>
+    </ng-container>
   </jnt-stack>
 
   <ngx-prism language="html">
