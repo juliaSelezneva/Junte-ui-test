@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UI } from '../../../../projects/junte-ui/src/lib/enum/ui';
 import { FormBuilder, FormControl } from '@angular/forms';
 
@@ -7,7 +7,7 @@ import { FormBuilder, FormControl } from '@angular/forms';
   templateUrl: './date-period-test.component.html',
   styleUrls: ['./date-period-test.component.scss']
 })
-export class DatePeriodTestComponent implements OnInit {
+export class DatePeriodTestComponent {
 
   ui = UI;
 
@@ -21,32 +21,21 @@ export class DatePeriodTestComponent implements OnInit {
     {},
   ];
 
-  startDate: Date = this.demo[0]['start'];
-  endDate: Date = this.demo[0]['end'];
-  currentDate: Date = this.demo[0]['current'];
-
-  startTest = new FormControl(this.startDate);
-  endTest = new FormControl(this.endDate);
-  currentTest = new FormControl(this.currentDate);
+  startControl = new FormControl(this.demo[0]['start']);
+  endControl = new FormControl(this.demo[0]['end']);
+  currentControl = new FormControl(this.demo[0]['current']);
 
   current = new Date();
 
 
   form = this.fb.group({
-    start: this.startTest,
-    end: this.endTest,
-    current: this.currentTest
+    start: this.startControl,
+    end: this.endControl,
+    current: this.currentControl
   });
 
 
   constructor(private fb: FormBuilder) {
-  }
-
-
-  ngOnInit() {
-    this.startTest.valueChanges.subscribe(start => this.startDate = start);
-    this.endTest.valueChanges.subscribe(end => this.endDate = end);
-    this.currentTest.valueChanges.subscribe(current => this.currentDate = current);
   }
 
 }

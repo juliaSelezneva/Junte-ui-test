@@ -43,7 +43,9 @@
         <jnt-date-picker formControlName="current"></jnt-date-picker>
       </jnt-form-item>
 
-      <jnt-date-period [start]="startDate" [end]="endDate" [current]="currentDate"></jnt-date-period>
+      <jnt-date-period [start]="startControl.value"
+                       [end]="endControl.value"
+                       [current]="currentControl.value"></jnt-date-period>
     </jnt-form>
 
     <br>
