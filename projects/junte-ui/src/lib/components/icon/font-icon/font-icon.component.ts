@@ -13,7 +13,7 @@ export class FontIconComponent {
   @HostBinding('attr.host') readonly host = 'jnt-font-icon-host';
 
   @HostBinding('attr.icon')
-  @Input() icon = FontIcons.check;
+  @Input() icon: string = FontIcons.check;
 
   @Input()
   @HostBinding('style.font-family') iconset = DEFAULT_ICONSET;

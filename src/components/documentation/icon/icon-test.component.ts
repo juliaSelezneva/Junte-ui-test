@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {AnimatedIcons, FontDefaultIcons, FontGesturesIcons, FontIcons, SvgIcons, UI} from 'junte-ui';
+import { Component, OnInit } from '@angular/core';
+import { AnimatedIcons, FontDefaultIcons, FontGesturesIcons, FontIcons, SvgIcons, UI } from 'junte-ui';
 
 class IconTest {
   constructor(public name: string,
@@ -28,7 +28,7 @@ export class IconTestComponent implements OnInit {
       .map(icon => new IconTest(icon, FontDefaultIcons[icon]));
 
     this.fontGestures = Object.keys(FontGesturesIcons)
-      .map(icon => new IconTest(icon, FontGesturesIcons[icon]));
+      .map(icon => new IconTest(icon, FontGesturesIcons[icon], 'junte-ui-icons-gestures'));
 
     this.svgDefault = Object.keys(UI.icons.svg.default)
       .map(icon => new IconTest(icon, UI.icons.svg.default[icon]));
