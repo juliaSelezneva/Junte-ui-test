@@ -15,12 +15,11 @@ export class FontIconComponent {
   @HostBinding('attr.icon')
   @Input() icon: string = FontIcons.check;
 
-  @Input()
-  @HostBinding('style.font-family') iconset = DEFAULT_ICONSET;
+  @HostBinding('style.font-family')
+  @Input() iconset = DEFAULT_ICONSET;
 
   @HostBinding('class')
   get class() {
     return `icon-${this.icon}`;
   }
-
 }
