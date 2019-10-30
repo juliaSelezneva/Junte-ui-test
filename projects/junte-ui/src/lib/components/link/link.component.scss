@@ -229,6 +229,7 @@ $link-schemes: (
   }
   [icon] {
     margin-right: $link-icon-spacing;
+    line-height: 0;
   }
   [badge] {
     margin-left: $link-badges-spacing;
