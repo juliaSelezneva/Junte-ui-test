@@ -35,7 +35,7 @@
               {
                 "glob": "**/*",
                 "input": "projects/junte-ui/src/lib/assets/fonts/junte-ui-icons-gestures/",
-                "output": "./assets/fonts/junte-ui-icons-default/"
+                "output": "./assets/fonts/junte-ui-icons-gestures/"
               },
               {
                 "glob": "**/*",
