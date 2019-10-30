@@ -1,6 +1,6 @@
 {
   "name": "junte-ui-app",
-  "version": "0.0.297",
+  "version": "0.0.298",
   "scripts": {
     "ng": "ng",
     "gulp": "gulp",
