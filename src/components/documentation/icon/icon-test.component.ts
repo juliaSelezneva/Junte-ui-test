@@ -25,7 +25,7 @@ export class IconTestComponent implements OnInit {
 
   ngOnInit() {
     this.fontDefault = Object.keys(FontDefaultIcons)
-      .map(icon => new IconTest(icon, FontDefaultIcons[icon]));
+      .map(icon => new IconTest(icon, FontDefaultIcons[icon], 'junte-ui-icons-default'));
 
     this.fontGestures = Object.keys(FontGesturesIcons)
       .map(icon => new IconTest(icon, FontGesturesIcons[icon], 'junte-ui-icons-gestures'));
