@@ -31,10 +31,10 @@ export class SwitchComponent implements ControlValueAccessor {
   label: string;
 
   @Input()
-  iconOn: FontIcons;
+  iconOn: string;
 
   @Input()
-  iconOff: FontIcons;
+  iconOff: string;
 
   @Input()
   labelOn: string;
@@ -46,11 +46,11 @@ export class SwitchComponent implements ControlValueAccessor {
   @Input()
   size: Sizes = Sizes.normal;
 
-  onChange = (val: boolean) => {
-  };
+  onChange(val: boolean) {
+  }
 
-  onTouched = () => {
-  };
+  onTouched() {
+  }
 
   writeValue(value) {
     this.checked = value;
