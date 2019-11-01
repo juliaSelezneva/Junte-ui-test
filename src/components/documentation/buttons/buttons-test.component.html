@@ -23,42 +23,82 @@
     <li>The button should be able to stretch across the width of the container or be the width of the content</li>
   </ol>
 
-  <hr>
+  <h3>Examples</h3>
 
-  <jnt-row>
-    <jnt-col [mobile]="12" [tablet]="4" [desktop]="3"
-             *ngFor="let scheme of [ui.schemes.primary, ui.schemes.secondary, ui.schemes.success, ui.schemes.fail]">
-      <jnt-stack [gutter]="ui.gutter.small">
-        <ng-container *ngFor="let outline of [ui.outline.fill, ui.outline.ghost, ui.outline.transparent]">
-          <ng-container *ngFor="let size of [ui.sizes.tiny, ui.sizes.small, ui.sizes.normal, ui.sizes.large]">
-            <ng-template let-icon="icon" let-type="type" let-iconset="iconset" #buttons>
-              <jnt-button [scheme]="scheme" [size]="size" [outline]="outline" [text]="scheme | titlecase"></jnt-button>
-              <jnt-button [scheme]="scheme" [size]="size" [outline]="outline" [disabled]="true"
-                          [text]="scheme | titlecase"></jnt-button>
-              <jnt-button [scheme]="scheme" [size]="size" [outline]="outline" [icon]="icon + ':' + type + ':' + iconset"
-                          [text]="scheme | titlecase"></jnt-button>
-              <jnt-button [scheme]="scheme" [size]="size" [outline]="outline" [icon]="icon + ':' + type + ':' + iconset"
-                          [text]="scheme | titlecase" [loading]="true"></jnt-button>
-              <jnt-button [scheme]="scheme" [size]="size" [outline]="outline" [icon]="icon + ':' + type + ':' + iconset"
-                          [text]="scheme | titlecase" [badge]="5"></jnt-button>
-              <jnt-button [scheme]="scheme" [size]="size" [outline]="outline"
-                          [icon]="icon + ':' + type + ':' + iconset"></jnt-button>
-            </ng-template>
+  <jnt-form [formGroup]="form">
 
-            <ng-container *ngTemplateOutlet="buttons;
-              context:{icon: ui.icons.plus, type: 'font', iconset: 'junte-ui-icons-default'}">
-            </ng-container>
-            <ng-container *ngTemplateOutlet="buttons;
-              context:{icon: ui.icons.svg.default.question, type: 'svg', iconset: 'default'}">
-            </ng-container>
-            <ng-container *ngTemplateOutlet="buttons;
-              context:{icon: ui.icons.animated.time, type: 'animated', iconset: 'default'}">
-            </ng-container>
-          </ng-container>
-        </ng-container>
+    <jnt-stack [gutter]="ui.gutter.large">
+
+      <jnt-block [padding]="ui.padding.normal" [width]="ui.width.fluid">
+
+        <jnt-form-item>
+          <jnt-form-label for="scheme">Scheme</jnt-form-label>
+          <jnt-form-control>
+            <jnt-select valueField="value"
+                        labelField="label"
+                        placeholder="Scheme"
+                        formControlName="scheme">
+              <jnt-select-option *ngFor="let scheme of schemes"
+                                 [label]="scheme.label"
+                                 [value]="scheme.value">
+              </jnt-select-option>
+            </jnt-select>
+          </jnt-form-control>
+        </jnt-form-item>
+
+        <jnt-form-item>
+          <jnt-form-label for="size">Size</jnt-form-label>
+          <jnt-form-control>
+            <jnt-select valueField="value"
+                        labelField="label"
+                        placeholder="Size"
+                        formControlName="size">
+              <jnt-select-option *ngFor="let size of sizes"
+                                 [label]="size.label"
+                                 [value]="size.value">
+              </jnt-select-option>
+            </jnt-select>
+          </jnt-form-control>
+        </jnt-form-item>
+
+        <jnt-form-item>
+          <jnt-form-label for="outline">Outline</jnt-form-label>
+          <jnt-form-control>
+            <jnt-select valueField="value"
+                        labelField="label"
+                        placeholder="Outline"
+                        formControlName="outline">
+              <jnt-select-option *ngFor="let outline of outlines"
+                                 [label]="outline.label"
+                                 [value]="outline.value">
+              </jnt-select-option>
+            </jnt-select>
+          </jnt-form-control>
+        </jnt-form-item>
+      </jnt-block>
+
+      <jnt-stack [type]="ui.stack.type.horizontal" [wrap]="ui.flex.wrap.wrap" buttons>
+        <jnt-button [scheme]="schemeControl.value" [size]="sizeControl.value" [outline]="outlineControl.value"
+                    text="Button"></jnt-button>
+        <jnt-button [scheme]="schemeControl.value" [size]="sizeControl.value" [outline]="outlineControl.value"
+                    [disabled]="true"
+                    text="Button"></jnt-button>
+        <jnt-button [scheme]="schemeControl.value" [size]="sizeControl.value" [outline]="outlineControl.value"
+                    [loading]="true"
+                    text="Button"></jnt-button>
+        <jnt-button [scheme]="schemeControl.value" [size]="sizeControl.value" [outline]="outlineControl.value"
+                    [icon]="ui.icons.plus"
+                    text="Button"></jnt-button>
+        <jnt-button [scheme]="schemeControl.value" [size]="sizeControl.value" [outline]="outlineControl.value"
+                    [icon]="ui.icons.figma"
+                    text="Button" [badge]="5"></jnt-button>
+        <jnt-button [scheme]="schemeControl.value" [size]="sizeControl.value" [outline]="outlineControl.value"
+                    [icon]="ui.icons.runningMan">
+        </jnt-button>
       </jnt-stack>
-    </jnt-col>
-  </jnt-row>
+    </jnt-stack>
+  </jnt-form>
+
 
   <ngx-prism language="html">
     <pre><![CDATA[
