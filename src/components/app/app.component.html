@@ -4,13 +4,13 @@
 
   <jnt-app-header>
     <ng-template #logo>
-      <img [src]="'assets/image/logo-' + theme + '.svg'" logo>
+      <img [src]="'assets/image/logo' + (theme === 'dark' ? '-dark' : '') + '.svg'" logo>
     </ng-template>
     <ng-template #topMenu>
       <jnt-menu>
         <jnt-menu-item [icon]="ui.icons.home" title="Home" [link]="['/home']"
                        [matching]="ui.url.matching.wildcard"></jnt-menu-item>
-        <jnt-menu-item [icon]="ui.icons.documentation" title="Documentation" [link]="['/documentation']"
+        <jnt-menu-item [icon]="ui.icons.font.clover" title="Documentation" [link]="['/documentation']"
                        [matching]="ui.url.matching.wildcard">
         </jnt-menu-item>
         <jnt-menu-item title="GitLab" link="https://gitlab.com/junte/junte-ui"
