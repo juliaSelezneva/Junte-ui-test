@@ -198,6 +198,11 @@ $link-schemes: (
       cursor: default;
     }
   }
+  &[with-title='false'] {
+    [link] [icon] {
+      margin-right: 0;
+    }
+  }
   @each $scheme, $map in $link-schemes {
     &[scheme='#{$scheme}'] {
       @include scheme($map);
