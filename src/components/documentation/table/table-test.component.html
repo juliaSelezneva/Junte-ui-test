@@ -23,7 +23,7 @@
 
   <jnt-block [width]="ui.width.fluid">
     <jnt-form [formGroup]="form">
-    <jnt-table [filter]="filter" #table [features]="[ui.table.features.search]">
+      <jnt-table #table [features]="[ui.table.features.search]" formControlName="table">
       <jnt-table-column title="Label" sort="label">
         <ng-template #cellTemplate let-label="label">
           {{label}}
@@ -37,7 +37,7 @@
       </jnt-table-column>
 
       <ng-template #rowActions let-row="row">
-        <jnt-menu [type]="ui.type.vertical" [spacer]="ui.gutter.small">
+        <jnt-menu [type]="ui.type.vertical" [spacer]="ui.sizes.small">
           <jnt-menu-item title="Edit" (click)="edit()"></jnt-menu-item>
           <jnt-menu-item title="Delete" (click)="delete()"></jnt-menu-item>
         </jnt-menu>
@@ -47,7 +47,7 @@
                       labelField="label"
                       [loadOptions]="loadOptions()"
                       placeholder="Single select"
-                      formControlName="selectAjax" label="Filter">
+                      formControlName="select" label="Filter">
           </jnt-select>
       </ng-template>
     </jnt-table>
@@ -65,7 +65,7 @@
         <ng-template #cellTemplate let-value="value">value</ng-template>
     </jnt-table-column>
      <ng-template #rowActions let-row="row">
-          <jnt-menu [type]="ui.type.vertical" [spacer]="ui.gutter.small">
+          <jnt-menu [type]="ui.type.vertical" [spacer]="ui.sizes.small">
             <jnt-menu-item title="Edit" (click)="edit()"></jnt-menu-item>
             <jnt-menu-item title="Delete" (click)="delete()"></jnt-menu-item>
           </jnt-menu>

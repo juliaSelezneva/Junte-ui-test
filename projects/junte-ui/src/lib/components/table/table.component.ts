@@ -15,7 +15,7 @@ import {
 import { ControlValueAccessor, FormBuilder, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, filter as filtering, finalize } from 'rxjs/operators';
 import { TableFeatures, UI } from '../../enum/ui';
-import { DEFAULT_FIRST, DEFAULT_OFFSET, DefaultSearchFilter, SearchFilter } from '../../models/table';
+import { DEFAULT_FIRST, DEFAULT_OFFSET, DefaultSearchFilter } from '../../models/table';
 import { isEqual } from '../../utils/equal';
 import { Subscriptions } from '../../utils/subscriptions';
 import { TableColumnComponent } from './column/table-column.component';
@@ -35,21 +35,18 @@ const FILTER_DELAY = 500;
 })
 export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
-  ui = UI;
-
   private _count: number;
   private subscriptions = new Subscriptions();
 
+  ui = UI;
   progress = {loading: false};
-
-  @HostBinding('attr.host') readonly host = 'jnt-table-host';
-
+  source: any[] = [];
   sort = new FormControl(null);
   offset = new FormControl(DEFAULT_OFFSET);
   first = new FormControl(DEFAULT_FIRST);
   page = new FormControl((+this.offset.value / +this.first.value) + 1);
 
-  filterForm = this.formBuilder.group({
+  filterForm = this.builder.group({
     q: [''],
     sort: this.sort,
     page: this.page,
@@ -57,7 +54,12 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
     first: this.first
   });
 
-  source: any[] = [];
+  filter: any = new DefaultSearchFilter({
+    offset: DEFAULT_OFFSET,
+    first: DEFAULT_FIRST
+  });
+
+  @HostBinding('attr.host') readonly host = 'jnt-table-host';
 
   @ContentChildren(TableColumnComponent)
   columns: QueryList<TableColumnComponent>;
@@ -75,18 +77,9 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
   filtersTemplate: TemplateRef<any>;
 
   @HostBinding('attr.features')
-  @Input()
-  features: TableFeatures[] = [];
+  @Input() features: TableFeatures[] = [];
 
-  @Input()
-  filter: SearchFilter = new DefaultSearchFilter({
-    offset: DEFAULT_OFFSET,
-    first: DEFAULT_FIRST
-  });
-
-  @Input()
-  fetcher: Function;
-
+  @Input() fetcher: Function;
   @Output() reloaded = new EventEmitter<any>();
 
   set count(count: number) {
@@ -101,7 +94,7 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
     return Math.ceil(this.count / this.filterForm.get('first').value);
   }
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private builder: FormBuilder) {
   }
 
   ngOnInit() {
@@ -114,7 +107,7 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
         filter.page = 1;
       }
       filter.offset = (filter.page - 1) * filter.first;
-      Object.assign(this.filter, filter);
+      this.filter = {...this.filter, ...filter};
       this.onChange(this.filter);
       this.load();
     });
@@ -127,6 +120,7 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
   load() {
     if (!!this.fetcher) {
       this.progress.loading = true;
+      console.log('filter:', this.filter);
       this.subscriptions.push('rows', this.fetcher(this.filter)
         .pipe(finalize(() => this.progress.loading = false))
         .subscribe(resp => {
@@ -140,16 +134,21 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
     this.filterForm.patchValue({orderBy: this.sort.value === sort ? `-${sort}` : sort});
   }
 
-  writeValue(value: SearchFilter) {
+  writeValue(value: any) {
     if (value !== undefined) {
       this.filterForm.patchValue({
         first: value.first,
-        offset: value.offset
-      }, {emitEvent: false});
+        offset: value.offset,
+        page: Math.floor(value.offset / value.first) + 1
+      });
+
+      console.log('value', value);
+      this.filter = {...this.filter, ...value};
+      this.load();
     }
   }
 
-  onChange(value: SearchFilter) {
+  onChange(value: any) {
   }
 
   onTouched() {

@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { DefaultSearchFilter, TableComponent, UI } from 'junte-ui';
-import { DEFAULT_FIRST, DEFAULT_OFFSET } from 'projects/junte-ui/src/lib/models/table';
+import { FormControl, FormGroup } from '@angular/forms';
+import { DEFAULT_FIRST, DEFAULT_OFFSET, TableComponent, UI } from 'junte-ui';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
+
+const DEFAULT_DELAY = 1000;
+const DEFAULT_SELECT = 4;
 
 @Component({
   selector: 'app-table-test',
@@ -14,55 +16,55 @@ export class TableTestComponent implements OnInit {
 
   ui = UI;
 
-  form: FormGroup;
+  table = new FormControl({offset: DEFAULT_OFFSET, first: DEFAULT_FIRST, select: DEFAULT_SELECT});
+  select = new FormControl([DEFAULT_SELECT]);
+
+  form = new FormGroup({
+    select: this.select,
+    table: this.table
+  });
+
   options: any[] = [
     {value: 1, label: 'PFC CSKA Moscow'},
     {value: 2, label: 'FC Real Madrid'},
     {value: 3, label: 'FC Manchester United'}
   ];
+
   ajaxOptions: any[] = [
     {value: 4, label: 'FC Manchester City'},
     {value: 5, label: 'FC Liverpool'},
     {value: 6, label: 'FC Barcelona'}
   ];
 
-  filter: DefaultSearchFilter = new DefaultSearchFilter({offset: DEFAULT_OFFSET, first: DEFAULT_FIRST});
-
   @ViewChild('table', {static: true})
-  table: TableComponent;
+  tableControl: TableComponent;
 
   data: any = {
-    results: [
-      {value: 'Value 1', label: 'Label 1'},
-      {value: 'Value 2', label: 'Label 2'},
-      {value: 'Value 3', label: 'Label 3'},
-      {value: 'Value 4', label: 'Label 4'},
-      {value: 'Value 5', label: 'Label 5'},
-      {value: 'Value 6', label: 'Label 6'},
-      {value: 'Value 7', label: 'Label 7'},
-      {value: 'Value 8', label: 'Label 8'},
-      {value: 'Value 9', label: 'Label 9'},
-      {value: 'Value 10', label: 'Label 10'}
-    ],
-    count: 37
+    results: [],
+    count: 0
   };
 
-  constructor(private fb: FormBuilder) {
-  }
-
   ngOnInit() {
-    this.table.fetcher = (): Observable<any> => of(this.data).pipe(delay(2000));
-    this.table.load();
+    for (let i = 0; i < Math.random() * (300 - 50) + 50; i++) {
+      this.data.results.push({value: `Value ${i}`, label: `Label ${i}`});
+    }
 
-    this.form = this.fb.group({
-      select: this.fb.control([1, 3]),
-      selectAjax: this.fb.control([])
+    this.tableControl.fetcher = (filter): Observable<any> => {
+      const data = {...this.data};
+      data.results = data.results.slice(filter.offset, filter.offset + filter.first);
+      data.count = this.data.results.length;
+      return of(data).pipe(delay(DEFAULT_DELAY));
+    };
+
+    this.select.valueChanges.subscribe(value => this.table.patchValue({...this.tableControl.filter, select: value}));
+
+    this.form.valueChanges.subscribe(form => {
+      console.log('table filter changed', form);
     });
-    this.form.valueChanges.subscribe(c => console.log(c));
   }
 
   loadOptions() {
-    return (): Observable<any> => of(this.ajaxOptions).pipe(delay(2000));
+    return (): Observable<any> => of(this.ajaxOptions).pipe(delay(DEFAULT_DELAY));
   }
 
   edit() {
