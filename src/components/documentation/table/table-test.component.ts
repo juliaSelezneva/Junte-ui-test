@@ -10,6 +10,7 @@ const DEFAULT_DELAY = 1000;
 
 class Filter extends DefaultSearchFilter {
   select?: number;
+  user?: number;
 
   constructor(defs: Filter = null) {
     super(defs);
@@ -27,8 +28,10 @@ export class TableTestComponent implements OnInit {
 
   table = new FormControl();
   select = new FormControl();
+  user = new FormControl();
 
   form = new FormGroup({
+    user: this.user,
     select: this.select,
     table: this.table
   });
@@ -40,9 +43,15 @@ export class TableTestComponent implements OnInit {
   ];
 
   ajaxOptions: any[] = [
-    {value: 4, label: 'FC Manchester City'},
-    {value: 5, label: 'FC Liverpool'},
-    {value: 6, label: 'FC Barcelona'}
+    {value: 4, label: 'Test 4'},
+    {value: 5, label: 'Test 5'},
+    {value: 6, label: 'Test 6'}
+  ];
+
+  ajaxUserOptions: any[] = [
+    {value: 1, label: 'User 1'},
+    {value: 2, label: 'User 2'},
+    {value: 3, label: 'User 3'}
   ];
 
   @ViewChild('table', {static: true})
@@ -70,6 +79,7 @@ export class TableTestComponent implements OnInit {
     };
 
     this.select.valueChanges.subscribe(value => this.table.patchValue({select: value}));
+    this.user.valueChanges.subscribe(value => this.table.patchValue({user: value}));
     this.table.valueChanges.subscribe(table => {
       const filter = new Filter();
 
@@ -85,24 +95,28 @@ export class TableTestComponent implements OnInit {
       if (table.select !== undefined) {
         filter.select = table.select;
       }
+      if (table.user !== undefined) {
+        filter.user = table.user;
+      }
 
       this.router.navigate([filter], {relativeTo: this.route});
     });
 
     this.route.params.pipe(distinctUntilChanged((val1, val2) => isEqual(val1, val2)))
-      .subscribe(({offset, first, select, q, sort}) => {
-        const filter = {offset, first, select, q, sort};
+      .subscribe(({offset, first, select, user, q, sort}) => {
+        const filter = new Filter();
         filter.offset = +offset || DEFAULT_OFFSET;
         filter.first = +first || DEFAULT_FIRST;
         if (!!select) {
           filter.select = +select;
           this.select.patchValue(+select);
         }
+        if (!!user) {
+          filter.user = +user;
+          this.user.patchValue(+user);
+        }
         if (!!q) {
           filter.q = q;
-        }
-        if (!!sort) {
-          filter.sort = sort;
         }
         this.table.patchValue(filter);
       });
@@ -110,6 +124,10 @@ export class TableTestComponent implements OnInit {
 
   loadOptions() {
     return (): Observable<any> => of(this.ajaxOptions).pipe(delay(DEFAULT_DELAY));
+  }
+
+  loadUserOptions() {
+    return (): Observable<any> => of(this.ajaxUserOptions).pipe(delay(DEFAULT_DELAY));
   }
 
   edit() {
