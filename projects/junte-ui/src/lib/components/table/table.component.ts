@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, FormBuilder, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter as filtering, finalize } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter as filtering, finalize, map } from 'rxjs/operators';
 import { TableFeatures, UI } from '../../enum/ui';
 import { DEFAULT_FIRST, DEFAULT_OFFSET, DefaultSearchFilter } from '../../models/table';
 import { isEqual } from '../../utils/equal';
@@ -106,18 +106,29 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
   }
 
   ngOnInit() {
-    this.filterForm.valueChanges.subscribe(filter => {
-      if (filter.first !== this.filter.first) {
-        filter.page = 1;
-      }
-      filter.offset = (filter.page - 1) * filter.first;
-      this.filter = {...this.filter, ...filter};
-      this.onChange(this.filter);
-    });
+    this.filterForm.valueChanges
+      .pipe(distinctUntilChanged((val1, val2) => isEqual(val1, val2)))
+      .subscribe(filter => {
+        if (filter.first !== this.filter.first) {
+          filter.page = 1;
+        }
+        filter.offset = (filter.page - 1) * filter.first;
+        this.filter = {...this.filter, ...filter};
+        this.onChange(this.filter);
+      });
 
     this.filter$.pipe(
       filtering(() => !!this.fetcher),
       debounceTime(FILTER_DELAY),
+      map(filter => {
+        for (let param in filter) {
+          if (filter.hasOwnProperty(param) && filter[param] === null
+            || filter[param] === undefined || filter[param] === '') {
+            delete filter[param];
+          }
+        }
+        return filter;
+      }),
       distinctUntilChanged((val1, val2) => isEqual(val1, val2))
     ).subscribe(() => this.load());
   }
@@ -148,26 +159,11 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
       this.filterForm.patchValue({
         first: value.first,
         offset: value.offset,
-        page: Math.floor(value.offset / value.first) + 1
+        page: Math.floor(value.offset / value.first) + 1,
+        q: value.q
       });
 
-      const filter = new DefaultSearchFilter();
-      if (!!this.filter.q) {
-        filter.q = this.filter.q;
-      }
-      if (!!this.filter.sort) {
-        filter.sort = this.filter.sort;
-      }
-      if (this.filter.page !== undefined) {
-        filter.page = this.filter.page;
-      }
-      if (this.filter.offset !== undefined) {
-        filter.offset = this.filter.offset;
-      }
-      if (this.filter.first !== undefined) {
-        filter.first = this.filter.first;
-      }
-      this.filter = filter;
+      this.filter = {...this.filter, ...value};
     }
   }
 

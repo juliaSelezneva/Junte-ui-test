@@ -1,13 +1,20 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DEFAULT_FIRST, DEFAULT_OFFSET, TableComponent, UI } from 'junte-ui';
+import { DEFAULT_FIRST, DEFAULT_OFFSET, DefaultSearchFilter, TableComponent, UI } from 'junte-ui';
 import { isEqual } from 'projects/junte-ui/src/lib/utils/equal';
 import { Observable, of } from 'rxjs';
 import { delay, distinctUntilChanged } from 'rxjs/operators';
 
 const DEFAULT_DELAY = 1000;
-const DEFAULT_SELECT = 4;
+
+class Filter extends DefaultSearchFilter {
+  select?: number;
+
+  constructor(defs: Filter = null) {
+    super(defs);
+  }
+}
 
 @Component({
   selector: 'app-table-test',
@@ -19,7 +26,7 @@ export class TableTestComponent implements OnInit {
   ui = UI;
 
   table = new FormControl();
-  select = new FormControl([DEFAULT_SELECT]);
+  select = new FormControl();
 
   form = new FormGroup({
     select: this.select,
@@ -62,32 +69,43 @@ export class TableTestComponent implements OnInit {
       return of(data).pipe(delay(DEFAULT_DELAY));
     };
 
-    this.select.valueChanges.subscribe(value => this.table.patchValue({...this.tableControl.filter, select: value}));
-    this.table.valueChanges.subscribe(filter => {
-      for (let param in filter) {
-        if (filter.hasOwnProperty(param) && filter[param] === null || filter[param] === undefined || filter[param] === '') {
-          delete filter[param];
-        }
+    this.select.valueChanges.subscribe(value => this.table.patchValue({select: value}));
+    this.table.valueChanges.subscribe(table => {
+      const filter = new Filter();
+
+      if (!!table.q) {
+        filter.q = table.q;
       }
+      if (table.offset !== undefined) {
+        filter.offset = table.offset;
+      }
+      if (table.first !== undefined) {
+        filter.first = table.first;
+      }
+      if (table.select !== undefined) {
+        filter.select = table.select;
+      }
+
       this.router.navigate([filter], {relativeTo: this.route});
     });
 
     this.route.params.pipe(distinctUntilChanged((val1, val2) => isEqual(val1, val2)))
       .subscribe(({offset, first, select, q, sort}) => {
-      const filter = {offset, first, select, q, sort};
-      filter.offset = +offset || DEFAULT_OFFSET;
-      filter.first = +first || DEFAULT_FIRST;
-      if (!!select) {
-        filter.select = +select;
-      }
-      if (!!q) {
-        filter.q = q;
-      }
-      if (!!sort) {
-        filter.sort = sort;
-      }
-      this.table.patchValue(filter);
-    });
+        const filter = {offset, first, select, q, sort};
+        filter.offset = +offset || DEFAULT_OFFSET;
+        filter.first = +first || DEFAULT_FIRST;
+        if (!!select) {
+          filter.select = +select;
+          this.select.patchValue(+select);
+        }
+        if (!!q) {
+          filter.q = q;
+        }
+        if (!!sort) {
+          filter.sort = sort;
+        }
+        this.table.patchValue(filter);
+      });
   }
 
   loadOptions() {
