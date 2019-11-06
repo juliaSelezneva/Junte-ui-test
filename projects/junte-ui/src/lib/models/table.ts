@@ -14,6 +14,8 @@ export class DefaultSearchFilter implements SearchFilter {
   q?: string;
   offset?: number;
   first?: number;
+  sort?: string;
+  page?: number;
 
   constructor(defs: DefaultSearchFilter = null) {
     if (!!defs) {

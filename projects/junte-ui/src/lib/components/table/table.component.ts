@@ -13,6 +13,7 @@ import {
   TemplateRef
 } from '@angular/core';
 import { ControlValueAccessor, FormBuilder, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter as filtering, finalize } from 'rxjs/operators';
 import { TableFeatures, UI } from '../../enum/ui';
 import { DEFAULT_FIRST, DEFAULT_OFFSET, DefaultSearchFilter } from '../../models/table';
@@ -37,6 +38,10 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
   private _count: number;
   private subscriptions = new Subscriptions();
+  private filter$ = new BehaviorSubject<any>(new DefaultSearchFilter({
+    offset: DEFAULT_OFFSET,
+    first: DEFAULT_FIRST
+  }));
 
   ui = UI;
   progress = {loading: false};
@@ -54,10 +59,13 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
     first: this.first
   });
 
-  filter: any = new DefaultSearchFilter({
-    offset: DEFAULT_OFFSET,
-    first: DEFAULT_FIRST
-  });
+  set filter(filter: any) {
+    this.filter$.next(filter);
+  }
+
+  get filter() {
+    return this.filter$.getValue();
+  }
 
   @HostBinding('attr.host') readonly host = 'jnt-table-host';
 
@@ -98,19 +106,20 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
   }
 
   ngOnInit() {
-    this.filterForm.valueChanges.pipe(
-      filtering(() => !!this.fetcher),
-      debounceTime(FILTER_DELAY),
-      distinctUntilChanged((val1, val2) => isEqual(val1, val2))
-    ).subscribe(filter => {
+    this.filterForm.valueChanges.subscribe(filter => {
       if (filter.first !== this.filter.first) {
         filter.page = 1;
       }
       filter.offset = (filter.page - 1) * filter.first;
       this.filter = {...this.filter, ...filter};
       this.onChange(this.filter);
-      // this.load();
     });
+
+    this.filter$.pipe(
+      filtering(() => !!this.fetcher),
+      debounceTime(FILTER_DELAY),
+      distinctUntilChanged((val1, val2) => isEqual(val1, val2))
+    ).subscribe(() => this.load());
   }
 
   ngOnDestroy() {
@@ -142,15 +151,23 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
         page: Math.floor(value.offset / value.first) + 1
       });
 
-      const filter = {...this.filter, ...value};
-      for (let param in filter) {
-        if (filter.hasOwnProperty(param) && filter[param] === null || filter[param] === undefined || filter[param] === '') {
-          delete filter[param];
-        }
+      const filter = new DefaultSearchFilter();
+      if (!!this.filter.q) {
+        filter.q = this.filter.q;
       }
-      console.log('value', filter);
+      if (!!this.filter.sort) {
+        filter.sort = this.filter.sort;
+      }
+      if (this.filter.page !== undefined) {
+        filter.page = this.filter.page;
+      }
+      if (this.filter.offset !== undefined) {
+        filter.offset = this.filter.offset;
+      }
+      if (this.filter.first !== undefined) {
+        filter.first = this.filter.first;
+      }
       this.filter = filter;
-      this.load();
     }
   }
 

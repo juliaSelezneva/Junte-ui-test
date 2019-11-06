@@ -75,10 +75,10 @@ export class TableTestComponent implements OnInit {
     this.route.params.pipe(distinctUntilChanged((val1, val2) => isEqual(val1, val2)))
       .subscribe(({offset, first, select, q, sort}) => {
       const filter = {offset, first, select, q, sort};
-      filter.offset = offset || DEFAULT_OFFSET;
-      filter.first = first || DEFAULT_FIRST;
+      filter.offset = +offset || DEFAULT_OFFSET;
+      filter.first = +first || DEFAULT_FIRST;
       if (!!select) {
-        filter.select = select;
+        filter.select = +select;
       }
       if (!!q) {
         filter.q = q;
