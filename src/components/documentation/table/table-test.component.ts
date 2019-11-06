@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DEFAULT_FIRST, DEFAULT_OFFSET, TableComponent, UI } from 'junte-ui';
+import { isEqual } from 'projects/junte-ui/src/lib/utils/equal';
 import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { delay, distinctUntilChanged } from 'rxjs/operators';
 
 const DEFAULT_DELAY = 1000;
 const DEFAULT_SELECT = 4;
@@ -16,7 +18,7 @@ export class TableTestComponent implements OnInit {
 
   ui = UI;
 
-  table = new FormControl({offset: DEFAULT_OFFSET, first: DEFAULT_FIRST, select: DEFAULT_SELECT});
+  table = new FormControl();
   select = new FormControl([DEFAULT_SELECT]);
 
   form = new FormGroup({
@@ -44,6 +46,10 @@ export class TableTestComponent implements OnInit {
     count: 0
   };
 
+  constructor(private router: Router,
+              private route: ActivatedRoute) {
+  }
+
   ngOnInit() {
     for (let i = 0; i < Math.random() * (300 - 50) + 50; i++) {
       this.data.results.push({value: `Value ${i}`, label: `Label ${i}`});
@@ -57,9 +63,30 @@ export class TableTestComponent implements OnInit {
     };
 
     this.select.valueChanges.subscribe(value => this.table.patchValue({...this.tableControl.filter, select: value}));
+    this.table.valueChanges.subscribe(filter => {
+      for (let param in filter) {
+        if (filter.hasOwnProperty(param) && filter[param] === null || filter[param] === undefined || filter[param] === '') {
+          delete filter[param];
+        }
+      }
+      this.router.navigate([filter], {relativeTo: this.route});
+    });
 
-    this.form.valueChanges.subscribe(form => {
-      console.log('table filter changed', form);
+    this.route.params.pipe(distinctUntilChanged((val1, val2) => isEqual(val1, val2)))
+      .subscribe(({offset, first, select, q, sort}) => {
+      const filter = {offset, first, select, q, sort};
+      filter.offset = offset || DEFAULT_OFFSET;
+      filter.first = first || DEFAULT_FIRST;
+      if (!!select) {
+        filter.select = select;
+      }
+      if (!!q) {
+        filter.q = q;
+      }
+      if (!!sort) {
+        filter.sort = sort;
+      }
+      this.table.patchValue(filter);
     });
   }
 

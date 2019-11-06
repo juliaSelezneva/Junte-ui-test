@@ -109,7 +109,7 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
       filter.offset = (filter.page - 1) * filter.first;
       this.filter = {...this.filter, ...filter};
       this.onChange(this.filter);
-      this.load();
+      // this.load();
     });
   }
 
@@ -120,7 +120,7 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
   load() {
     if (!!this.fetcher) {
       this.progress.loading = true;
-      console.log('filter:', this.filter);
+      console.log('load:', this.filter);
       this.subscriptions.push('rows', this.fetcher(this.filter)
         .pipe(finalize(() => this.progress.loading = false))
         .subscribe(resp => {
@@ -135,15 +135,21 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
   }
 
   writeValue(value: any) {
-    if (value !== undefined) {
+    if (!!value) {
       this.filterForm.patchValue({
         first: value.first,
         offset: value.offset,
         page: Math.floor(value.offset / value.first) + 1
       });
 
-      console.log('value', value);
-      this.filter = {...this.filter, ...value};
+      const filter = {...this.filter, ...value};
+      for (let param in filter) {
+        if (filter.hasOwnProperty(param) && filter[param] === null || filter[param] === undefined || filter[param] === '') {
+          delete filter[param];
+        }
+      }
+      console.log('value', filter);
+      this.filter = filter;
       this.load();
     }
   }
