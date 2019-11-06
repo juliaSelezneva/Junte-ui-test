@@ -168,6 +168,7 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
   }
 
   onChange(value: any) {
+    console.log('value changed', value);
   }
 
   onTouched() {

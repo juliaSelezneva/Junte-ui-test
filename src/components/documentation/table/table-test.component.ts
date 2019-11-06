@@ -80,46 +80,43 @@ export class TableTestComponent implements OnInit {
 
     this.select.valueChanges.subscribe(value => this.table.patchValue({select: value}));
     this.user.valueChanges.subscribe(value => this.table.patchValue({user: value}));
-    this.table.valueChanges.subscribe(table => {
+    this.table.valueChanges.subscribe(({offset, first, select, user, q}) => {
       const filter = new Filter();
-
-      if (!!table.q) {
-        filter.q = table.q;
+      filter.offset = +offset || DEFAULT_OFFSET;
+      filter.first = +first || DEFAULT_FIRST;
+      if (!!q) {
+        filter.q = q;
       }
-      if (table.offset !== undefined) {
-        filter.offset = table.offset;
+      if (select !== undefined) {
+        filter.select = select;
       }
-      if (table.first !== undefined) {
-        filter.first = table.first;
-      }
-      if (table.select !== undefined) {
-        filter.select = table.select;
-      }
-      if (table.user !== undefined) {
-        filter.user = table.user;
+      if (user !== undefined) {
+        filter.user = user;
       }
 
       this.router.navigate([filter], {relativeTo: this.route});
     });
 
     this.route.params.pipe(distinctUntilChanged((val1, val2) => isEqual(val1, val2)))
-      .subscribe(({offset, first, select, user, q}) => {
-        const filter = new Filter();
-        filter.offset = +offset || DEFAULT_OFFSET;
-        filter.first = +first || DEFAULT_FIRST;
-        if (!!select) {
-          filter.select = +select;
-          this.select.patchValue(+select);
-        }
-        if (!!user) {
-          filter.user = +user;
-          this.user.patchValue(+user);
-        }
-        if (!!q) {
-          filter.q = q;
-        }
-        this.table.patchValue(filter);
-      });
+      .subscribe((filter: {offset, first, select, user, q}) => this.table.patchValue(this.buildFilter(filter)));
+  }
+
+  buildFilter({offset, first, select, user, q}) {
+    const filter = new Filter();
+    filter.offset = +offset || DEFAULT_OFFSET;
+    filter.first = +first || DEFAULT_FIRST;
+    if (!!select) {
+      filter.select = +select;
+      this.select.patchValue(+select);
+    }
+    if (!!user) {
+      filter.user = +user;
+      this.user.patchValue(+user);
+    }
+    if (!!q) {
+      filter.q = q;
+    }
+    return filter;
   }
 
   loadOptions() {
