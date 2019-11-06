@@ -122,8 +122,8 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
       debounceTime(FILTER_DELAY),
       map(filter => {
         for (let param in filter) {
-          if (filter.hasOwnProperty(param) && filter[param] === null
-            || filter[param] === undefined || filter[param] === '') {
+          if (filter.hasOwnProperty(param) && (filter[param] === null
+            || filter[param] === undefined || filter[param] === '')) {
             delete filter[param];
           }
         }
