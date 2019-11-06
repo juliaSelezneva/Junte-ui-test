@@ -170,6 +170,11 @@ $link-schemes: (
     border-radius: 0;
     &:hover, &:focus {
       color: #{map-get($scheme, transparent-hover-color)};
+      &:focus {
+        box-shadow: none;
+        outline-offset: 1px;
+        outline: #{map-get($scheme, link-focus-shadow-color)} auto 1px;
+      }
       [icon][child-host=#{$jnt-icon-host}] {
         fill: #{map-get($scheme, transparent-hover-color)};
       }
