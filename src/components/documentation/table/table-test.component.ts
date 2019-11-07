@@ -78,8 +78,8 @@ export class TableTestComponent implements OnInit {
       return of(data).pipe(delay(DEFAULT_DELAY));
     };
 
-    this.select.valueChanges.subscribe(value => this.table.patchValue({select: value}));
-    this.user.valueChanges.subscribe(value => this.table.patchValue({user: value}));
+    this.select.valueChanges.subscribe(value => this.table.patchValue({...this.table.value, select: value}));
+    this.user.valueChanges.subscribe(value => this.table.patchValue({...this.table.value, user: value}));
     this.table.valueChanges.subscribe(table => {
       const filter = new Filter();
 
