@@ -120,15 +120,6 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
     this.filter$.pipe(
       filtering(() => !!this.fetcher),
       debounceTime(FILTER_DELAY),
-      map(filter => {
-        for (let param in filter) {
-          if (filter.hasOwnProperty(param) && filter[param] === null
-            || filter[param] === undefined || filter[param] === '') {
-            delete filter[param];
-          }
-        }
-        return filter;
-      }),
       distinctUntilChanged((val1, val2) => isEqual(val1, val2))
     ).subscribe(() => this.load());
   }
@@ -140,7 +131,6 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
   load() {
     if (!!this.fetcher) {
       this.progress.loading = true;
-      console.log('load:', this.filter);
       this.subscriptions.push('rows', this.fetcher(this.filter)
         .pipe(finalize(() => this.progress.loading = false))
         .subscribe(resp => {

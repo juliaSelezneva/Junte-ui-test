@@ -72,6 +72,7 @@ export class TableTestComponent implements OnInit {
     }
 
     this.tableControl.fetcher = (filter): Observable<any> => {
+      console.log('load:', filter);
       const data = {...this.data};
       data.results = data.results.slice(filter.offset, filter.offset + filter.first);
       data.count = this.data.results.length;
