@@ -80,6 +80,7 @@ export class TableTestComponent implements OnInit {
 
     this.select.valueChanges.subscribe(value => this.table.patchValue({...this.table.value, select: value}));
     this.user.valueChanges.subscribe(value => this.table.patchValue({...this.table.value, user: value}));
+
     this.table.valueChanges.subscribe(table => {
       const filter = new Filter();
 
@@ -98,26 +99,22 @@ export class TableTestComponent implements OnInit {
       if (table.user !== undefined) {
         filter.user = table.user;
       }
-      console.group('valueChanges');
-      console.log('table', table);
-      console.log('filter', filter);
-      console.groupEnd();
+
       this.router.navigate([filter], {relativeTo: this.route});
     });
 
     this.route.params.pipe(distinctUntilChanged((val1, val2) => isEqual(val1, val2)))
-      .subscribe(({offset, first, select, user, q}) => {
-        console.log('route', {offset, first, select, user, q});
+      .subscribe(({offset, first, select, user, q, sort}) => {
         const filter = new Filter();
         filter.offset = +offset || DEFAULT_OFFSET;
         filter.first = +first || DEFAULT_FIRST;
-        if (!!select && this.select.value !== select) {
+        if (!!select) {
           filter.select = +select;
-          this.select.patchValue(+select, {emitEvent: false});
+          this.select.patchValue(+select);
         }
-        if (!!user && this.user.value !== user) {
+        if (!!user) {
           filter.user = +user;
-          this.user.patchValue(+user, {emitEvent: false});
+          this.user.patchValue(+user);
         }
         if (!!q) {
           filter.q = q;
