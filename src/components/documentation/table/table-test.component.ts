@@ -98,22 +98,26 @@ export class TableTestComponent implements OnInit {
       if (table.user !== undefined) {
         filter.user = table.user;
       }
-
+      console.group('valueChanges');
+      console.log('table', table);
+      console.log('filter', filter);
+      console.groupEnd();
       this.router.navigate([filter], {relativeTo: this.route});
     });
 
     this.route.params.pipe(distinctUntilChanged((val1, val2) => isEqual(val1, val2)))
-      .subscribe(({offset, first, select, user, q, sort}) => {
+      .subscribe(({offset, first, select, user, q}) => {
+        console.log('route', {offset, first, select, user, q});
         const filter = new Filter();
         filter.offset = +offset || DEFAULT_OFFSET;
         filter.first = +first || DEFAULT_FIRST;
-        if (!!select) {
+        if (!!select && this.select.value !== select) {
           filter.select = +select;
-          this.select.patchValue(+select);
+          this.select.patchValue(+select, {emitEvent: false});
         }
-        if (!!user) {
+        if (!!user && this.user.value !== user) {
           filter.user = +user;
-          this.user.patchValue(+user);
+          this.user.patchValue(+user, {emitEvent: false});
         }
         if (!!q) {
           filter.q = q;
