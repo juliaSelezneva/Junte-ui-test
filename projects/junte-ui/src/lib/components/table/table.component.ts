@@ -110,10 +110,10 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
     this.subscriptions.unsubscribe();
   }
 
-  load() {
+  load(filter = this.form.getRawValue()) {
     if (!!this.fetcher) {
       this.progress.loading = true;
-      this.subscriptions.push('rows', this.fetcher(this.form.getRawValue())
+      this.subscriptions.push('rows', this.fetcher(filter)
         .pipe(finalize(() => this.progress.loading = false))
         .subscribe(resp => {
           this.source = resp.results;

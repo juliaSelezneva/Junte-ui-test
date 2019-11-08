@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DEFAULT_FIRST, DEFAULT_OFFSET, DefaultSearchFilter, TableComponent, UI } from 'junte-ui';
-import { isEqual } from 'projects/junte-ui/src/lib/utils/equal';
+import { DEFAULT_FIRST, DEFAULT_OFFSET, DefaultSearchFilter, TableComponent, UI, isEqual } from 'junte-ui';
 import { Observable, of } from 'rxjs';
 import { delay, distinctUntilChanged } from 'rxjs/operators';
 
@@ -71,9 +70,8 @@ export class TableTestComponent implements OnInit {
       this.data.results.push({value: `Value ${i}`, label: `Label ${i}`});
     }
 
-    this.tableControl.fetcher = (): Observable<any> => {
-      const filter = {...this.table.value, user: this.user.value, select: this.select.value};
-      console.log('load:', filter);
+    this.tableControl.fetcher = (filter): Observable<any> => {
+      console.log('load:', {...filter, user: this.user.value, select: this.select.value});
       const data = {...this.data};
       data.results = data.results.slice(filter.offset, filter.offset + filter.first);
       data.count = this.data.results.length;
@@ -88,7 +86,7 @@ export class TableTestComponent implements OnInit {
   }
 
   load({offset, first, select, user, q}) {
-    const filter = new Filter();
+    const filter = new DefaultSearchFilter();
     filter.offset = +offset || DEFAULT_OFFSET;
     filter.first = +first || DEFAULT_FIRST;
     if (!!q) {
@@ -102,7 +100,7 @@ export class TableTestComponent implements OnInit {
       this.user.patchValue(+user, {emitEvent: false});
     }
     this.table.patchValue(filter);
-    this.tableControl.load();
+    this.tableControl.load(filter);
   }
 
   navigate() {
