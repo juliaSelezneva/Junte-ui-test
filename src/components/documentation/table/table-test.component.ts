@@ -70,8 +70,9 @@ export class TableTestComponent implements OnInit {
       this.data.results.push({value: `Value ${i}`, label: `Label ${i}`});
     }
 
-    this.tableControl.fetcher = (filter): Observable<any> => {
-      console.log('load:', {...filter, user: this.user.value, select: this.select.value});
+    this.tableControl.fetcher = (): Observable<any> => {
+      const filter = {...this.table.value, user: this.user.value, select: this.select.value};
+      console.log('load:', filter);
       const data = {...this.data};
       data.results = data.results.slice(filter.offset, filter.offset + filter.first);
       data.count = this.data.results.length;
@@ -92,6 +93,7 @@ export class TableTestComponent implements OnInit {
     if (!!q) {
       filter.q = q;
     }
+    this.table.patchValue(filter, {emitEvent: false});
 
     if (!!select) {
       this.select.patchValue(+select, {emitEvent: false});
@@ -99,8 +101,7 @@ export class TableTestComponent implements OnInit {
     if (!!user) {
       this.user.patchValue(+user, {emitEvent: false});
     }
-    this.table.patchValue(filter);
-    this.tableControl.load(filter);
+    this.tableControl.load();
   }
 
   navigate() {

@@ -15,7 +15,7 @@ import {
 import { ControlValueAccessor, FormBuilder, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, filter as filtering, finalize } from 'rxjs/operators';
 import { TableFeatures, UI } from '../../enum/ui';
-import { DEFAULT_FIRST, DEFAULT_OFFSET } from '../../models/table';
+import { DEFAULT_FIRST, DEFAULT_OFFSET, DefaultSearchFilter } from '../../models/table';
 import { isEqual } from '../../utils/equal';
 import { Subscriptions } from '../../utils/subscriptions';
 import { TableColumnComponent } from './column/table-column.component';
@@ -126,7 +126,7 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
     this.form.patchValue({orderBy: this.sort.value === sort ? `-${sort}` : sort});
   }
 
-  writeValue(value: any) {
+  writeValue(value: DefaultSearchFilter) {
     if (!!value) {
       this.form.patchValue({
         first: value.first,
@@ -137,7 +137,7 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
     }
   }
 
-  onChange(value: any) {
+  onChange(value: DefaultSearchFilter) {
   }
 
   onTouched() {
