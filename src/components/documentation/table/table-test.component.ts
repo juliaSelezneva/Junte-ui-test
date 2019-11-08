@@ -84,23 +84,25 @@ export class TableTestComponent implements OnInit {
       .subscribe(() => this.navigate());
 
     this.route.params.pipe(distinctUntilChanged((val1, val2) => isEqual(val1, val2)))
-      .subscribe(({offset, first, select, user, q}) => {
-        const filter = new Filter();
-        filter.offset = +offset || DEFAULT_OFFSET;
-        filter.first = +first || DEFAULT_FIRST;
-        if (!!q) {
-          filter.q = q;
-        }
+      .subscribe(({offset, first, select, user, q}) => this.load({offset, first, select, user, q}));
+  }
 
-        if (!!select) {
-          this.select.patchValue(+select, {emitEvent: false});
-        }
-        if (!!user) {
-          this.user.patchValue(+user, {emitEvent: false});
-        }
-        this.table.patchValue(filter);
-        this.tableControl.load();
-      });
+  load({offset, first, select, user, q}) {
+    const filter = new Filter();
+    filter.offset = +offset || DEFAULT_OFFSET;
+    filter.first = +first || DEFAULT_FIRST;
+    if (!!q) {
+      filter.q = q;
+    }
+
+    if (!!select) {
+      this.select.patchValue(+select, {emitEvent: false});
+    }
+    if (!!user) {
+      this.user.patchValue(+user, {emitEvent: false});
+    }
+    this.table.patchValue(filter);
+    this.tableControl.load();
   }
 
   navigate() {
