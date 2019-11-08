@@ -71,7 +71,8 @@ export class TableTestComponent implements OnInit {
       this.data.results.push({value: `Value ${i}`, label: `Label ${i}`});
     }
 
-    this.tableControl.fetcher = (filter): Observable<any> => {
+    this.tableControl.fetcher = (): Observable<any> => {
+      const filter = {...this.table.value, user: this.user.value, select: this.select.value};
       console.log('load:', filter);
       const data = {...this.data};
       data.results = data.results.slice(filter.offset, filter.offset + filter.first);
@@ -79,32 +80,43 @@ export class TableTestComponent implements OnInit {
       return of(data).pipe(delay(DEFAULT_DELAY));
     };
 
-    this.select.valueChanges.subscribe(value => this.table.patchValue({...this.table.value, select: value}));
-    this.user.valueChanges.subscribe(value => this.table.patchValue({...this.table.value, user: value}));
-
-    this.table.valueChanges.subscribe((filter: {offset, first, select, user, q}) =>
-      this.router.navigate([this.build(filter)], {relativeTo: this.route}));
+    this.form.valueChanges.pipe(distinctUntilChanged((val1, val2) => isEqual(val1, val2)))
+      .subscribe(() => this.navigate());
 
     this.route.params.pipe(distinctUntilChanged((val1, val2) => isEqual(val1, val2)))
-      .subscribe((filter: {offset, first, select, user, q}) => this.table.patchValue(this.build(filter)));
+      .subscribe(({offset, first, select, user, q}) => {
+        const filter = new Filter();
+        filter.offset = +offset || DEFAULT_OFFSET;
+        filter.first = +first || DEFAULT_FIRST;
+        if (!!q) {
+          filter.q = q;
+        }
+
+        if (!!select) {
+          this.select.patchValue(+select, {emitEvent: false});
+        }
+        if (!!user) {
+          this.user.patchValue(+user, {emitEvent: false});
+        }
+        this.table.patchValue(filter);
+        this.tableControl.load();
+      });
   }
 
-  build({offset, first, select, user, q}) {
+  navigate() {
     const filter = new Filter();
-    filter.offset = +offset || DEFAULT_OFFSET;
-    filter.first = +first || DEFAULT_FIRST;
-    if (!!select) {
-      filter.select = +select;
-      this.select.patchValue(+select, {emitEvent: false});
+    filter.offset = +this.table.value.offset || DEFAULT_OFFSET;
+    filter.first = +this.table.value.first || DEFAULT_FIRST;
+    if (!!this.table.value.q) {
+      filter.q = this.table.value.q;
     }
-    if (!!user) {
-      filter.user = +user;
-      this.user.patchValue(+user, {emitEvent: false});
+    if (!!this.select.value) {
+      filter.select = this.select.value;
     }
-    if (!!q) {
-      filter.q = q;
+    if (!!this.user.value) {
+      filter.user = this.user.value;
     }
-    return filter;
+    this.router.navigate([filter], {relativeTo: this.route});
   }
 
   loadOptions() {

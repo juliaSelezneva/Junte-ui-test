@@ -13,10 +13,9 @@ import {
   TemplateRef
 } from '@angular/core';
 import { ControlValueAccessor, FormBuilder, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, filter as filtering, finalize, map } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter as filtering, finalize } from 'rxjs/operators';
 import { TableFeatures, UI } from '../../enum/ui';
-import { DEFAULT_FIRST, DEFAULT_OFFSET, DefaultSearchFilter } from '../../models/table';
+import { DEFAULT_FIRST, DEFAULT_OFFSET } from '../../models/table';
 import { isEqual } from '../../utils/equal';
 import { Subscriptions } from '../../utils/subscriptions';
 import { TableColumnComponent } from './column/table-column.component';
@@ -38,10 +37,6 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
   private _count: number;
   private subscriptions = new Subscriptions();
-  private filter$ = new BehaviorSubject<any>(new DefaultSearchFilter({
-    offset: DEFAULT_OFFSET,
-    first: DEFAULT_FIRST
-  }));
 
   ui = UI;
   progress = {loading: false};
@@ -58,14 +53,6 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
     offset: this.offset,
     first: this.first
   });
-
-  set filter(filter: any) {
-    this.filter$.next(filter);
-  }
-
-  get filter() {
-    return this.filter$.getValue();
-  }
 
   @HostBinding('attr.host') readonly host = 'jnt-table-host';
 
@@ -106,22 +93,17 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
   }
 
   ngOnInit() {
-    this.form.valueChanges
-      .pipe(distinctUntilChanged((val1, val2) => isEqual(val1, val2)))
-      .subscribe(filter => {
-        if (filter.first !== this.filter.first) {
-          filter.page = 1;
-        }
-        filter.offset = (filter.page - 1) * filter.first;
-        this.filter = {...this.filter, ...filter};
-        this.onChange(this.filter);
-      });
-
-    this.filter$.pipe(
+    this.form.valueChanges.pipe(
       filtering(() => !!this.fetcher),
       debounceTime(FILTER_DELAY),
       distinctUntilChanged((val1, val2) => isEqual(val1, val2))
-    ).subscribe(() => this.load());
+    ).subscribe(filter => {
+      if (filter.first !== this.first.value) {
+        filter.page = 1;
+      }
+      filter.offset = (filter.page - 1) * filter.first;
+      this.onChange(filter);
+    });
   }
 
   ngOnDestroy() {
@@ -131,7 +113,7 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
   load() {
     if (!!this.fetcher) {
       this.progress.loading = true;
-      this.subscriptions.push('rows', this.fetcher(this.filter)
+      this.subscriptions.push('rows', this.fetcher(this.form.getRawValue())
         .pipe(finalize(() => this.progress.loading = false))
         .subscribe(resp => {
           this.source = resp.results;
@@ -152,8 +134,6 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
         page: Math.floor(value.offset / value.first) + 1,
         q: value.q
       });
-
-      this.filter = {...this.filter, ...value};
     }
   }
 
