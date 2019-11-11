@@ -24,23 +24,22 @@
   <jnt-block [width]="ui.width.fluid">
     <jnt-form [formGroup]="form">
       <jnt-stack [type]="ui.stack.type.vertical" [align]="ui.flex.align.stretch" [gutter]="ui.gutter.normal">
-        <jnt-select valueField="value"
-                    labelField="label"
-                    [loadOptions]="loadUserOptions()"
-                    placeholder="Single select"
-                    formControlName="user"
-                    label="User">
-        </jnt-select>
         <jnt-table #table [features]="[ui.table.features.search]" formControlName="table">
-          <jnt-table-column title="Label" sort="label">
-            <ng-template #cellTemplate let-label="label">
-              {{label}}
+          <jnt-table-column title="#" sort="id">
+            <ng-template #cellTemplate let-id="id">
+              {{id}}
             </ng-template>
           </jnt-table-column>
 
-          <jnt-table-column title="Value" sort="value">
-            <ng-template #cellTemplate let-value="value">
-              {{value}}
+          <jnt-table-column title="Person" sort="person">
+            <ng-template #cellTemplate let-person="person">
+              {{person}}
+            </ng-template>
+          </jnt-table-column>
+
+          <jnt-table-column title="Job" sort="job">
+            <ng-template #cellTemplate let-job="job">
+              {{job}}
             </ng-template>
           </jnt-table-column>
 
@@ -53,9 +52,9 @@
           <ng-template #filters>
             <jnt-select valueField="value"
                         labelField="label"
-                        [loadOptions]="loadOptions()"
-                        placeholder="Single select"
-                        formControlName="select" label="Filter">
+                        [loadOptions]="loadJobs()"
+                        placeholder="Select job"
+                        formControlName="job" label="Job">
             </jnt-select>
           </ng-template>
         </jnt-table>

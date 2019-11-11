@@ -1,19 +1,17 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { DEFAULT_FIRST, DEFAULT_OFFSET, DefaultSearchFilter, TableComponent, UI, isEqual } from 'junte-ui';
-import { Observable, of } from 'rxjs';
-import { delay, distinctUntilChanged } from 'rxjs/operators';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {DEFAULT_FIRST, DEFAULT_OFFSET, DefaultSearchFilter, isEqual, TableComponent, UI} from 'junte-ui';
+import {Observable, of} from 'rxjs';
+import {delay, distinctUntilChanged, tap} from 'rxjs/operators';
+import merge from 'merge-anything';
+import {defined} from '../../../../projects/junte-ui/src/lib/utils/defined';
+import {fake} from 'faker';
 
 const DEFAULT_DELAY = 1000;
 
 class Filter extends DefaultSearchFilter {
-  select?: number;
-  user?: number;
-
-  constructor(defs: Filter = null) {
-    super(defs);
-  }
+  job?: string;
 }
 
 @Component({
@@ -25,107 +23,92 @@ export class TableTestComponent implements OnInit {
 
   ui = UI;
 
-  table = new FormControl();
-  select = new FormControl();
-  user = new FormControl();
-
-  form = new FormGroup({
-    user: this.user,
-    select: this.select,
-    table: this.table
+  form = this.builder.group({
+    table: [{
+      q: null,
+      sort: null,
+      first: DEFAULT_FIRST,
+      offset: DEFAULT_OFFSET
+    }],
+    job: []
   });
 
-  options: any[] = [
-    {value: 1, label: 'PFC CSKA Moscow'},
-    {value: 2, label: 'FC Real Madrid'},
-    {value: 3, label: 'FC Manchester United'}
-  ];
-
-  ajaxOptions: any[] = [
-    {value: 4, label: 'Test 4'},
-    {value: 5, label: 'Test 5'},
-    {value: 6, label: 'Test 6'}
-  ];
-
-  ajaxUserOptions: any[] = [
-    {value: 1, label: 'User 1'},
-    {value: 2, label: 'User 2'},
-    {value: 3, label: 'User 3'}
-  ];
-
   @ViewChild('table', {static: true})
-  tableControl: TableComponent;
+  table: TableComponent;
 
-  data: any = {
-    results: [],
-    count: 0
-  };
+  mocks = (() => {
+    const data = [];
+    for (let i = 0; i < Math.random() * (300 - 50) + 50; i++) {
+      data.push({
+        id: i + 1,
+        person: fake('{{name.firstName}} {{name.lastName}}'),
+        job: fake('{{name.jobArea}}')
+      });
+    }
+    return data;
+  })();
 
-  constructor(private router: Router,
+  constructor(private builder: FormBuilder,
+              private router: Router,
               private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    for (let i = 0; i < Math.random() * (300 - 50) + 50; i++) {
-      this.data.results.push({value: `Value ${i}`, label: `Label ${i}`});
-    }
+    this.table.fetcher = (): Observable<any> => {
+      const {table, job} = this.form.getRawValue();
+      const filter: Filter = {...table, job};
+      console.log(filter);
 
-    this.tableControl.fetcher = (): Observable<any> => {
-      const filter = {...this.table.value, user: this.user.value, select: this.select.value};
-      console.log('load:', filter);
-      const data = {...this.data};
-      data.results = data.results.slice(filter.offset, filter.offset + filter.first);
-      data.count = this.data.results.length;
-      return of(data).pipe(delay(DEFAULT_DELAY));
+      let results = this.mocks;
+      if (!!filter.q) {
+        results = results.filter(({person}) => person.indexOf(filter.q) !== -1);
+      }
+
+      return of({
+        results: results.slice(filter.offset, filter.offset + filter.first),
+        count: this.mocks.length
+      }).pipe(delay(DEFAULT_DELAY));
     };
 
-    this.form.valueChanges.pipe(distinctUntilChanged((val1, val2) => isEqual(val1, val2)))
-      .subscribe(() => this.navigate());
+    this.form.valueChanges.pipe(distinctUntilChanged((val1, val2) => isEqual(val1, val2)),
+      tap(({table: {offset, first, q}, job}) => this.save({offset, first, q, job})))
+      .subscribe(() => this.table.load());
 
-    this.route.params.pipe(distinctUntilChanged((val1, val2) => isEqual(val1, val2)))
-      .subscribe(({offset, first, select, user, q}) => this.load({offset, first, select, user, q}));
+    this.route.params.subscribe(({q, sort, first, offset, job}) => {
+      const filter = merge({extensions: [defined]},
+        this.form.getRawValue(), {table: {q, sort, first, offset}, job});
+      this.form.patchValue(filter);
+    });
   }
 
-  load({offset, first, select, user, q}) {
-    const filter = new DefaultSearchFilter();
-    filter.offset = +offset || DEFAULT_OFFSET;
-    filter.first = +first || DEFAULT_FIRST;
-    if (!!q) {
-      filter.q = q;
+  save(filter: Filter) {
+    const state: { q?, sort?, first?, offset?, job? } = {};
+    if (filter.offset !== DEFAULT_OFFSET) {
+      state.offset = filter.offset;
     }
-    this.table.patchValue(filter, {emitEvent: false});
+    if (filter.first !== DEFAULT_FIRST) {
+      state.first = filter.first;
+    }
 
-    if (!!select) {
-      this.select.patchValue(+select, {emitEvent: false});
+    if (!!filter.q) {
+      state.q = filter.q;
     }
-    if (!!user) {
-      this.user.patchValue(+user, {emitEvent: false});
+
+    if (!!filter.job) {
+      state.job = filter.job;
     }
-    this.tableControl.load();
+
+    this.router.navigate([state], {
+      relativeTo: this.route
+    }).then(() => null);
   }
 
-  navigate() {
-    const filter = new Filter();
-    filter.offset = +this.table.value.offset || DEFAULT_OFFSET;
-    filter.first = +this.table.value.first || DEFAULT_FIRST;
-    if (!!this.table.value.q) {
-      filter.q = this.table.value.q;
-    }
-    if (!!this.select.value) {
-      filter.select = this.select.value;
-    }
-    if (!!this.user.value) {
-      filter.user = this.user.value;
-    }
-    this.router.navigate([filter], {relativeTo: this.route});
-  }
-
-  loadOptions() {
-    return (): Observable<any> => of(this.ajaxOptions).pipe(delay(DEFAULT_DELAY));
-  }
-
-  loadUserOptions() {
-    return (): Observable<any> => of(this.ajaxUserOptions).pipe(delay(DEFAULT_DELAY));
+  loadJobs() {
+    return (): Observable<any> => of([
+      {value: 1, label: 'PFC CSKA Moscow'},
+      {value: 2, label: 'FC Real Madrid'},
+      {value: 3, label: 'FC Manchester United'}
+    ]).pipe(delay(DEFAULT_DELAY));
   }
 
   edit() {

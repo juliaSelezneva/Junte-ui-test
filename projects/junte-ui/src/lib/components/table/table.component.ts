@@ -12,13 +12,13 @@ import {
   QueryList,
   TemplateRef
 } from '@angular/core';
-import { ControlValueAccessor, FormBuilder, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, filter as filtering, finalize } from 'rxjs/operators';
-import { TableFeatures, UI } from '../../enum/ui';
-import { DEFAULT_FIRST, DEFAULT_OFFSET, DefaultSearchFilter } from '../../models/table';
-import { isEqual } from '../../utils/equal';
-import { Subscriptions } from '../../utils/subscriptions';
-import { TableColumnComponent } from './column/table-column.component';
+import {ControlValueAccessor, FormBuilder, FormControl, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {debounceTime, distinctUntilChanged, filter as filtering, finalize} from 'rxjs/operators';
+import {TableFeatures, UI} from '../../enum/ui';
+import {DEFAULT_FIRST, DEFAULT_OFFSET, DefaultSearchFilter} from '../../models/table';
+import {isEqual} from '../../utils/equal';
+import {Subscriptions} from '../../utils/subscriptions';
+import {TableColumnComponent} from './column/table-column.component';
 
 const FILTER_DELAY = 500;
 
@@ -35,23 +35,22 @@ const FILTER_DELAY = 500;
 })
 export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
-  private _count: number;
+  private count: number;
   private subscriptions = new Subscriptions();
 
   ui = UI;
   progress = {loading: false};
   source: any[] = [];
-  sort = new FormControl(null);
-  offset = new FormControl(DEFAULT_OFFSET);
-  first = new FormControl(DEFAULT_FIRST);
-  page = new FormControl((+this.offset.value / +this.first.value) + 1);
+  q = new FormControl(null);
+  orderBy = new FormControl(null);
+  pageSize = new FormControl(DEFAULT_FIRST);
+  page = new FormControl((DEFAULT_OFFSET / DEFAULT_FIRST) + 1);
 
   form = this.builder.group({
-    q: [''],
-    sort: this.sort,
+    q: this.q,
+    orderBy: this.orderBy,
     page: this.page,
-    offset: this.offset,
-    first: this.first
+    pageSize: this.pageSize
   });
 
   @HostBinding('attr.host') readonly host = 'jnt-table-host';
@@ -77,16 +76,8 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
   @Input() fetcher: Function;
   @Output() reloaded = new EventEmitter<any>();
 
-  set count(count: number) {
-    this._count = count;
-  }
-
-  get count() {
-    return this._count;
-  }
-
   get pagesCount() {
-    return Math.ceil(this.count / this.form.get('first').value);
+    return Math.ceil(this.count / this.pageSize.value);
   }
 
   constructor(private builder: FormBuilder) {
@@ -97,12 +88,13 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
       filtering(() => !!this.fetcher),
       debounceTime(FILTER_DELAY),
       distinctUntilChanged((val1, val2) => isEqual(val1, val2))
-    ).subscribe(filter => {
-      if (filter.first !== this.first.value) {
-        filter.page = 1;
-      }
-      filter.offset = (filter.page - 1) * filter.first;
-      this.onChange(filter);
+    ).subscribe(state => {
+      this.onChange({
+        q: state.q,
+        sort: state.sort,
+        first: state.pageSize,
+        offset: (state.page - 1) * state.pageSize
+      });
     });
   }
 
@@ -122,22 +114,20 @@ export class TableComponent implements OnInit, OnDestroy, ControlValueAccessor {
     }
   }
 
-  sorting(sort: string) {
-    this.form.patchValue({orderBy: this.sort.value === sort ? `-${sort}` : sort});
+  sorting(field: string) {
+    this.orderBy.setValue(this.orderBy.value === field ? `-${field}` : field);
   }
 
-  writeValue(value: DefaultSearchFilter) {
-    if (!!value) {
-      this.form.patchValue({
-        first: value.first,
-        offset: value.offset,
-        page: Math.floor(value.offset / value.first) + 1,
-        q: value.q
-      });
-    }
+  writeValue({q, orderBy, first, offset}: DefaultSearchFilter) {
+    this.form.patchValue({
+      q,
+      orderBy,
+      pageSize: first,
+      page: Math.floor(offset / first) + 1
+    });
   }
 
-  onChange(value: DefaultSearchFilter) {
+  onChange(filter: DefaultSearchFilter) {
   }
 
   onTouched() {
