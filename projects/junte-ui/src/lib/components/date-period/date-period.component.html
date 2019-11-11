@@ -18,6 +18,6 @@
 </div>
 
 <div *ngIf="!!start && !!end" days>
-  {{(end | dateDiff:start:base) >= 0 ? ((end | dateDiff:start:base) + 1) : ((end | dateDiff:start:base) - 1)}} {{base}}
+  {{end | dateDiff:start:base}} {{base}}
 </div>
 
