@@ -18,17 +18,6 @@
     "lib": [
       "es2018",
       "dom"
-    ],
-    "paths": {
-      "components/*": [
-        "src/app/components/*"
-      ],
-      "junte-ui": [
-        "dist/junte-ui"
-      ],
-      "junte-ui/*": [
-        "dist/junte-ui/*"
-      ]
-    }
+    ]
   }
 }
