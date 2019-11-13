@@ -1,7 +1,0 @@
-<div tabs>
-  <div tab item *ngFor="let tab of tabItems" [attr.active]="tab.active" (click)="activatedTab(tab)" tabindex="0">
-    {{tab.title}}
-  </div>
-</div>
-<ng-content></ng-content>
-
