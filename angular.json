@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "junte-ui-app": {
+    "junte-ui-test": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -45,14 +45,6 @@
               "node_modules/junte-ui/lib/assets/fonts/open-sans/import.scss",
               "src/styles.scss"
             ],
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                "src/style"
-              ]
-            },
-            "scripts": [
-              "src/assets/themes/themes.js"
-            ]
           },
           "configurations": {
             "production": {
@@ -151,47 +143,6 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
-    "junte-ui": {
-      "root": "projects/junte-ui",
-      "sourceRoot": "projects/junte-ui/src",
-      "projectType": "library",
-      "prefix": "jnt",
-      "schematics": {
-        "@schematics/angular:component": {
-          "styleext": "scss",
-          "spec": false
-        }
-      },
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/junte-ui/tsconfig.lib.json",
-            "project": "projects/junte-ui/ng-package.json"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/junte-ui/src/test.ts",
-            "tsConfig": "projects/junte-ui/tsconfig.spec.json",
-            "karmaConfig": "projects/junte-ui/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/junte-ui/tsconfig.lib.json",
-              "projects/junte-ui/tsconfig.spec.json"
-            ],
             "exclude": [
               "**/node_modules/**"
             ]
