@@ -29,36 +29,25 @@
               "src/assets",
               {
                 "glob": "**/*",
-                "input": "projects/junte-ui/src/lib/assets/fonts/junte-ui-icons-default/",
-                "output": "./assets/fonts/junte-ui-icons-default/"
+                "input": "node_modules/junte-ui/lib/assets/fonts/junte-ui/",
+                "output": "./assets/fonts/junte-ui/"
               },
               {
                 "glob": "**/*",
-                "input": "projects/junte-ui/src/lib/assets/fonts/junte-ui-icons-gestures/",
-                "output": "./assets/fonts/junte-ui-icons-gestures/"
-              },
-              {
-                "glob": "**/*",
-                "input": "projects/junte-ui/src/lib/assets/icons/animated/",
-                "output": "./assets/icons/animated/"
-              },
-              {
-                "glob": "**/*",
-                "input": "projects/junte-ui/src/lib/assets/icons/svg/",
-                "output": "./assets/icons/svg/"
+                "input": "node_modules/junte-ui/lib/assets/icons/",
+                "output": "./assets/icons/"
               }
             ],
             "styles": [
               "./src/assets/themes/light.scss",
               "./node_modules/prismjs/themes/prism.css",
-              "./projects/junte-ui/src/lib/assets/fonts/open-sans/import.scss",
-              "./projects/junte-ui/src/lib/assets/fonts/junte-ui-icons-default/junte-ui-icons-default-font.scss",
-              "./projects/junte-ui/src/lib/assets/fonts/junte-ui-icons-gestures/junte-ui-icons-gestures-font.scss",
-              "./src/assets/fonts/junte-ui/junte-ui-font.scss"
+              "node_modules/junte-ui/lib/assets/fonts/junte-ui-icons-default/junte-ui-icons-default-font.scss",
+              "node_modules/junte-ui/lib/assets/fonts/open-sans/import.scss",
+              "src/styles.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "projects/junte-ui/src/lib/assets/styles"
+                "src/style"
               ]
             },
             "scripts": [

@@ -1,87 +1,87 @@
-<jnt-container>
-  <h1>Table</h1>
-  <jnt-stack resources [type]="ui.stack.type.horizontal">
-    <jnt-link [icon]="ui.icons.externalLink"
-              source="https://gitlab.com/junte/junte-ui/tree/master/projects/junte-ui/src/lib/components/table"
-              target="_blank" title="GitLab">
-    </jnt-link>
-    <jnt-link [icon]="ui.icons.externalLink"
-              source="https://www.figma.com/file/EIUNwZCXL9Nm5BKQKl43mfDr/Junte-UI-v1?node-id=1270%3A541"
-              target="_blank" title="Figma">
-    </jnt-link>
-  </jnt-stack>
-  <h3>Requirements</h3>
+<!--<jnt-container>-->
+  <!--<h1>Table</h1>-->
+  <!--<jnt-stack resources [type]="ui.stack.type.horizontal">-->
+    <!--<jnt-link [icon]="ui.icons.externalLink"-->
+              <!--source="https://gitlab.com/junte/junte-ui/tree/master/projects/junte-ui/src/lib/components/table"-->
+              <!--target="_blank" title="GitLab">-->
+    <!--</jnt-link>-->
+    <!--<jnt-link [icon]="ui.icons.externalLink"-->
+              <!--source="https://www.figma.com/file/EIUNwZCXL9Nm5BKQKl43mfDr/Junte-UI-v1?node-id=1270%3A541"-->
+              <!--target="_blank" title="Figma">-->
+    <!--</jnt-link>-->
+  <!--</jnt-stack>-->
+  <!--<h3>Requirements</h3>-->
 
-  <ol>
-    <li>The table should show the loading</li>
-    <li>The table row should respond to mouse hover</li>
-    <li>The table must include pagination</li>
-    <li>The table must include action buttons (reload, add, etc.)</li>
-  </ol>
+  <!--<ol>-->
+    <!--<li>The table should show the loading</li>-->
+    <!--<li>The table row should respond to mouse hover</li>-->
+    <!--<li>The table must include pagination</li>-->
+    <!--<li>The table must include action buttons (reload, add, etc.)</li>-->
+  <!--</ol>-->
 
-  <hr>
+  <!--<hr>-->
 
-  <jnt-block [width]="ui.width.fluid">
-    <jnt-form [formGroup]="form">
-      <jnt-stack [type]="ui.stack.type.vertical" [align]="ui.flex.align.stretch" [gutter]="ui.gutter.normal">
-        <jnt-table #table [features]="[ui.table.features.search]" formControlName="table">
-          <jnt-table-column title="#" sort="id">
-            <ng-template #cellTemplate let-id="id">
-              {{id}}
-            </ng-template>
-          </jnt-table-column>
+  <!--<jnt-block [width]="ui.width.fluid">-->
+    <!--<jnt-form [formGroup]="form">-->
+      <!--<jnt-stack [type]="ui.stack.type.vertical" [align]="ui.flex.align.stretch" [gutter]="ui.gutter.normal">-->
+        <!--<jnt-table #table [features]="[ui.table.features.search]" formControlName="table">-->
+          <!--<jnt-table-column title="#" sort="id">-->
+            <!--<ng-template #cellTemplate let-id="id">-->
+              <!--{{id}}-->
+            <!--</ng-template>-->
+          <!--</jnt-table-column>-->
 
-          <jnt-table-column title="Person" sort="person">
-            <ng-template #cellTemplate let-person="person">
-              {{person}}
-            </ng-template>
-          </jnt-table-column>
+          <!--<jnt-table-column title="Person" sort="person">-->
+            <!--<ng-template #cellTemplate let-person="person">-->
+              <!--{{person}}-->
+            <!--</ng-template>-->
+          <!--</jnt-table-column>-->
 
-          <jnt-table-column title="Job" sort="job">
-            <ng-template #cellTemplate let-job="job">
-              {{job}}
-            </ng-template>
-          </jnt-table-column>
+          <!--<jnt-table-column title="Job" sort="job">-->
+            <!--<ng-template #cellTemplate let-job="job">-->
+              <!--{{job}}-->
+            <!--</ng-template>-->
+          <!--</jnt-table-column>-->
 
-          <ng-template #rowActions let-row="row">
-            <jnt-menu [type]="ui.type.vertical" [spacer]="ui.sizes.small">
-              <jnt-menu-item title="Edit" (click)="edit()"></jnt-menu-item>
-              <jnt-menu-item title="Delete" (click)="delete()"></jnt-menu-item>
-            </jnt-menu>
-          </ng-template>
-          <ng-template #filters>
-            <jnt-select valueField="value"
-                        labelField="label"
-                        [loadOptions]="loadJobs()"
-                        placeholder="Select job"
-                        formControlName="job" label="Job">
-            </jnt-select>
-          </ng-template>
-        </jnt-table>
-      </jnt-stack>
-    </jnt-form>
-  </jnt-block>
+          <!--<ng-template #rowActions let-row="row">-->
+            <!--<jnt-menu [type]="ui.type.vertical" [spacer]="ui.sizes.small">-->
+              <!--<jnt-menu-item title="Edit" (click)="edit()"></jnt-menu-item>-->
+              <!--<jnt-menu-item title="Delete" (click)="delete()"></jnt-menu-item>-->
+            <!--</jnt-menu>-->
+          <!--</ng-template>-->
+          <!--<ng-template #filters>-->
+            <!--<jnt-select valueField="value"-->
+                        <!--labelField="label"-->
+                        <!--[loadOptions]="loadJobs()"-->
+                        <!--placeholder="Select job"-->
+                        <!--formControlName="job" label="Job">-->
+            <!--</jnt-select>-->
+          <!--</ng-template>-->
+        <!--</jnt-table>-->
+      <!--</jnt-stack>-->
+    <!--</jnt-form>-->
+  <!--</jnt-block>-->
 
-  <ngx-prism language="html">
-      <pre><![CDATA[
-<jnt-block>
-  <jnt-table>
-    <jnt-table-column title="Label" sort="label">
-        <ng-template #cellTemplate let-label="label">label</ng-template>
-    </jnt-table-column>
-    <jnt-table-column title="Value" sort="value">
-        <ng-template #cellTemplate let-value="value">value</ng-template>
-    </jnt-table-column>
-     <ng-template #rowActions let-row="row">
-          <jnt-menu [type]="ui.type.vertical" [spacer]="ui.sizes.small">
-            <jnt-menu-item title="Edit" (click)="edit()"></jnt-menu-item>
-            <jnt-menu-item title="Delete" (click)="delete()"></jnt-menu-item>
-          </jnt-menu>
-        </ng-template>
-  </jnt-table>
-</jnt-block>
-      ]]></pre>
-  </ngx-prism>
+  <!--<ngx-prism language="html">-->
+      <!--<pre><![CDATA[-->
+<!--<jnt-block>-->
+  <!--<jnt-table>-->
+    <!--<jnt-table-column title="Label" sort="label">-->
+        <!--<ng-template #cellTemplate let-label="label">label</ng-template>-->
+    <!--</jnt-table-column>-->
+    <!--<jnt-table-column title="Value" sort="value">-->
+        <!--<ng-template #cellTemplate let-value="value">value</ng-template>-->
+    <!--</jnt-table-column>-->
+     <!--<ng-template #rowActions let-row="row">-->
+          <!--<jnt-menu [type]="ui.type.vertical" [spacer]="ui.sizes.small">-->
+            <!--<jnt-menu-item title="Edit" (click)="edit()"></jnt-menu-item>-->
+            <!--<jnt-menu-item title="Delete" (click)="delete()"></jnt-menu-item>-->
+          <!--</jnt-menu>-->
+        <!--</ng-template>-->
+  <!--</jnt-table>-->
+<!--</jnt-block>-->
+      <!--]]></pre>-->
+  <!--</ngx-prism>-->
 
-</jnt-container>
+<!--</jnt-container>-->
 
