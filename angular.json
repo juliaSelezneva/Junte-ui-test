@@ -45,6 +45,14 @@
               "node_modules/junte-ui/lib/assets/fonts/open-sans/import.scss",
               "src/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/style"
+              ]
+            },
+            "scripts": [
+              "src/assets/themes/themes.js"
+            ]
           },
           "configurations": {
             "production": {
