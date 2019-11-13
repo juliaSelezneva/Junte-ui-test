@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "junte-ui-test": {
+    "junte-ui-app": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -151,5 +151,5 @@
       }
     }
   },
-  "defaultProject": "junte-ui-test"
+  "defaultProject": "junte-ui-app"
 }
