@@ -39,7 +39,7 @@
               }
             ],
             "styles": [
-              "./src/assets/themes/light.scss",
+              "src/assets/themes/light.scss",
               "./node_modules/prismjs/themes/prism.css",
               "node_modules/junte-ui/lib/assets/fonts/junte-ui-icons-default/junte-ui-icons-default-font.scss",
               "node_modules/junte-ui/lib/assets/fonts/open-sans/import.scss",
