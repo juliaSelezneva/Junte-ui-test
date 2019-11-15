@@ -8,6 +8,11 @@ import { BreadcrumbsRoutingModule } from './breadcrumbs-routing.module';
 import { JunteUiModule } from 'junte-ui';
 import { BreadcrumbResolver } from './resolver';
 import { BreadCrumbTest2Component } from './tests/test2.component';
+import 'prismjs/prism';
+import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-scss';
+import 'prismjs/components/prism-markup';
+import { PrismModule } from '@sgbj/angular-prism';
 
 
 @NgModule({
@@ -21,7 +26,8 @@ import { BreadCrumbTest2Component } from './tests/test2.component';
     FormsModule,
     RouterModule,
     JunteUiModule,
-    BreadcrumbsRoutingModule
+    BreadcrumbsRoutingModule,
+    PrismModule
   ],
   exports: [
     BreadcrumbsTestComponent,
