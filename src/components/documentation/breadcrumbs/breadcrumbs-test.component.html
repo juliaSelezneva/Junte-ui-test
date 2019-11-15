@@ -20,14 +20,14 @@
   <jnt-link [source]="['page']">Page First</jnt-link>
 
   <h3>Usage</h3>
-  <ngx-prism language="html">
+  <prism language="markup">
     <pre><![CDATA[
 <jnt-breadcrumb></jnt-breadcrumb>
 ]]></pre>
-  </ngx-prism>
+  </prism>
 
   <p>For using Breadcrumbs you need to import <code>RouterModule</code></p>
-  <ngx-prism language="js">
+  <prism language="typescript">
 <pre><![CDATA[
 import { RouterModule } from '@angular/router';
 
@@ -40,11 +40,11 @@ import { RouterModule } from '@angular/router';
 export class AppModule {
 }
 ]]></pre>
-  </ngx-prism>
+  </prism>
 
   <p>To each <jnt-label label="route" [color]="ui.colors.orange"></jnt-label> in the property data, you need to add the object <jnt-label label="breadcrumb" [color]="ui.colors.orange"></jnt-label>, in which you need to specify the
     label:</p>
-  <ngx-prism language="js">
+  <prism language="typescript">
     <pre><![CDATA[
 export const routes: Routes = [
   {
@@ -60,6 +60,6 @@ export const routes: Routes = [
     ]
   }
 ];]]></pre>
-  </ngx-prism>
+  </prism>
 
 </jnt-container>

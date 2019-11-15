@@ -37,7 +37,7 @@
   <p>To use the modal component, changes are <jnt-label [color]="ui.colors.red" label="required in the main component"></jnt-label> of the application.</p>
 
   <h6>app.component.ts:</h6>
-  <ngx-prism language="js">
+  <prism language="typescript">
     <pre><![CDATA[
   import { Component } from '@angular/core';
   import { ModalComponent, ModalService } from 'junte-ui';
@@ -60,20 +60,20 @@
     }
 
   }]]></pre>
-  </ngx-prism>
+  </prism>
   <h6>app.component.css:</h6>
-  <ngx-prism language="html">
+  <prism language="markup">
       <pre><![CDATA[
   <jnt-modal #modal [backdrop]="backdrop"></jnt-modal>
   <jnt-container #layout>
     This is the main component of the application
   </jnt-container>
 ]]></pre>
-  </ngx-prism>
+  </prism>
 
   <p>To call the modal window from the components, use the service <jnt-label label="ModalService"></jnt-label></p>
   <h6>other.component.ts:</h6>
-  <ngx-prism language="js">
+  <prism language="typescript">
       <pre><![CDATA[
   import { Component, ComponentFactoryResolver, Injector, TemplateRef, ViewChild } from '@angular/core';
   import { ModalService, ModalOptions } from 'junte-ui';
@@ -101,10 +101,10 @@
     }
   }
 ]]></pre>
-  </ngx-prism>
+  </prism>
 
   <h6>other.template.html:</h6>
-  <ngx-prism language="html">
+  <prism language="markup">
     <pre><![CDATA[
   <ng-template #content>
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A accusamus cum delectus dolorem ducimus illum iusto
@@ -116,7 +116,7 @@
   <jnt-button (click)="openModalWithTemplate()" text="Open modal with Template"></jnt-button>
   <jnt-button (click)="openModalWithComponent()" text="Open modal with Component"></jnt-button>
 ]]></pre>
-  </ngx-prism>
+  </prism>
 
 
   <h3>API</h3>

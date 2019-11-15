@@ -30,13 +30,13 @@
       </jnt-calendar>
     </jnt-block>
 
-    <ngx-prism language="html">
+    <prism language="markup">
         <pre><![CDATA[
 <jnt-block>
   <jnt-calendar formControlName="dueDate" (updated)="period = $event"></jnt-calendar>
 </jnt-block>
           ]]></pre>
-    </ngx-prism>
+    </prism>
 
     <h3>Calendar with custom template day</h3>
     <jnt-block>
@@ -47,7 +47,7 @@
       </jnt-calendar>
     </jnt-block>
 
-    <ngx-prism language="html">
+    <prism language="markup">
         <pre><![CDATA[
 <jnt-block>
   <jnt-calendar formControlName="dueDate" (updated)="period = $event">
@@ -57,7 +57,7 @@
   </jnt-calendar>
 </jnt-block>
         ]]></pre>
-    </ngx-prism>
+    </prism>
 
     <h3>Calendar with Metrics</h3>
     <jnt-block>
@@ -71,7 +71,7 @@
       </jnt-calendar>
     </jnt-block>
 
-    <ngx-prism language="html">
+    <prism language="markup">
         <pre><![CDATA[
 <jnt-block>
   <jnt-calendar formControlName="dueDate" (updated)="period = $event">
@@ -82,7 +82,7 @@
   </jnt-calendar>
 </jnt-block>
         ]]></pre>
-    </ngx-prism>
+    </prism>
 
     <h1>Calendar Week</h1>
 
@@ -99,11 +99,11 @@
       <jnt-calendar-week [period]="dueDate.value">
       </jnt-calendar-week>
 
-    <ngx-prism language="html">
+    <prism language="markup">
         <pre><![CDATA[
 <jnt-calendar-week [period]="dueDate.value"></jnt-calendar-week>
         ]]></pre>
-    </ngx-prism>
+    </prism>
 
     <h3>Calendar Week with custom template day</h3>
     <jnt-calendar-week [period]="dueDate.value">

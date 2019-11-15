@@ -8,7 +8,6 @@ import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 
-
 @NgModule({
   declarations: [
     AppComponent
@@ -20,7 +19,7 @@ import { AppComponent } from './app.component';
     FormsModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    JunteUiModule
+    JunteUiModule,
   ],
   bootstrap: [AppComponent],
   providers: [

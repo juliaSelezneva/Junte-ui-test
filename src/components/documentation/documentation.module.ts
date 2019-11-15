@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PrismModule } from '@ngx-prism/core';
 import { JunteUiModule } from 'junte-ui';
 import { AppLayoutTestComponent } from './app-layout/app-layout-test.component';
 import { AvatarTestComponent } from './avatar/avatar-test.component';
@@ -44,6 +43,11 @@ import { TypographyTestComponent } from './typography/typography-test.component'
 import { AppFooterModule } from '../app-footer/app-footer.module';
 import { DatePickerTestComponent } from './date-picker/date-picker-test.component';
 import { DatePeriodTestComponent } from './date-period/date-period-test.component';
+import { PrismModule } from '@sgbj/angular-prism';
+import 'prismjs/prism';
+import 'prismjs/components/prism-typescript';
+import 'prismjs/components/prism-scss';
+import 'prismjs/components/prism-markup';
 
 @NgModule({
   imports: [
