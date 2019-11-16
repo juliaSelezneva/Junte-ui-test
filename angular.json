@@ -25,18 +25,7 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              {
-                "glob": "**/*",
-                "input": "node_modules/junte-ui/lib/assets/fonts/open-sans/",
-                "output": "./"
-              },
-              {
-                "glob": "**/*",
-                "input": "node_modules/junte-ui/lib/assets/icons/",
-                "output": "./assets/icons/"
-              }
+              "src/favicon.ico"
             ],
             "styles": [
               "src/assets/themes/light.scss",
